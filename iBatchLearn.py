@@ -34,6 +34,7 @@ def run(args):
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
                     'reg_coef':args.reg_coef}
+                    
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
     print('#parameter of model:',agent.count_parameter())
@@ -54,7 +55,8 @@ def run(args):
                                                    batch_size=args.batch_size, shuffle=True, num_workers=args.workers)
         val_loader = torch.utils.data.DataLoader(val_dataset_all,
                                                  batch_size=args.batch_size, shuffle=False, num_workers=args.workers)
-
+        
+        
         agent.learn_batch(train_loader, val_loader)
 
         acc_table['All'] = {}
@@ -94,16 +96,16 @@ def get_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
-    parser.add_argument('--model_type', type=str, default='mlp', help="The type (mlp|lenet|vgg|resnet) of backbone network")
-    parser.add_argument('--model_name', type=str, default='MLP', help="The name of actual model for the backbone")
-    parser.add_argument('--force_out_dim', type=int, default=2, help="Set 0 to let the task decide the required output dimension")
+    parser.add_argument('--model_type', type=str, default='resnet', help="The type (mlp|lenet|vgg|resnet) of backbone network")
+    parser.add_argument('--model_name', type=str, default='ResNet20_cifar', help="The name of actual model for the backbone")
+    parser.add_argument('--force_out_dim', type=int, default=100, help="Set 0 to let the task decide the required output dimension")
     parser.add_argument('--agent_type', type=str, default='default', help="The type (filename) of agent")
     parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
     parser.add_argument('--optimizer', type=str, default='SGD', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
-    parser.add_argument('--dataset', type=str, default='MNIST', help="MNIST(default)|CIFAR10|CIFAR100")
+    parser.add_argument('--dataset', type=str, default='CIFAR100', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
-    parser.add_argument('--first_split_size', type=int, default=2)
+    parser.add_argument('--first_split_size', type=int, default=100)
     parser.add_argument('--other_split_size', type=int, default=2)
     parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
@@ -113,12 +115,12 @@ def get_args(argv):
                         help="Randomize the classes in splits")
     parser.add_argument('--rand_split_order', dest='rand_split_order', default=False, action='store_true',
                         help="Randomize the order of splits")
-    parser.add_argument('--workers', type=int, default=3, help="#Thread for dataloader")
+    parser.add_argument('--workers', type=int, default=1, help="#Thread for dataloader")
     parser.add_argument('--batch_size', type=int, default=100)
-    parser.add_argument('--lr', type=float, default=0.01, help="Learning rate")
+    parser.add_argument('--lr', type=float, default=0.1, help="Learning rate")
     parser.add_argument('--momentum', type=float, default=0)
     parser.add_argument('--weight_decay', type=float, default=0)
-    parser.add_argument('--schedule', nargs="+", type=int, default=[2],
+    parser.add_argument('--schedule', nargs="+", type=int, default=[100],
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
@@ -126,7 +128,7 @@ def get_args(argv):
     parser.add_argument('--reg_coef', nargs="+", type=float, default=[0.], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
     parser.add_argument('--eval_on_train_set', dest='eval_on_train_set', default=False, action='store_true',
                         help="Force the evaluation on train set")
-    parser.add_argument('--offline_training', dest='offline_training', default=False, action='store_true',
+    parser.add_argument('--offline_training', dest='offline_training', default=True, action='store_true',
                         help="Non-incremental learning by make all data available in one batch. For measuring the upperbound performance.")
     parser.add_argument('--repeat', type=int, default=1, help="Repeat the experiment N times")
     parser.add_argument('--incremental_class', dest='incremental_class', default=False, action='store_true',

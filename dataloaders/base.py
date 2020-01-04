@@ -26,7 +26,7 @@ def MNIST(dataroot, train_aug=False):
         download=True,
         transform=train_transform
     )
-    train_dataset = CacheClassLabel(train_dataset, 10, train_dataset.train_labels)
+    train_dataset = CacheClassLabel(train_dataset, 10, train_dataset.targets)
 
     val_dataset = torchvision.datasets.MNIST(
         dataroot,
@@ -94,7 +94,8 @@ def CIFAR100(dataroot, train_aug=False):
         download=True,
         transform=train_transform
     )
-    train_dataset = CacheClassLabel(train_dataset, 100, train_dataset.train_labels)
+
+    train_dataset = CacheClassLabel(train_dataset, 100, train_dataset.targets)
 
     val_dataset = torchvision.datasets.CIFAR100(
         root=dataroot,
@@ -102,7 +103,8 @@ def CIFAR100(dataroot, train_aug=False):
         download=True,
         transform=val_transform
     )
-    val_dataset = CacheClassLabel(val_dataset, 100, val_dataset.test_labels)
+    val_dataset = CacheClassLabel(val_dataset, 100, val_dataset.targets)
+    
 
     return train_dataset, val_dataset
 

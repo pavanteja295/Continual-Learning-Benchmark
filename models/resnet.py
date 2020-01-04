@@ -108,6 +108,7 @@ class PreActResNet(nn.Module):
 
 class PreActResNet_cifar(nn.Module):
     def __init__(self, block, num_blocks, filters, num_classes=10, droprate=0):
+        
         super(PreActResNet_cifar, self).__init__()
         self.in_planes = 16
         last_planes = filters[2]*block.expansion
@@ -118,7 +119,7 @@ class PreActResNet_cifar(nn.Module):
         self.stage3 = self._make_layer(block, filters[2], num_blocks[2], stride=2, droprate=droprate)
         self.bn_last = nn.BatchNorm2d(last_planes)
         self.last = nn.Linear(last_planes, num_classes)
-
+        
         """
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -163,6 +164,7 @@ class PreActResNet_cifar(nn.Module):
 # ResNet for Cifar10/100 or the dataset with image size 32x32
 
 def ResNet20_cifar(out_dim=10):
+
     return PreActResNet_cifar(PreActBlock, [3 , 3 , 3 ], [16, 32, 64], num_classes=out_dim)
 
 def ResNet56_cifar(out_dim=10):

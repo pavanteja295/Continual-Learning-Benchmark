@@ -4,6 +4,8 @@ import torch.nn as nn
 from types import MethodType
 import models
 from utils.metric import accuracy, AverageMeter, Timer
+from torch.utils.tensorboard import SummaryWriter
+
 
 class NormalNN(nn.Module):
     '''
@@ -97,9 +99,13 @@ class NormalNN(nn.Module):
         return out
 
     def validation(self, dataloader):
+        # this might possibly change for other incremental scenario
         # This function doesn't distinguish tasks.
         batch_timer = Timer()
         acc = AverageMeter()
+        losses = AverageMeter()
+        acc = AverageMeter()
+
         batch_timer.tic()
 
         orig_mode = self.training
@@ -111,7 +117,8 @@ class NormalNN(nn.Module):
                     input = input.cuda()
                     target = target.cuda()
             output = self.predict(input)
-
+            loss = self.criterion(output, target, task)
+            losses.update(loss, input.size(0))        
             # Summarize the performance of all tasks, or 1 task, depends on dataloader.
             # Calculated by total number of data.
             acc = accumulate_acc(output, target, task, acc)
@@ -120,7 +127,7 @@ class NormalNN(nn.Module):
 
         self.log(' * Val Acc {acc.avg:.3f}, Total time {time:.2f}'
               .format(acc=acc,time=batch_timer.toc()))
-        return acc.avg
+        return acc, losses
 
     def criterion(self, preds, targets, tasks, **kwargs):
         # The inputs and targets could come from single task or a mix of tasks
@@ -151,18 +158,19 @@ class NormalNN(nn.Module):
         return loss.detach(), out
 
     def learn_batch(self, train_loader, val_loader=None):
+        writer = SummaryWriter()
+        itrs = 0
         if self.reset_optimizer:  # Reset optimizer before learning each task
             self.log('Optimizer is reset!')
             self.init_optimizer()
-
+        data_timer = Timer()
+        batch_timer = Timer()
+        batch_time = AverageMeter()
+        data_time = AverageMeter()
+        losses = AverageMeter()
+        acc = AverageMeter()
+        
         for epoch in range(self.config['schedule'][-1]):
-            data_timer = Timer()
-            batch_timer = Timer()
-            batch_time = AverageMeter()
-            data_time = AverageMeter()
-            losses = AverageMeter()
-            acc = AverageMeter()
-
             # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
@@ -173,11 +181,10 @@ class NormalNN(nn.Module):
             # Learning with mini-batch
             data_timer.tic()
             batch_timer.tic()
-            self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc')
+            self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
             for i, (input, target, task) in enumerate(train_loader):
-
                 data_time.update(data_timer.toc())  # measure data loading time
-
+                itrs += 1
                 if self.gpu:
                     input = input.cuda()
                     target = target.cuda()
@@ -189,7 +196,10 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-
+                print(itrs)
+                writer.add_scalar('Loss/train', losses.avg, itrs)
+                writer.add_scalar('Accuracy/train', acc.avg, itrs)
+                
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
 
@@ -206,7 +216,9 @@ class NormalNN(nn.Module):
 
             # Evaluate the performance of current task
             if val_loader != None:
-                self.validation(val_loader)
+               acc, loss =  self.validation(val_loader)
+               writer.add_scalar('Loss/test', loss.avg, itrs)
+               writer.add_scalar('Accuracy/test', acc.avg, itrs)
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'
