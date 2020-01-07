@@ -33,6 +33,7 @@ class NormalNN(nn.Module):
             self.gpu = True
         else:
             self.gpu = False
+        self.exp_name = agent_config['exp_name']
         self.init_optimizer()
         self.reset_optimizer = False
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
@@ -158,7 +159,7 @@ class NormalNN(nn.Module):
         return loss.detach(), out
 
     def learn_batch(self, train_loader, val_loader=None):
-        writer = SummaryWriter()
+        writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         itrs = 0
         if self.reset_optimizer:  # Reset optimizer before learning each task
             self.log('Optimizer is reset!')
@@ -196,7 +197,6 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                print(itrs)
                 writer.add_scalar('Loss/train', losses.avg, itrs)
                 writer.add_scalar('Accuracy/train', acc.avg, itrs)
                 
@@ -216,9 +216,9 @@ class NormalNN(nn.Module):
 
             # Evaluate the performance of current task
             if val_loader != None:
-               acc, loss =  self.validation(val_loader)
-               writer.add_scalar('Loss/test', loss.avg, itrs)
-               writer.add_scalar('Accuracy/test', acc.avg, itrs)
+               acc_val, loss_val =  self.validation(val_loader)
+               writer.add_scalar('Loss/test', loss_val.avg, itrs)
+               writer.add_scalar('Accuracy/test', acc_val.avg, itrs)
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'
