@@ -187,7 +187,7 @@ class NormalNN(nn.Module):
                 data_time.update(data_timer.toc())  # measure data loading time
                 itrs += 1
                 if self.gpu:
-                    input = input.cuda()
+                    input = input.cuda()                                                                                                                                                                                                                                                
                     target = target.cuda()
 
                 loss, output = self.update_model(input, target, task)
@@ -210,7 +210,7 @@ class NormalNN(nn.Module):
                           '{loss.val:.3f} ({loss.avg:.3f})\t'
                           '{acc.val:.2f} ({acc.avg:.2f})'.format(
                         i, len(train_loader), batch_time=batch_time,
-                        data_time=data_time, loss=losses, acc=acc))
+                        data_time=data_time, loss=losses, acc=acc))                                                                                                                                                                                                                                                                     
 
             self.log(' * Train Acc {acc.avg:.3f}'.format(acc=acc))
 
@@ -237,8 +237,8 @@ class NormalNN(nn.Module):
 
     def save_model(self, filename):
         model_state = self.model.state_dict()
-        if isinstance(self.model,torch.nn.DataParallel):
-            # Get rid of 'module' before the name of states
+        if isinstance(self.model,torch.nn.DataParallel):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            # Get rid of 'module' before the name of stat                               es                     
             model_state = self.model.module.state_dict()
         for key in model_state.keys():  # Always save it to cpu
             model_state[key] = model_state[key].cpu()

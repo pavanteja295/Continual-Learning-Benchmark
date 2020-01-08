@@ -11,6 +11,18 @@ import agents
 
 # hello world
 def run(args):
+    import torch
+    import random
+    import numpy as np
+
+    torch.manual_seed(42)
+    random.seed(42)
+    np.random.seed(42)
+
+    # necessary for reproducing results
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
     if not os.path.exists('outputs'):
         os.mkdir('outputs')
 
