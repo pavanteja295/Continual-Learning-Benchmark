@@ -197,8 +197,7 @@ class NormalNN(nn.Module):
 
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
-
-            
+  
             # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
@@ -210,7 +209,7 @@ class NormalNN(nn.Module):
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
             for i, (input, target, task) in enumerate(train_loader):
-                if epoch <= self.warmup:
+                if epoch < self.warmup:
                     self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
                 itrs += 1
