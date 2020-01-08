@@ -1,4 +1,5 @@
 # repo-specific stuff
+runs/
 data/
 outputs/
 *.pt

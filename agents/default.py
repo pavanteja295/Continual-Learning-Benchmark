@@ -178,7 +178,7 @@ class NormalNN(nn.Module):
         return loss.detach(), out
 
     def learn_batch(self, train_loader, val_loader=None):
-        writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        
         itrs = 0
         if self.reset_optimizer:  # Reset optimizer before learning each task
             self.log('Optimizer is reset!')
@@ -194,7 +194,7 @@ class NormalNN(nn.Module):
         
         
         for epoch in range(self.config['schedule'][-1]):
-
+            writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
   
@@ -214,8 +214,8 @@ class NormalNN(nn.Module):
                 data_time.update(data_timer.toc())  # measure data loading time
                 itrs += 1
                 if self.gpu:
-                    input = input.cuda()                                                                                                                                                                                                                                                
-                    target = target.cuda()
+                        input = input.cuda()                                                                                                                                                                                                                                                
+                        target   = target.cuda()
 
                 loss, output = self.update_model(input, target, task)
                 input = input.detach()
@@ -246,6 +246,7 @@ class NormalNN(nn.Module):
                acc_val, loss_val =  self.validation(val_loader)
                writer.add_scalar('Loss/test', loss_val.avg, itrs)
                writer.add_scalar('Accuracy/test', acc_val.avg, itrs)
+            writer.close()
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'
