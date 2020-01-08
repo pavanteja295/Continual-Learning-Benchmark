@@ -9,6 +9,7 @@ import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
 
+
 # hello world
 def run(args):
     import torch
@@ -45,7 +46,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim>0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name}
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up}
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -113,7 +114,7 @@ def get_args(argv):
     parser.add_argument('--force_out_dim', type=int, default=100, help="Set 0 to let the task decide the required output dimension")
     parser.add_argument('--agent_type', type=str, default='default', help="The type (filename) of agent")
     parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
-    parser.add_argument('--optimizer', type=str, default='Adam', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
+    parser.add_argument('--optimizer', type=str, default='SGD', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
     parser.add_argument('--dataset', type=str, default='CIFAR100', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
@@ -129,10 +130,10 @@ def get_args(argv):
                         help="Randomize the order of splits")
     parser.add_argument('--workers', type=int, default=1, help="#Thread for dataloader")
     parser.add_argument('--batch_size', type=int, default=128)
-    parser.add_argument('--lr', type=float, default=0.001, help="Learning rate")
+    parser.add_argument('--lr', type=float, default=0.1, help="Learning rate")
     parser.add_argument('--momentum', type=float, default=0.9)
-    parser.add_argument('--weight_decay', type=float, default=0)
-    parser.add_argument('--schedule', nargs="+", type=int, default=[300],
+    parser.add_argument('--weight_decay', type=float, default=5e-4)
+    parser.add_argument('--schedule', nargs="+", type=int, default=[60, 120, 160],
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
@@ -147,7 +148,7 @@ def get_args(argv):
                         help="The number of output node in the single-headed model increases along with new categories.")
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")
-
+    parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
     args = parser.parse_args(argv)
     return args
 

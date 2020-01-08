@@ -5,7 +5,25 @@ from types import MethodType
 import models
 from utils.metric import accuracy, AverageMeter, Timer
 from torch.utils.tensorboard import SummaryWriter
+from torch.optim.lr_scheduler import _LRScheduler
 
+
+class WarmUpLR(_LRScheduler):
+    """warmup_training learning rate scheduler
+    Args:
+        optimizer: optimzier(e.g. SGD)
+        total_iters: totoal_iters of warmup phase
+    """
+    def __init__(self, optimizer, total_iters, last_epoch=-1):
+        
+        self.total_iters = total_iters
+        super().__init__(optimizer, last_epoch)
+
+    def get_lr(self):
+        """we will use the first m batches, and set the learning
+        rate to base_lr * m / total_iters
+        """
+        return [base_lr * self.last_epoch / (self.total_iters + 1e-8) for base_lr in self.base_lrs]
 
 class NormalNN(nn.Module):
     '''
@@ -34,6 +52,7 @@ class NormalNN(nn.Module):
         else:
             self.gpu = False
         self.exp_name = agent_config['exp_name']
+        self.warmup = agent_config['warmup']
         self.init_optimizer()
         self.reset_optimizer = False
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
@@ -53,8 +72,8 @@ class NormalNN(nn.Module):
 
         self.optimizer = torch.optim.__dict__[self.config['optimizer']](**optimizer_arg)
         self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.config['schedule'],
-                                                              gamma=0.1)
-
+                                                              gamma=0.2)
+        
     def create_model(self):
         cfg = self.config
 
@@ -170,12 +189,19 @@ class NormalNN(nn.Module):
         data_time = AverageMeter()
         losses = AverageMeter()
         acc = AverageMeter()
+
+        self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
+        
         
         for epoch in range(self.config['schedule'][-1]):
+
+            if epoch > self.warmup:
+                self.scheduler.step(epoch)
+
+            
             # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
-            self.scheduler.step(epoch)
             for param_group in self.optimizer.param_groups:
                 self.log('LR:',param_group['lr'])
 
@@ -184,6 +210,8 @@ class NormalNN(nn.Module):
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
             for i, (input, target, task) in enumerate(train_loader):
+                if epoch <= self.warmup:
+                    self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
                 itrs += 1
                 if self.gpu:

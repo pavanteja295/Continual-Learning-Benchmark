@@ -84,6 +84,7 @@ def CIFAR100(dataroot, train_aug=False):
         train_transform = transforms.Compose([
             transforms.RandomCrop(32, padding=4),
             transforms.RandomHorizontalFlip(),
+            transforms.RandomRotation(15),
             transforms.ToTensor(),
             normalize,
         ])
