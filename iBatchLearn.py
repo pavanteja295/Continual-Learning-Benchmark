@@ -149,7 +149,7 @@ def get_args(argv):
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
-        parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
+    parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
     args = parser.parse_args(argv)
     return args
 
