@@ -46,7 +46,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim>0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up}
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov}
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -110,7 +110,7 @@ def get_args(argv):
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
     parser.add_argument('--model_type', type=str, default='resnet', help="The type (mlp|lenet|vgg|resnet) of backbone network")
-    parser.add_argument('--model_name', type=str, default='ResNet20_cifar', help="The name of actual model for the backbone")
+    parser.add_argument('--model_name', type=str, default='ResNet18', help="The name of actual model for the backbone")
     parser.add_argument('--force_out_dim', type=int, default=100, help="Set 0 to let the task decide the required output dimension")
     parser.add_argument('--agent_type', type=str, default='default', help="The type (filename) of agent")
     parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
@@ -122,7 +122,7 @@ def get_args(argv):
     parser.add_argument('--other_split_size', type=int, default=2)
     parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
-    parser.add_argument('--train_aug', dest='train_aug', default=False, action='store_true',
+    parser.add_argument('--train_aug', dest='train_aug', default=True, action='store_true',
                         help="Allow data augmentation during training")
     parser.add_argument('--rand_split', dest='rand_split', default=False, action='store_true',
                         help="Randomize the classes in splits")
@@ -149,6 +149,7 @@ def get_args(argv):
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
+        parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
     args = parser.parse_args(argv)
     return args
 

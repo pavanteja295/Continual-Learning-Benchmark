@@ -64,6 +64,7 @@ class NormalNN(nn.Module):
                          'weight_decay':self.config['weight_decay']}
         if self.config['optimizer'] in ['SGD','RMSprop']:
             optimizer_arg['momentum'] = self.config['momentum']
+            optimizer_arg['nesterov'] = self.config['nesterov']
         elif self.config['optimizer'] in ['Rprop']:
             optimizer_arg.pop('weight_decay')
         elif self.config['optimizer'] == 'amsgrad':
