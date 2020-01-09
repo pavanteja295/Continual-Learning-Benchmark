@@ -43,7 +43,7 @@ def run(args):
     # Prepare the Agent (model)
     agent_config = {'lr': args.lr, 'momentum': args.momentum, 'weight_decay': args.weight_decay,'schedule': args.schedule,
                     'model_type':args.model_type, 'model_name': args.model_name, 'model_weights':args.model_weights,
-                    'out_dim':{'All':args.force_out_dim} if args.force_out_dim>0 else task_output_space,
+                    'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
                     'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov}
@@ -60,6 +60,7 @@ def run(args):
         print('Shuffled task order:', task_names)
 
     acc_table = OrderedDict()
+    loss_table = OrderedDict()
     if args.offline_training:  # Non-incremental learning / offline_training / measure the upper-bound performance
         task_names = ['All']
         train_dataset_all = torch.utils.data.ConcatDataset(train_dataset_splits.values())
@@ -90,9 +91,12 @@ def run(args):
 
             # Learn
             agent.learn_batch(train_loader, val_loader)
+            # if i == 0:
+
 
             # Evaluate
             acc_table[train_name] = OrderedDict()
+            loss_table[train_name] = OrderedDict()
             for j in range(i+1):
                 val_name = task_names[j]
                 print('validation split name:', val_name)
@@ -100,7 +104,11 @@ def run(args):
                 val_loader = torch.utils.data.DataLoader(val_data,
                                                          batch_size=args.batch_size, shuffle=False,
                                                          num_workers=args.workers)
-                acc_table[val_name][train_name] = agent.validation(val_loader)
+                acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader)
+    
+                # tensorboard 
+                agent.writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, int(train_name))
+                agent.writer.add_scalar('CumAcc/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name))
 
     return acc_table, task_names
 
@@ -118,7 +126,7 @@ def get_args(argv):
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
     parser.add_argument('--dataset', type=str, default='CIFAR10', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
-    parser.add_argument('--first_split_size', type=int, default=10)
+    parser.add_argument('--first_split_size', type=int, default=2)
     parser.add_argument('--other_split_size', type=int, default=2)
     parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
@@ -130,10 +138,10 @@ def get_args(argv):
                         help="Randomize the order of splits")
     parser.add_argument('--workers', type=int, default=1, help="#Thread for dataloader")
     parser.add_argument('--batch_size', type=int, default=128)
-    parser.add_argument('--lr', type=float, default=0.02, help="Learning rate")
+    parser.add_argument('--lr', type=float, default=0.01, help="Learning rate")
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--weight_decay', type=float, default=5e-4)
-    parser.add_argument('--schedule', nargs="+", type=int, default=[60, 120, 160, 300],
+    parser.add_argument('--schedule', nargs="+", type=int, default=[60], #, 120, 160, 300
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
@@ -141,10 +149,10 @@ def get_args(argv):
     parser.add_argument('--reg_coef', nargs="+", type=float, default=[0.], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
     parser.add_argument('--eval_on_train_set', dest='eval_on_train_set', default=False, action='store_true',
                         help="Force the evaluation on train set")
-    parser.add_argument('--offline_training', dest='offline_training', default=True, action='store_true',
+    parser.add_argument('--offline_training', dest='offline_training', default=False, action='store_true',
                         help="Non-incremental learning by make all data available in one batch. For measuring the upperbound performance.")
     parser.add_argument('--repeat', type=int, default=1, help="Repeat the experiment N times")
-    parser.add_argument('--incremental_class', dest='incremental_class', default=False, action='store_true',
+    parser.add_argument('--incremental_class', dest='incremental_class', default=True, action='store_true',
                         help="The number of output node in the single-headed model increases along with new categories.")
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")

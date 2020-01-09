@@ -39,7 +39,6 @@ def MNIST(dataroot, train_aug=False):
 
 def CIFAR10(dataroot, train_aug=False):
     normalize = transforms.Normalize(mean=[0.491, 0.482, 0.447], std=[0.247, 0.243, 0.262])
-    import pdb; pdb.set_trace()
     val_transform = transforms.Compose([
         transforms.ToTensor(),
         normalize,

@@ -44,6 +44,7 @@ class NormalNN(nn.Module):
         self.config = agent_config
         # If out_dim is a dict, there is a list of tasks. The model will have a head for each task.
         self.multihead = True if len(self.config['out_dim'])>1 else False  # A convenience flag to indicate multi-head/task
+        
         self.model = self.create_model()
         self.criterion_fn = nn.CrossEntropyLoss()
         if agent_config['gpuid'][0] >= 0:
@@ -57,6 +58,7 @@ class NormalNN(nn.Module):
         self.reset_optimizer = False
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
+        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
 
     def init_optimizer(self):
         optimizer_arg = {'params':self.model.parameters(),
@@ -81,6 +83,7 @@ class NormalNN(nn.Module):
         # Define the backbone (MLP, LeNet, VGG, ResNet ... etc) of model
         model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
 
+  
         # Apply network surgery to the backbone
         # Create the heads for tasks (It can be single task or multi-task)
         n_feat = model.last.in_features
@@ -195,7 +198,7 @@ class NormalNN(nn.Module):
         
         
         for epoch in range(self.config['schedule'][-1]):
-            writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+            
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
   
@@ -225,8 +228,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                writer.add_scalar('Loss/train', losses.avg, itrs)
-                writer.add_scalar('Accuracy/train', acc.avg, itrs)
+                self.writer.add_scalar('Loss/train', losses.avg, itrs)
+                self.writer.add_scalar('Accuracy/train', acc.avg, itrs)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -245,9 +248,9 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader)
-               writer.add_scalar('Loss/test', loss_val.avg, itrs)
-               writer.add_scalar('Accuracy/test', acc_val.avg, itrs)
-            writer.close()
+               self.writer.add_scalar('Loss/test', loss_val.avg, itrs)
+               self.writer.add_scalar('Accuracy/test', acc_val.avg, itrs)
+            self.writer.close()
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'

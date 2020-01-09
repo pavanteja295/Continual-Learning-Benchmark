@@ -39,6 +39,7 @@ def SplitGen(train_dataset, val_dataset, first_split_sz=2, other_split_sz=2, ran
     train_dataset_splits = {}
     val_dataset_splits = {}
     task_output_space = {}
+
     for name,class_list in class_lists.items():
         train_dataset_splits[name] = AppendName(Subclass(train_dataset, class_list, remap_class), name)
         val_dataset_splits[name] = AppendName(Subclass(val_dataset, class_list, remap_class), name)
