@@ -39,7 +39,7 @@ def MNIST(dataroot, train_aug=False):
 
 def CIFAR10(dataroot, train_aug=False):
     normalize = transforms.Normalize(mean=[0.491, 0.482, 0.447], std=[0.247, 0.243, 0.262])
-
+    import pdb; pdb.set_trace()
     val_transform = transforms.Compose([
         transforms.ToTensor(),
         normalize,
@@ -59,7 +59,7 @@ def CIFAR10(dataroot, train_aug=False):
         download=True,
         transform=train_transform
         )
-    train_dataset = CacheClassLabel(train_dataset, 10, train_dataset.train_labels)
+    train_dataset = CacheClassLabel(train_dataset, 10, train_dataset.targets)
 
     val_dataset = torchvision.datasets.CIFAR10(
         root=dataroot,
@@ -67,7 +67,7 @@ def CIFAR10(dataroot, train_aug=False):
         download=True,
         transform=val_transform
     )
-    val_dataset = CacheClassLabel(val_dataset, 10, val_dataset.test_labels)
+    val_dataset = CacheClassLabel(val_dataset, 10, val_dataset.targets)
 
     return train_dataset, val_dataset
 
