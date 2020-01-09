@@ -70,8 +70,8 @@ def run(args):
         val_loader = torch.utils.data.DataLoader(val_dataset_all,
                                                  batch_size=args.batch_size, shuffle=False, num_workers=args.workers)
         
-        
-        agent.learn_batch(train_loader, val_loader)
+        epochs = args.epoch[-1]
+        agent.learn_batch(train_loader, val_loader, epochs)
 
         acc_table['All'] = {}
         acc_table['All']['All'] = agent.validation(val_loader)
@@ -89,8 +89,9 @@ def run(args):
             if args.incremental_class:
                 agent.add_valid_output_dim(task_output_space[train_name])
 
+            epochs = args.epochs[i]
             # Learn
-            agent.learn_batch(train_loader, val_loader)
+            agent.learn_batch(train_loader, val_loader, epochs)
             # if i == 0:
 
 
@@ -107,9 +108,10 @@ def run(args):
                 acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader)
     
                 # tensorboard 
+                # agent.writer.reopen()
                 agent.writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, int(train_name))
                 agent.writer.add_scalar('CumAcc/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name))
-
+                agent.writer.close()
     return acc_table, task_names
 
 def get_args(argv):
@@ -138,10 +140,10 @@ def get_args(argv):
                         help="Randomize the order of splits")
     parser.add_argument('--workers', type=int, default=1, help="#Thread for dataloader")
     parser.add_argument('--batch_size', type=int, default=128)
-    parser.add_argument('--lr', type=float, default=0.01, help="Learning rate")
+    parser.add_argument('--lr', type=float, default=0.1, help="Learning rate")
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--weight_decay', type=float, default=5e-4)
-    parser.add_argument('--schedule', nargs="+", type=int, default=[60], #, 120, 160, 300
+    parser.add_argument('--schedule', nargs="+", type=int, default=[2], #, 120, 160, 300
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
@@ -158,6 +160,9 @@ def get_args(argv):
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
     parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
+    parser.add_argument('--epochs', nargs="+", type=int, default=[1, 2, 40, 40, 40], 
+                     help="Randomize the order of splits")
+
     args = parser.parse_args(argv)
     return args
 

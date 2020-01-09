@@ -55,7 +55,7 @@ class NormalNN(nn.Module):
         self.exp_name = agent_config['exp_name']
         self.warmup = agent_config['warmup']
         self.init_optimizer()
-        self.reset_optimizer = False
+        self.reset_optimizer = True
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
         self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
@@ -181,7 +181,7 @@ class NormalNN(nn.Module):
         self.optimizer.step()
         return loss.detach(), out
 
-    def learn_batch(self, train_loader, val_loader=None):
+    def learn_batch(self, train_loader, val_loader=None, epochs=40):
         
         itrs = 0
         if self.reset_optimizer:  # Reset optimizer before learning each task
@@ -197,8 +197,8 @@ class NormalNN(nn.Module):
         self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
         
         
-        for epoch in range(self.config['schedule'][-1]):
-            
+        for epoch in range(epochs):
+            #self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
   
