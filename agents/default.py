@@ -181,10 +181,10 @@ class NormalNN(nn.Module):
         self.optimizer.step()
         return loss.detach(), out
 
-    def learn_batch(self, train_loader, val_loader=None, epochs=40):
+    def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task=''):
         
         itrs = 0
-        if self.reset_optimizer:  # Reset optimizer before learning each task
+        if self.reset_optimizer and epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
             self.log('Optimizer is reset!')
             self.init_optimizer()
         data_timer = Timer()
@@ -197,11 +197,12 @@ class NormalNN(nn.Module):
         self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
         
         
-        for epoch in range(epochs):
+        for epoch in range(epochs[0], epochs[1]):
             #self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
-  
+            
+
             # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
@@ -213,10 +214,10 @@ class NormalNN(nn.Module):
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
             for i, (input, target, task) in enumerate(train_loader):
+                n_iter = (epoch) * len(train_loader) + i + 1
                 if epoch < self.warmup:
                     self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
-                itrs += 1
                 if self.gpu:
                         input = input.cuda()                                                                                                                                                                                                                                                
                         target   = target.cuda()
@@ -228,8 +229,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                self.writer.add_scalar('Loss/train', losses.avg, itrs)
-                self.writer.add_scalar('Accuracy/train', acc.avg, itrs)
+                self.writer.add_scalar('Loss/train' + task, losses.avg, n_iter)
+                self.writer.add_scalar('Accuracy/train' + task, acc.avg, n_iter)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -248,8 +249,8 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader)
-               self.writer.add_scalar('Loss/test', loss_val.avg, itrs)
-               self.writer.add_scalar('Accuracy/test', acc_val.avg, itrs)
+               self.writer.add_scalar('Loss/test' + task, loss_val.avg, n_iter)
+               self.writer.add_scalar('Accuracy/test' + task, acc_val.avg, n_iter)
             self.writer.close()
 
     def learn_stream(self, data, label):

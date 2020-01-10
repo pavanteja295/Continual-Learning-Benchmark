@@ -51,6 +51,7 @@ def run(args):
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
     print('#parameter of model:',agent.count_parameter())
+    
 
     # Decide split ordering
     task_names = sorted(list(task_output_space.keys()), key=int)
@@ -71,7 +72,7 @@ def run(args):
                                                  batch_size=args.batch_size, shuffle=False, num_workers=args.workers)
         
         epochs = args.epoch[-1]
-        agent.learn_batch(train_loader, val_loader, epochs)
+        agent.learn_batch(train_loader, val_loader, [0, epochs])
 
         acc_table['All'] = {}
         acc_table['All']['All'] = agent.validation(val_loader)
@@ -91,27 +92,28 @@ def run(args):
 
             epochs = args.epochs[i]
             # Learn
-            agent.learn_batch(train_loader, val_loader, epochs)
-            # if i == 0:
-
-
-            # Evaluate
-            acc_table[train_name] = OrderedDict()
-            loss_table[train_name] = OrderedDict()
-            for j in range(i+1):
-                val_name = task_names[j]
-                print('validation split name:', val_name)
-                val_data = val_dataset_splits[val_name] if not args.eval_on_train_set else train_dataset_splits[val_name]
-                val_loader = torch.utils.data.DataLoader(val_data,
-                                                         batch_size=args.batch_size, shuffle=False,
-                                                         num_workers=args.workers)
-                acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader)
-    
-                # tensorboard 
-                # agent.writer.reopen()
-                agent.writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, int(train_name))
-                agent.writer.add_scalar('CumAcc/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name))
-                agent.writer.close()
+            # split the epochs into multiple sub epochs
+            # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
+            # helps us in better understanding how the degradation happens
+            for epoch_10 in range(int(epochs / args.old_val_freq)):
+                    agent.learn_batch(train_loader, val_loader, epochs=[epoch_10 * args.old_val_freq, (epoch_10 + 1)* args.old_val_freq], task=train_name)
+                    # Evaluate
+                    acc_table[train_name] = OrderedDict()
+                    loss_table[train_name] = OrderedDict()
+                    for j in range(i+1):
+                        val_name = task_names[j]
+                        print('validation split name:', val_name)
+                        val_data = val_dataset_splits[val_name] if not args.eval_on_train_set else train_dataset_splits[val_name]
+                        val_loader = torch.utils.data.DataLoader(val_data,
+                                                                batch_size=args.batch_size, shuffle=False,
+                                                                num_workers=args.workers)
+                        acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader)
+            
+                        # tensorboard 
+                        # agent.writer.reopen()
+                        agent.writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, int(train_name) + (epoch_10 + 1) * 0.1)
+                        agent.writer.add_scalar('CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) + (epoch_10 + 1) * 0.1)
+                        agent.writer.close()
     return acc_table, task_names
 
 def get_args(argv):
@@ -129,7 +131,7 @@ def get_args(argv):
     parser.add_argument('--dataset', type=str, default='CIFAR10', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
     parser.add_argument('--first_split_size', type=int, default=2)
-    parser.add_argument('--other_split_size', type=int, default=2)
+    parser.add_argument('--other_split_size', type=int, default=8)
     parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
     parser.add_argument('--train_aug', dest='train_aug', default=True, action='store_true',
@@ -160,7 +162,9 @@ def get_args(argv):
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
     parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
-    parser.add_argument('--epochs', nargs="+", type=int, default=[1, 2, 40, 40, 40], 
+    parser.add_argument('--epochs', nargs="+", type=int, default=[2, 4], 
+                     help="Randomize the order of splits")
+    parser.add_argument('--old_val_freq', type=int, default=2, 
                      help="Randomize the order of splits")
 
     args = parser.parse_args(argv)
@@ -189,7 +193,7 @@ if __name__ == '__main__':
                 cls_acc_sum = 0
                 for j in range(i + 1):
                     val_name = task_names[j]
-                    cls_acc_sum += acc_table[val_name][train_name]
+                    cls_acc_sum += acc_table[val_name][train_name].avg
                 avg_acc_history[i] = cls_acc_sum / (i + 1)
                 print('Task', train_name, 'average acc:', avg_acc_history[i])
 
