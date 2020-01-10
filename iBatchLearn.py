@@ -96,7 +96,7 @@ def run(args):
             # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
             # helps us in better understanding how the degradation happens
             for epoch_10 in range(int(epochs / args.old_val_freq)):
-                    agent.learn_batch(train_loader, val_loader, epochs=[epoch_10 * args.old_val_freq, (epoch_10 + 1)* args.old_val_freq], task=train_name)
+                    agent.learn_batch(train_loader, val_loader, epochs=[epoch_10 * args.old_val_freq, (epoch_10 + 1)* args.old_val_freq], task_n=train_name)
                     # Evaluate
                     acc_table[train_name] = OrderedDict()
                     loss_table[train_name] = OrderedDict()

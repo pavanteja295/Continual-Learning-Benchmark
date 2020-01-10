@@ -181,7 +181,7 @@ class NormalNN(nn.Module):
         self.optimizer.step()
         return loss.detach(), out
 
-    def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task=''):
+    def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
         
         itrs = 0
         if self.reset_optimizer and epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
@@ -229,8 +229,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                self.writer.add_scalar('Loss/train' + task, losses.avg, n_iter)
-                self.writer.add_scalar('Accuracy/train' + task, acc.avg, n_iter)
+                self.writer.add_scalar('Loss/train' + task_n, losses.avg, n_iter)
+                self.writer.add_scalar('Accuracy/train' + task_n, acc.avg, n_iter)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -249,8 +249,8 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader)
-               self.writer.add_scalar('Loss/test' + task, loss_val.avg, n_iter)
-               self.writer.add_scalar('Accuracy/test' + task, acc_val.avg, n_iter)
+               self.writer.add_scalar('Loss/test' + task_n, loss_val.avg, n_iter)
+               self.writer.add_scalar('Accuracy/test' + task_n, acc_val.avg, n_iter)
             self.writer.close()
 
     def learn_stream(self, data, label):
