@@ -182,7 +182,6 @@ class NormalNN(nn.Module):
         return loss.detach(), out
 
     def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
-        
         itrs = 0
         if self.reset_optimizer and epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
             self.log('Optimizer is reset!')
@@ -194,22 +193,25 @@ class NormalNN(nn.Module):
         losses = AverageMeter()
         acc = AverageMeter()
 
-        self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
+       # 
         
         
         for epoch in range(epochs[0], epochs[1]):
             self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+            if epoch == 0:
+                self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
+            
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
             
 
-            # Config the model and optimizer
+            # # # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
             for param_group in self.optimizer.param_groups:
                 self.log('LR:',param_group['lr'])
 
-            # Learning with mini-batch
+            # # Learning with mini-batch
             data_timer.tic()
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
