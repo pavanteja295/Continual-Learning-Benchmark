@@ -198,7 +198,7 @@ class NormalNN(nn.Module):
         
         
         for epoch in range(epochs[0], epochs[1]):
-            #self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+            self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
             

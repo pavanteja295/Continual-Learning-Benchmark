@@ -8,7 +8,7 @@ from collections import OrderedDict
 import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
-
+from torch.utils.tensorboard import SummaryWriter
 
 # hello world
 def run(args):
@@ -96,10 +96,11 @@ def run(args):
             # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
             # helps us in better understanding how the degradation happens
             for epoch_10 in range(int(epochs / args.old_val_freq)):
-                    agent.learn_batch(train_loader, val_loader, epochs=[epoch_10 * args.old_val_freq, (epoch_10 + 1)* args.old_val_freq], task_n=train_name)
+                    #agent.learn_batch(train_loader, val_loader, epochs=[epoch_10 * args.old_val_freq, (epoch_10 + 1)* args.old_val_freq], task_n=train_name)
                     # Evaluate
                     acc_table[train_name] = OrderedDict()
                     loss_table[train_name] = OrderedDict()
+                    writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
                     for j in range(i+1):
                         val_name = task_names[j]
                         print('validation split name:', val_name)
@@ -111,9 +112,12 @@ def run(args):
             
                         # tensorboard 
                         # agent.writer.reopen()
-                        agent.writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, int(train_name) + (epoch_10 + 1) * 0.1)
-                        agent.writer.add_scalar('CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) + (epoch_10 + 1) * 0.1)
-                        agent.writer.close()
+                        print('logging for Task  {} while training {}'.format(val_name, train_name))
+                        print('logging', int(train_name) + (epoch_10 + 1) * 0.1 )
+                
+                        writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
+                        writer.add_scalar('CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
+                        writer.close()
     return acc_table, task_names
 
 def get_args(argv):
