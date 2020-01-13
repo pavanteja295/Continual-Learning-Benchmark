@@ -16,7 +16,7 @@ def SplitGen(train_dataset, val_dataset, first_split_sz=2, other_split_sz=2, ran
     '''
     assert train_dataset.number_classes==val_dataset.number_classes,'Train/Val has different number of classes'
     num_classes =  train_dataset.number_classes
-
+    
     # Calculate the boundary index of classes for splits
     # Ex: [0,2,4,6,8,10] or [0,50,60,70,80,90,100]
     split_boundaries = [0, first_split_sz]
@@ -27,6 +27,7 @@ def SplitGen(train_dataset, val_dataset, first_split_sz=2, other_split_sz=2, ran
 
     # Assign classes to each splits
     # Create the dict: {split_name1:[2,6,7], split_name2:[0,3,9], ...}
+
     if not rand_split:
         class_lists = {str(i):list(range(split_boundaries[i-1],split_boundaries[i])) for i in range(1,len(split_boundaries))}
     else:

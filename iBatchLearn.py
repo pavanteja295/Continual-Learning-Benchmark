@@ -12,17 +12,6 @@ from torch.utils.tensorboard import SummaryWriter
 
 # hello world
 def run(args):
-    import torch
-    import random
-    import numpy as np
-
-    torch.manual_seed(42)
-    random.seed(42)
-    np.random.seed(42)
-
-    # necessary for reproducing results
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
 
     if not os.path.exists('outputs'):
         os.mkdir('outputs')
@@ -46,7 +35,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov}
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -90,7 +79,7 @@ def run(args):
             if args.incremental_class:
                 agent.add_valid_output_dim(task_output_space[train_name])
 
-            epochs = args.epochs[i]
+            epochs = args.epochs[i] if isinstance(args.epochs, list) else args.epochs
             # Learn
             # split the epochs into multiple sub epochs
             # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
@@ -115,8 +104,8 @@ def run(args):
                         print('logging for Task  {} while training {}'.format(val_name, train_name))
                         print('logging', int(train_name) + (epoch_10 + 1) * 0.1 )
                 
-                        writer.add_scalar('CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
-                        writer.add_scalar('CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
+                        writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
+                        writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
                         writer.close()
     return acc_table, task_names
 
@@ -125,20 +114,20 @@ def get_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
-    parser.add_argument('--model_type', type=str, default='resnet', help="The type (mlp|lenet|vgg|resnet) of backbone network")
-    parser.add_argument('--model_name', type=str, default='ResNet18', help="The name of actual model for the backbone")
+    parser.add_argument('--model_type', type=str, default='mlp', help="The type (mlp|lenet|vgg|resnet) of backbone network")
+    parser.add_argument('--model_name', type=str, default='MLP400', help="The name of actual model for the backbone")
     parser.add_argument('--force_out_dim', type=int, default=10, help="Set 0 to let the task decide the required output dimension")
-    parser.add_argument('--agent_type', type=str, default='default', help="The type (filename) of agent")
-    parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
-    parser.add_argument('--optimizer', type=str, default='SGD', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
+    parser.add_argument('--agent_type', type=str, default='regularization', help="The type (filename) of agent")
+    parser.add_argument('--agent_name', type=str, default='L2', help="The class name of agent")
+    parser.add_argument('--optimizer', type=str, default='Adam', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
-    parser.add_argument('--dataset', type=str, default='CIFAR10', help="MNIST(default)|CIFAR10|CIFAR100")
+    parser.add_argument('--dataset', type=str, default='MNIST', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
     parser.add_argument('--first_split_size', type=int, default=2)
-    parser.add_argument('--other_split_size', type=int, default=8)
-    parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
+    parser.add_argument('--other_split_size', type=int, default=2)
+    parser.add_argument('--no_class_remap', dest='no_class_remap', default=True, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
-    parser.add_argument('--train_aug', dest='train_aug', default=True, action='store_true',
+    parser.add_argument('--train_aug', dest='train_aug', default=False, action='store_true',
                         help="Allow data augmentation during training")
     parser.add_argument('--rand_split', dest='rand_split', default=False, action='store_true',
                         help="Randomize the classes in splits")
@@ -146,30 +135,30 @@ def get_args(argv):
                         help="Randomize the order of splits")
     parser.add_argument('--workers', type=int, default=1, help="#Thread for dataloader")
     parser.add_argument('--batch_size', type=int, default=128)
-    parser.add_argument('--lr', type=float, default=0.1, help="Learning rate")
-    parser.add_argument('--momentum', type=float, default=0.9)
-    parser.add_argument('--weight_decay', type=float, default=5e-4)
-    parser.add_argument('--schedule', nargs="+", type=int, default=[2], #, 120, 160, 300
+    parser.add_argument('--lr', type=float, default=0.001, help="Learning rate")
+    parser.add_argument('--momentum', type=float, default=0)
+    parser.add_argument('--weight_decay', type=float, default=0)
+    parser.add_argument('--schedule', nargs="+", type=int, default=[120], #, 120, 160, 300
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
                         help="The path to the file for the model weights (*.pth).")
-    parser.add_argument('--reg_coef', nargs="+", type=float, default=[0.], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
+    parser.add_argument('--reg_coef', nargs="+", type=float, default=[5e-4], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
     parser.add_argument('--eval_on_train_set', dest='eval_on_train_set', default=False, action='store_true',
                         help="Force the evaluation on train set")
     parser.add_argument('--offline_training', dest='offline_training', default=False, action='store_true',
                         help="Non-incremental learning by make all data available in one batch. For measuring the upperbound performance.")
-    parser.add_argument('--repeat', type=int, default=1, help="Repeat the experiment N times")
-    parser.add_argument('--incremental_class', dest='incremental_class', default=True, action='store_true',
+    parser.add_argument('--repeat', type=int, default=10, help="Repeat the experiment N times")
+    parser.add_argument('--incremental_class', dest='incremental_class', default=False, action='store_true',
                         help="The number of output node in the single-headed model increases along with new categories.")
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")
-    parser.add_argument('--warm_up', type=int, default=1, help='warm up training phase')
+    parser.add_argument('--warm_up', type=int, default=0, help='warm up training phase')
     parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
-    parser.add_argument('--epochs', nargs="+", type=int, default=[2, 4], 
+    parser.add_argument('--epochs', nargs="+", type=int, default=4, 
                      help="Randomize the order of splits")
-    parser.add_argument('--old_val_freq', type=int, default=2, 
-                     help="Randomize the order of splits")
+    parser.add_argument('--old_val_freq', type=int, default=1, 
+                     help="frequency to log validation error of seen tasks")
 
     args = parser.parse_args(argv)
     return args
@@ -179,13 +168,30 @@ if __name__ == '__main__':
     reg_coef_list = args.reg_coef
     avg_final_acc = {}
 
+    import torch
+    import random
+    import numpy as np
+
+    # for reproducibility
+    torch.manual_seed(42)
+    random.seed(42)
+    np.random.seed(42)
+
+
+    # necessary for reproducing results
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
     # The for loops over hyper-paramerters or repeats
     for reg_coef in reg_coef_list:
         args.reg_coef = reg_coef
+        
         avg_final_acc[reg_coef] = np.zeros(args.repeat)
         for r in range(args.repeat):
 
             # Run the experiment
+            
+            args.run_num = r + 1
             acc_table, task_names = run(args)
             print(acc_table)
 

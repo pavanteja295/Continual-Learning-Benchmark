@@ -13,9 +13,9 @@ def MNIST(dataroot, train_aug=False):
         normalize,
     ])
     train_transform = val_transform
+    #transforms.RandomCrop(32, padding=4), paper mentions not doint this
     if train_aug:
         train_transform = transforms.Compose([
-            transforms.RandomCrop(32, padding=4),
             transforms.ToTensor(),
             normalize,
         ])

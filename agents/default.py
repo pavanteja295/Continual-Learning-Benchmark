@@ -55,7 +55,7 @@ class NormalNN(nn.Module):
         self.exp_name = agent_config['exp_name']
         self.warmup = agent_config['warmup']
         self.init_optimizer()
-        self.reset_optimizer = True
+        self.reset_optimizer = False
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
         self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
@@ -193,12 +193,9 @@ class NormalNN(nn.Module):
         losses = AverageMeter()
         acc = AverageMeter()
 
-       # 
-        
-        
         for epoch in range(epochs[0], epochs[1]):
             self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
-            if epoch == 0:
+            if epoch == 0 and self.warmup:
                 self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
             
             if epoch > self.warmup:
@@ -215,8 +212,10 @@ class NormalNN(nn.Module):
             data_timer.tic()
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
+            
             for i, (input, target, task) in enumerate(train_loader):
-                n_iter = (epoch) * len(train_loader) + i + 1
+                # iteration count
+                self.n_iter = (epoch) * len(train_loader) + i + 1
                 if epoch < self.warmup:
                     self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
@@ -231,8 +230,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                self.writer.add_scalar('Loss/train' + task_n, losses.avg, n_iter)
-                self.writer.add_scalar('Accuracy/train' + task_n, acc.avg, n_iter)
+                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Loss/train' + task_n, losses.avg, self.n_iter)
+                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + task_n, acc.avg, self.n_iter)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -251,8 +250,8 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader)
-               self.writer.add_scalar('Loss/test' + task_n, loss_val.avg, n_iter)
-               self.writer.add_scalar('Accuracy/test' + task_n, acc_val.avg, n_iter)
+               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
+               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
             self.writer.close()
 
     def learn_stream(self, data, label):

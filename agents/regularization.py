@@ -1,6 +1,7 @@
 import torch
 import random
 from .default import NormalNN
+from torch.utils.tensorboard import SummaryWriter
 
 
 class L2(NormalNN):
@@ -18,7 +19,7 @@ class L2(NormalNN):
         self.params = {n: p for n, p in self.model.named_parameters() if p.requires_grad}  # For convenience
         self.regularization_terms = {}
         self.task_count = 0
-        self.online_reg = True  # True: There will be only one importance matrix and previous model parameters
+        self.online_reg = False  # True: There will be only one importance matrix and previous model parameters
                                 # False: Each task has its own importance matrix and model parameters
 
     def calculate_importance(self, dataloader):
@@ -28,12 +29,12 @@ class L2(NormalNN):
             importance[n] = p.clone().detach().fill_(1)  # Identity
         return importance
 
-    def learn_batch(self, train_loader, val_loader=None):
+    def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
 
         self.log('#reg_term:', len(self.regularization_terms))
 
         # 1.Learn the parameters for current task
-        super(L2, self).learn_batch(train_loader, val_loader)
+        super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)
 
         # 2.Backup the weight of current task
         task_param = {}
@@ -54,7 +55,8 @@ class L2(NormalNN):
 
     def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
         loss = super(L2, self).criterion(inputs, targets, tasks, **kwargs)
-
+        
+        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         if regularization and len(self.regularization_terms)>0:
             # Calculate the reg_loss only when the regularization_terms exists
             reg_loss = 0
@@ -65,7 +67,10 @@ class L2(NormalNN):
                 for n, p in self.params.items():
                     task_reg_loss += (importance[n] * (p - task_param[n]) ** 2).sum()
                 reg_loss += task_reg_loss
+                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + str(i), task_reg_loss, self.n_iter)
             loss += self.config['reg_coef'] * reg_loss
+        self.writer.close()
+
         return loss
 
 
