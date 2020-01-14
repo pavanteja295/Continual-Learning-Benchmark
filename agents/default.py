@@ -86,9 +86,12 @@ class NormalNN(nn.Module):
         
     def create_model(self):
         cfg = self.config
+        
         if self.noise:
             params = self.config['out_dim']
-            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params)
+            noise_type = self.config['noise_type']
+            print('====================== Noise Type ==   ',noise_type,'=======================')
+            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params) #
         else:
             model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
 
@@ -248,31 +251,31 @@ class NormalNN(nn.Module):
 
         for epoch in range(epochs[0], epochs[1]):
             # grads visualization
-            # for i, param in enumerate(self.model.linear.parameters()):
-            #     if not i :
-            #         print(param.data[0,:10])
+            for i, param in enumerate(self.model.linear.parameters()):
+                if not i :
+                    print(param.data[0,:10])
 
-            # # import pdb; pdb.set_trace()
-            # for key, val in self.model.last.items():
-            #     if key != task_n:
-            #         for param in self.model.last[key].parameters():
-            #         #    import pdb; pdb.set_trace()
-            #             if len(param.data.shape) > 1: 
-            #                 print(param.data[0,:10])
-            #     else:
-            #         for param in self.model.last[key].parameters():
-            #             # import pdb; pdb.set_trace()
-            #             if len(param.data.shape) > 1: 
-            #                 print(param.data[0,:10])
-            # print('====================== Noise params =======================')
-            # if self.noise:
-            #     for key, val in self.model.noise_list.items():
-            #         if key != task_n:
-            #             for param in self.model.noise_list[key].parameters():
-            #                     print(param.data[:10])
-            #         else:
-            #             for param in self.model.noise_list[key].parameters():
-            #                     print(param.data[:10])
+            # import pdb; pdb.set_trace()
+            for key, val in self.model.last.items():
+                if key != task_n:
+                    for param in self.model.last[key].parameters():
+                    #    import pdb; pdb.set_trace()
+                        if len(param.data.shape) > 1: 
+                            print(param.data[0,:10])
+                else:
+                    for param in self.model.last[key].parameters():
+                        # import pdb; pdb.set_trace()
+                        if len(param.data.shape) > 1: 
+                            print(param.data[0,:10])
+            print('====================== Noise params =======================')
+            if self.noise:
+                for key, val in self.model.noise_list.items():
+                    if key != task_n:
+                        for param in self.model.noise_list[key].parameters():
+                                print(param.data[:10])
+                    else:
+                        for param in self.model.noise_list[key].parameters():
+                                print(param.data[:10])
 
                     
             # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)

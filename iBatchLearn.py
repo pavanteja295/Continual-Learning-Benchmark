@@ -35,7 +35,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt }
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_type':args.noise_type }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -80,7 +80,7 @@ def run(args):
             if args.incremental_class:
                 agent.add_valid_output_dim(task_output_space[train_name])
 
-            epochs = args.epochs[i] if isinstance(args.epochs, list) else args.epochs
+            epochs = args.epochs[i] if len(args.epochs) - 1  else args.epochs[0]
             # Learn
             # split the epochs into multiple sub epochs
             # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
@@ -117,6 +117,7 @@ def run(args):
 def get_args(argv):
     # This function prepares the variables shared across demo.py
     parser = argparse.ArgumentParser()
+    parser.add_argument('--noise_type', type=str, default='seperate', help="The type (mlp|lenet|vgg|resnet) of backbone network")
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
     parser.add_argument('--model_type', type=str, default='noise_based', help="The type (mlp|lenet|vgg|resnet) of backbone network")
@@ -169,7 +170,7 @@ def get_args(argv):
                      help="freeze the core network")
     parser.add_argument('--reset_opt',  default=False, action='store_true',
                      help="freeze the core network")
-
+    
 
     args = parser.parse_args(argv)
     return args
