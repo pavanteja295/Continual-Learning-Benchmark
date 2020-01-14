@@ -161,7 +161,7 @@ def get_args(argv):
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=0, help='warm up training phase')
     parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
-    parser.add_argument('--epochs', nargs="+", type=int, default=2, 
+    parser.add_argument('--epochs', nargs="+", type=int, default=[2], 
                      help="Randomize the order of splits")
     parser.add_argument('--old_val_freq', type=int, default=1, 
                      help="frequency to log validation error of seen tasks")
