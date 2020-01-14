@@ -18,7 +18,6 @@ class MLP_First(MLP):
         
     def forward(self, input):
         # input is the image
-        import pdb; pdb.set_trace()
         input = input.view(-1,self.in_dim)
         out1_ = self.first(input)
         out2_= super(MLP_First, self).forward(out1_)
