@@ -44,9 +44,11 @@ class NormalNN(nn.Module):
         self.config = agent_config
         # If out_dim is a dict, there is a list of tasks. The model will have a head for each task.
         self.multihead = True if len(self.config['out_dim'])>1 else False  # A convenience flag to indicate multi-head/task
-        
+        self.noise = 'Noise' in self.config['model_name']
+        # import pdb; pdb.set_trace()
         self.model = self.create_model()
         self.criterion_fn = nn.CrossEntropyLoss()
+        
         if agent_config['gpuid'][0] >= 0:
             self.cuda()
             self.gpu = True
@@ -55,13 +57,18 @@ class NormalNN(nn.Module):
         self.exp_name = agent_config['exp_name']
         self.warmup = agent_config['warmup']
         self.init_optimizer()
-        self.reset_optimizer = False
+        self.reset_optimizer = agent_config['reset_opt']
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
-        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
 
-    def init_optimizer(self):
-        optimizer_arg = {'params':self.model.parameters(),
+        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        self.task_num = 0
+
+    def init_optimizer(self, params=None):
+        if not params:
+            params = self.model.parameters()
+        
+        optimizer_arg = {'params':params,
                          'lr':self.config['lr'],
                          'weight_decay':self.config['weight_decay']}
         if self.config['optimizer'] in ['SGD','RMSprop']:
@@ -79,9 +86,14 @@ class NormalNN(nn.Module):
         
     def create_model(self):
         cfg = self.config
+        if self.noise:
+            params = self.config['out_dim']
+            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params)
+        else:
+            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
 
         # Define the backbone (MLP, LeNet, VGG, ResNet ... etc) of model
-        model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
+        
 
   
         # Apply network surgery to the backbone
@@ -112,17 +124,19 @@ class NormalNN(nn.Module):
             print('=> Load Done')
         return model
 
-    def forward(self, x):
+    def forward(self, x, task_n=''):
+        if self.noise:
+            return self.model.forward(x, task_n)
         return self.model.forward(x)
 
-    def predict(self, inputs):
+    def predict(self, inputs, task_n=''):
         self.model.eval()
-        out = self.forward(inputs)
+        out = self.forward(inputs, task_n)
         for t in out.keys():
             out[t] = out[t].detach()
         return out
 
-    def validation(self, dataloader):
+    def validation(self, dataloader, task_n=''):
         # this might possibly change for other incremental scenario
         # This function doesn't distinguish tasks.
         batch_timer = Timer()
@@ -140,7 +154,8 @@ class NormalNN(nn.Module):
                 with torch.no_grad():
                     input = input.cuda()
                     target = target.cuda()
-            output = self.predict(input)
+            # print(task_n)
+            output = self.predict(input, task_n)
             loss = self.criterion(output, target, task)
             losses.update(loss, input.size(0))        
             # Summarize the performance of all tasks, or 1 task, depends on dataloader.
@@ -173,19 +188,57 @@ class NormalNN(nn.Module):
             loss = self.criterion_fn(pred, targets)
         return loss
 
-    def update_model(self, inputs, targets, tasks):
-        out = self.forward(inputs)
+    def update_model(self, inputs, targets, tasks, task_n=''):
+
+        out = self.forward(inputs, task_n)
         loss = self.criterion(out, targets, tasks)
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
         return loss.detach(), out
 
+    def freeze(self, task_n):
+        
+        if task_n == '2':
+            if self.config['freeze_core']:
+                for param in self.model.linear.parameters():
+                        param.requires_grad = False
+            else:
+                for param in self.model.linear.parameters():
+                        param.requires_grad = True
+
+        for key, val in self.model.last.items():
+            if key != task_n:
+                for param in self.model.last[key].parameters():
+                    param.requires_grad = False
+            else:
+                for param in self.model.last[key].parameters():
+                    param.requires_grad = True
+        if self.noise:
+            for key, val in self.model.noise_list.items():
+                if key != task_n:
+                    for param in self.model.noise_list[key].parameters():
+                        param.requires_grad = False
+                else:
+                    for param in self.model.noise_list[key].parameters():
+                        param.requires_grad = True
+
+        t = 0
+        for p in self.model.parameters():
+            if p.requires_grad:
+                t = t + 1
+        print('====================== trainable params ==   ',t,'=======================')
+                
+ 
     def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
         itrs = 0
-        if self.reset_optimizer and epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
-            self.log('Optimizer is reset!')
-            self.init_optimizer()
+        if epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
+           self.task_num +=1
+           if self.reset_optimizer:
+                self.log('Optimizer is reset!')
+                self.freeze(task_n)
+                self.init_optimizer(params=filter(lambda p: p.requires_grad, self.model.parameters()))
+        
         data_timer = Timer()
         batch_timer = Timer()
         batch_time = AverageMeter()
@@ -194,7 +247,35 @@ class NormalNN(nn.Module):
         acc = AverageMeter()
 
         for epoch in range(epochs[0], epochs[1]):
-            self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+            # grads visualization
+            # for i, param in enumerate(self.model.linear.parameters()):
+            #     if not i :
+            #         print(param.data[0,:10])
+
+            # # import pdb; pdb.set_trace()
+            # for key, val in self.model.last.items():
+            #     if key != task_n:
+            #         for param in self.model.last[key].parameters():
+            #         #    import pdb; pdb.set_trace()
+            #             if len(param.data.shape) > 1: 
+            #                 print(param.data[0,:10])
+            #     else:
+            #         for param in self.model.last[key].parameters():
+            #             # import pdb; pdb.set_trace()
+            #             if len(param.data.shape) > 1: 
+            #                 print(param.data[0,:10])
+            # print('====================== Noise params =======================')
+            # if self.noise:
+            #     for key, val in self.model.noise_list.items():
+            #         if key != task_n:
+            #             for param in self.model.noise_list[key].parameters():
+            #                     print(param.data[:10])
+            #         else:
+            #             for param in self.model.noise_list[key].parameters():
+            #                     print(param.data[:10])
+
+                    
+            # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             if epoch == 0 and self.warmup:
                 self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
             
@@ -212,7 +293,7 @@ class NormalNN(nn.Module):
             data_timer.tic()
             batch_timer.tic()
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
-            
+
             for i, (input, target, task) in enumerate(train_loader):
                 # iteration count
                 self.n_iter = (epoch) * len(train_loader) + i + 1
@@ -222,8 +303,8 @@ class NormalNN(nn.Module):
                 if self.gpu:
                         input = input.cuda()                                                                                                                                                                                                                                                
                         target   = target.cuda()
-
-                loss, output = self.update_model(input, target, task)
+                
+                loss, output = self.update_model(input, target, task, task_n)
                 input = input.detach()
                 target = target.detach()
 
@@ -249,7 +330,7 @@ class NormalNN(nn.Module):
 
             # Evaluate the performance of current task
             if val_loader != None:
-               acc_val, loss_val =  self.validation(val_loader)
+               acc_val, loss_val =  self.validation(val_loader, task_n)
                self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
                self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
             self.writer.close()

@@ -33,25 +33,27 @@ class L2(NormalNN):
 
         self.log('#reg_term:', len(self.regularization_terms))
 
+        if epochs[0] == 0:
+            # 2.Backup the weight of current task
+            task_param = {}
+            for n, p in self.params.items():
+                task_param[n] = p.clone().detach()
+
+            # 3.Calculate the importance of weights for current task
+            importance = self.calculate_importance(train_loader)
+
+            # Save the weight and importance of weights of current task
+            self.task_count += 1
+            if self.online_reg and len(self.regularization_terms)>0:
+                # Always use only one slot in self.regularization_terms
+                self.regularization_terms[1] = {'importance':importance, 'task_param':task_param}
+            else:
+                # Use a new slot to store the task-specific information
+                self.regularization_terms[self.task_count] = {'importance':importance, 'task_param':task_param}
+
         # 1.Learn the parameters for current task
         super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)
 
-        # 2.Backup the weight of current task
-        task_param = {}
-        for n, p in self.params.items():
-            task_param[n] = p.clone().detach()
-
-        # 3.Calculate the importance of weights for current task
-        importance = self.calculate_importance(train_loader)
-
-        # Save the weight and importance of weights of current task
-        self.task_count += 1
-        if self.online_reg and len(self.regularization_terms)>0:
-            # Always use only one slot in self.regularization_terms
-            self.regularization_terms[1] = {'importance':importance, 'task_param':task_param}
-        else:
-            # Use a new slot to store the task-specific information
-            self.regularization_terms[self.task_count] = {'importance':importance, 'task_param':task_param}
 
     def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
         loss = super(L2, self).criterion(inputs, targets, tasks, **kwargs)

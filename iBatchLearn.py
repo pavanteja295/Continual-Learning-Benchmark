@@ -35,7 +35,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num }
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -45,6 +45,7 @@ def run(args):
     # Decide split ordering
     task_names = sorted(list(task_output_space.keys()), key=int)
     print('Task order:',task_names)
+    #import pdb; pdb.set_trace()
     if args.rand_split_order:
         shuffle(task_names)
         print('Shuffled task order:', task_names)
@@ -97,7 +98,7 @@ def run(args):
                         val_loader = torch.utils.data.DataLoader(val_data,
                                                                 batch_size=args.batch_size, shuffle=False,
                                                                 num_workers=args.workers)
-                        acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader)
+                        acc_table[val_name][train_name], loss_table[val_name][train_name] = agent.validation(val_loader, val_name)
             
                         # tensorboard 
                         # agent.writer.reopen()
@@ -107,6 +108,10 @@ def run(args):
                         writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
                         writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
                         writer.close()
+            # if i == 1:
+                #after the first task freeze some weights:
+
+
     return acc_table, task_names
 
 def get_args(argv):
@@ -114,18 +119,18 @@ def get_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
-    parser.add_argument('--model_type', type=str, default='mlp', help="The type (mlp|lenet|vgg|resnet) of backbone network")
-    parser.add_argument('--model_name', type=str, default='MLP400', help="The name of actual model for the backbone")
-    parser.add_argument('--force_out_dim', type=int, default=10, help="Set 0 to let the task decide the required output dimension")
-    parser.add_argument('--agent_type', type=str, default='regularization', help="The type (filename) of agent")
-    parser.add_argument('--agent_name', type=str, default='L2', help="The class name of agent")
+    parser.add_argument('--model_type', type=str, default='noise_based', help="The type (mlp|lenet|vgg|resnet) of backbone network")
+    parser.add_argument('--model_name', type=str, default='Noise_Net', help="The name of actual model for the backbone")
+    parser.add_argument('--force_out_dim', type=int, default=0, help="Set 0 to let the task decide the required output dimension")
+    parser.add_argument('--agent_type', type=str, default='default', help="The type (filename) of agent")
+    parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
     parser.add_argument('--optimizer', type=str, default='Adam', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
     parser.add_argument('--dataset', type=str, default='MNIST', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
     parser.add_argument('--first_split_size', type=int, default=2)
     parser.add_argument('--other_split_size', type=int, default=2)
-    parser.add_argument('--no_class_remap', dest='no_class_remap', default=True, action='store_true',
+    parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
     parser.add_argument('--train_aug', dest='train_aug', default=False, action='store_true',
                         help="Allow data augmentation during training")
@@ -155,10 +160,16 @@ def get_args(argv):
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=0, help='warm up training phase')
     parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
-    parser.add_argument('--epochs', nargs="+", type=int, default=4, 
+    parser.add_argument('--epochs', nargs="+", type=int, default=2, 
                      help="Randomize the order of splits")
     parser.add_argument('--old_val_freq', type=int, default=1, 
                      help="frequency to log validation error of seen tasks")
+
+    parser.add_argument('--freeze_core',  default=False, action='store_true',
+                     help="freeze the core network")
+    parser.add_argument('--reset_opt',  default=False, action='store_true',
+                     help="freeze the core network")
+
 
     args = parser.parse_args(argv)
     return args
@@ -171,11 +182,9 @@ if __name__ == '__main__':
     import torch
     import random
     import numpy as np
-
+    
     # for reproducibility
-    torch.manual_seed(42)
-    random.seed(42)
-    np.random.seed(42)
+
 
 
     # necessary for reproducing results
@@ -188,7 +197,9 @@ if __name__ == '__main__':
         
         avg_final_acc[reg_coef] = np.zeros(args.repeat)
         for r in range(args.repeat):
-
+            torch.manual_seed(r)
+            random.seed(r)
+            np.random.seed(r)
             # Run the experiment
             
             args.run_num = r + 1
