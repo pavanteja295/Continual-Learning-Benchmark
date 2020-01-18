@@ -44,7 +44,7 @@ class NormalNN(nn.Module):
         self.config = agent_config
         # If out_dim is a dict, there is a list of tasks. The model will have a head for each task.
         self.multihead = True if len(self.config['out_dim'])>1 else False  # A convenience flag to indicate multi-head/task
-        self.noise = 'Noise' in self.config['model_name']
+        self.noise = 'Noise' in self.config['model_name'] or 'MLP_Inc_Tasks' in self.config['model_name']
         # import pdb; pdb.set_trace()
         self.model = self.create_model()
         self.criterion_fn = nn.CrossEntropyLoss()
@@ -61,7 +61,7 @@ class NormalNN(nn.Module):
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
 
-        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        self.writer = SummaryWriter(log_dir="../runs/" + self.exp_name)
         self.task_num = 0
 
     def init_optimizer(self, params=None):
@@ -91,7 +91,7 @@ class NormalNN(nn.Module):
             params = self.config['out_dim']
             noise_type = self.config['noise_type']
             print('====================== Noise Type ==   ',noise_type,'=======================')
-            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params) #
+            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params, noise_type= noise_type) #
         else:
             model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
 
