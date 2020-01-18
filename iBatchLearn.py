@@ -89,7 +89,7 @@ def run(args):
                     # Evaluate
                     acc_table[train_name] = OrderedDict()
                     loss_table[train_name] = OrderedDict()
-                    writer = SummaryWriter(log_dir="../runs/" + agent.exp_name)
+                    writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
                     for j in range(i+1):
                         val_name = task_names[j]
                         print('validation split name:', val_name)

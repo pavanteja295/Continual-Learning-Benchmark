@@ -61,7 +61,7 @@ class NormalNN(nn.Module):
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
 
-        self.writer = SummaryWriter(log_dir="../runs/" + self.exp_name)
+        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         self.task_num = 0
 
     def init_optimizer(self, params=None):

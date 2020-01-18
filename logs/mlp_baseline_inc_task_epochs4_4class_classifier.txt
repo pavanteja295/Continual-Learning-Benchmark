@@ -1,0 +1,3258 @@
+split_boundaries: [0, 2, 6, 10]
+{'1': [4, 1], '2': [7, 5, 3, 9], '3': [0, 8, 6, 2]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([ 0.0083, -0.0094, -0.0061, -0.0299, -0.0207, -0.0129,  0.0012,  0.0124,
+         0.0188, -0.0212], device='cuda:0')
+tensor([ 0.0522,  0.0388,  0.0012, -0.0238,  0.0305, -0.0426, -0.0467, -0.0472,
+        -0.0435, -0.0506], device='cuda:0')
+tensor([-0.0363,  0.0413, -0.0162,  0.0206,  0.0452, -0.0207,  0.0007, -0.0027,
+         0.0576, -0.0569], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	3.3155 (3.3155)	0.1198 (0.1198)	0.696 (0.696)	53.91 (53.91)
+[98/99]	0.0058 (0.0538)	0.0025 (0.0179)	0.085 (0.040)	97.50 (98.80)
+ * Train Acc 98.800
+ * Val Acc 99.717, Total time 0.42
+validation split name: 1
+ * Val Acc 99.717, Total time 0.40
+logging for Task  1 while training 1
+logging 1.1
+tensor([ 0.0024, -0.0153, -0.0120, -0.0357, -0.0266, -0.0187, -0.0047,  0.0065,
+         0.0129, -0.0270], device='cuda:0')
+tensor([ 0.0462,  0.0305,  0.0049, -0.0165,  0.0299, -0.0488, -0.0464, -0.0436,
+        -0.0513, -0.0551], device='cuda:0')
+tensor([-0.0363,  0.0413, -0.0162,  0.0206,  0.0452, -0.0207,  0.0007, -0.0027,
+         0.0576, -0.0569], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0539 (0.0539)	0.0486 (0.0486)	0.011 (0.011)	100.00 (100.00)
+[98/99]	0.0063 (0.0220)	0.0031 (0.0182)	0.000 (0.010)	100.00 (99.63)
+ * Train Acc 99.634
+ * Val Acc 99.953, Total time 0.39
+validation split name: 1
+ * Val Acc 99.953, Total time 0.43
+logging for Task  1 while training 1
+logging 1.2
+tensor([ 0.0047, -0.0131, -0.0098, -0.0335, -0.0243, -0.0165, -0.0025,  0.0087,
+         0.0151, -0.0248], device='cuda:0')
+tensor([ 0.0453,  0.0329,  0.0050, -0.0182,  0.0274, -0.0493, -0.0468, -0.0400,
+        -0.0490, -0.0536], device='cuda:0')
+tensor([-0.0363,  0.0413, -0.0162,  0.0206,  0.0452, -0.0207,  0.0007, -0.0027,
+         0.0576, -0.0569], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0549 (0.0549)	0.0497 (0.0497)	0.001 (0.001)	100.00 (100.00)
+[98/99]	0.0061 (0.0220)	0.0031 (0.0182)	0.000 (0.009)	100.00 (99.73)
+ * Train Acc 99.730
+ * Val Acc 99.953, Total time 0.44
+validation split name: 1
+ * Val Acc 99.953, Total time 0.48
+logging for Task  1 while training 1
+logging 1.3
+tensor([ 0.0047, -0.0131, -0.0098, -0.0335, -0.0243, -0.0165, -0.0025,  0.0087,
+         0.0151, -0.0248], device='cuda:0')
+tensor([ 0.0452,  0.0335,  0.0052, -0.0179,  0.0291, -0.0487, -0.0465, -0.0451,
+        -0.0479, -0.0535], device='cuda:0')
+tensor([-0.0363,  0.0413, -0.0162,  0.0206,  0.0452, -0.0207,  0.0007, -0.0027,
+         0.0576, -0.0569], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0764 (0.0764)	0.0705 (0.0705)	0.006 (0.006)	99.22 (99.22)
+[98/99]	0.0073 (0.0236)	0.0037 (0.0194)	0.026 (0.006)	100.00 (99.79)
+ * Train Acc 99.793
+ * Val Acc 99.906, Total time 0.41
+validation split name: 1
+ * Val Acc 99.906, Total time 0.41
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([ 0.0053, -0.0124, -0.0091, -0.0328, -0.0236, -0.0158, -0.0018,  0.0094,
+         0.0158, -0.0241], device='cuda:0')
+tensor([ 0.0442,  0.0328,  0.0077, -0.0188,  0.0283, -0.0491, -0.0462, -0.0510,
+        -0.0483, -0.0549], device='cuda:0')
+tensor([-0.0363,  0.0413, -0.0162,  0.0206,  0.0452, -0.0207,  0.0007, -0.0027,
+         0.0576, -0.0569], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/186]	0.0539 (0.0539)	0.0487 (0.0487)	1.722 (1.722)	33.59 (33.59)
+[100/186]	0.0216 (0.0221)	0.0179 (0.0180)	0.132 (0.249)	96.88 (91.08)
+[185/186]	0.0129 (0.0221)	0.0094 (0.0180)	0.096 (0.185)	95.35 (93.56)
+ * Train Acc 93.558
+ * Val Acc 97.766, Total time 0.76
+validation split name: 1
+ * Val Acc 97.308, Total time 0.41
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 97.766, Total time 0.73
+logging for Task  2 while training 2
+logging 2.1
+tensor([ 0.0133, -0.0044, -0.0011, -0.0248, -0.0157, -0.0079,  0.0062,  0.0174,
+         0.0238, -0.0162], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0425,  0.0322, -0.0268,  0.0209,  0.0383, -0.0286, -0.0076, -0.0036,
+         0.0559, -0.0629], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/186]	0.0593 (0.0593)	0.0536 (0.0536)	0.042 (0.042)	99.22 (99.22)
+[100/186]	0.0213 (0.0222)	0.0174 (0.0183)	0.053 (0.068)	97.66 (97.80)
+[185/186]	0.0146 (0.0222)	0.0110 (0.0181)	0.099 (0.062)	96.51 (97.95)
+ * Train Acc 97.947
+ * Val Acc 97.664, Total time 0.72
+validation split name: 1
+ * Val Acc 97.166, Total time 0.42
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 97.664, Total time 0.71
+logging for Task  2 while training 2
+logging 2.2
+tensor([ 0.0169, -0.0008,  0.0025, -0.0212, -0.0121, -0.0043,  0.0098,  0.0210,
+         0.0274, -0.0126], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0422,  0.0297, -0.0396,  0.0234,  0.0386, -0.0338, -0.0157, -0.0044,
+         0.0570, -0.0661], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/186]	0.0532 (0.0532)	0.0480 (0.0480)	0.028 (0.028)	98.44 (98.44)
+[100/186]	0.0224 (0.0222)	0.0182 (0.0181)	0.008 (0.038)	100.00 (98.75)
+[185/186]	0.0163 (0.0222)	0.0127 (0.0182)	0.196 (0.038)	95.35 (98.75)
+ * Train Acc 98.746
+ * Val Acc 98.071, Total time 0.73
+validation split name: 1
+ * Val Acc 94.284, Total time 0.40
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.071, Total time 0.72
+logging for Task  2 while training 2
+logging 2.3
+tensor([ 0.0221,  0.0044,  0.0077, -0.0160, -0.0068,  0.0010,  0.0150,  0.0262,
+         0.0326, -0.0073], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0373,  0.0264, -0.0510,  0.0253,  0.0391, -0.0398, -0.0196, -0.0092,
+         0.0585, -0.0716], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/186]	0.0521 (0.0521)	0.0471 (0.0471)	0.048 (0.048)	98.44 (98.44)
+[100/186]	0.0219 (0.0226)	0.0181 (0.0183)	0.022 (0.027)	99.22 (99.07)
+[185/186]	0.0148 (0.0227)	0.0112 (0.0185)	0.052 (0.026)	97.67 (99.11)
+ * Train Acc 99.112
+ * Val Acc 98.121, Total time 0.72
+validation split name: 1
+ * Val Acc 94.143, Total time 0.42
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.121, Total time 0.81
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([ 2.1184e-02,  3.4702e-03,  6.7717e-03, -1.6940e-02, -7.7820e-03,
+         3.2391e-05,  1.4072e-02,  2.5269e-02,  3.1665e-02, -8.2713e-03],
+       device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0345,  0.0287, -0.0573,  0.0272,  0.0410, -0.0436, -0.0249, -0.0112,
+         0.0594, -0.0736], device='cuda:0')
+tensor([ 0.0384,  0.0451, -0.0240,  0.0461, -0.0395,  0.0279, -0.0425, -0.0530,
+        -0.0468,  0.0038], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0625 (0.0625)	0.0554 (0.0554)	1.681 (1.681)	21.88 (21.88)
+[100/185]	0.0224 (0.0239)	0.0182 (0.0189)	0.037 (0.156)	98.44 (94.85)
+[184/185]	0.0158 (0.0229)	0.0121 (0.0183)	0.048 (0.109)	97.96 (96.49)
+ * Train Acc 96.495
+ * Val Acc 98.529, Total time 0.70
+validation split name: 1
+ * Val Acc 93.906, Total time 0.41
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 95.303, Total time 0.78
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.529, Total time 0.77
+logging for Task  3 while training 3
+logging 3.1
+tensor([ 0.0270,  0.0092,  0.0126, -0.0112, -0.0020,  0.0058,  0.0199,  0.0310,
+         0.0374, -0.0025], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0365,  0.0279, -0.0574,  0.0253,  0.0422, -0.0439, -0.0256, -0.0117,
+         0.0569, -0.0751], device='cuda:0')
+tensor([ 0.0263,  0.0354, -0.0229,  0.0541, -0.0490,  0.0167, -0.0447, -0.0643,
+        -0.0574, -0.0036], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0545 (0.0545)	0.0484 (0.0484)	0.049 (0.049)	99.22 (99.22)
+[100/185]	0.0217 (0.0231)	0.0176 (0.0185)	0.059 (0.033)	97.66 (98.86)
+[184/185]	0.0181 (0.0231)	0.0142 (0.0183)	0.068 (0.033)	98.98 (98.90)
+ * Train Acc 98.905
+ * Val Acc 98.682, Total time 0.77
+validation split name: 1
+ * Val Acc 94.662, Total time 0.43
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 95.710, Total time 0.77
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.682, Total time 0.78
+logging for Task  3 while training 3
+logging 3.2
+tensor([ 0.0249,  0.0072,  0.0105, -0.0132, -0.0040,  0.0038,  0.0178,  0.0290,
+         0.0354, -0.0045], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0365,  0.0279, -0.0574,  0.0253,  0.0422, -0.0439, -0.0256, -0.0117,
+         0.0569, -0.0751], device='cuda:0')
+tensor([ 0.0274,  0.0369, -0.0217,  0.0547, -0.0610,  0.0166, -0.0467, -0.0670,
+        -0.0587, -0.0052], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0559 (0.0559)	0.0502 (0.0502)	0.003 (0.003)	100.00 (100.00)
+[100/185]	0.0227 (0.0238)	0.0179 (0.0188)	0.011 (0.018)	100.00 (99.43)
+[184/185]	0.0165 (0.0236)	0.0122 (0.0187)	0.002 (0.018)	100.00 (99.37)
+ * Train Acc 99.374
+ * Val Acc 98.986, Total time 0.75
+validation split name: 1
+ * Val Acc 92.064, Total time 0.44
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 95.227, Total time 0.78
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.986, Total time 0.76
+logging for Task  3 while training 3
+logging 3.3
+tensor([ 0.0249,  0.0072,  0.0105, -0.0132, -0.0040,  0.0038,  0.0178,  0.0290,
+         0.0354, -0.0045], device='cuda:0')
+tensor([ 0.0437,  0.0326,  0.0006, -0.0204,  0.0273, -0.0490, -0.0460, -0.0545,
+        -0.0491, -0.0551], device='cuda:0')
+tensor([-0.0365,  0.0279, -0.0574,  0.0253,  0.0422, -0.0439, -0.0256, -0.0117,
+         0.0569, -0.0751], device='cuda:0')
+tensor([ 0.0275,  0.0370, -0.0226,  0.0554, -0.0713,  0.0166, -0.0503, -0.0761,
+        -0.0607, -0.0045], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0569 (0.0569)	0.0496 (0.0496)	0.001 (0.001)	100.00 (100.00)
+[100/185]	0.0239 (0.0237)	0.0188 (0.0186)	0.003 (0.010)	100.00 (99.66)
+[184/185]	0.0198 (0.0237)	0.0144 (0.0188)	0.014 (0.012)	98.98 (99.62)
+ * Train Acc 99.619
+ * Val Acc 98.529, Total time 0.76
+validation split name: 1
+ * Val Acc 94.095, Total time 0.45
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 95.126, Total time 0.78
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.529, Total time 0.78
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0125223518>), ('2', <utils.metric.AverageMeter object at 0x7f0125223940>), ('3', <utils.metric.AverageMeter object at 0x7f012523bef0>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f012cff7198>), ('3', <utils.metric.AverageMeter object at 0x7f0125223588>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f0125223630>)]))])
+Task 1 average acc: 99.90552668871044
+Task 2 average acc: 96.13200264832267
+Task 3 average acc: 95.91683207396783
+===Summary of experiment repeats: 1 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207  0.          0.          0.          0.          0.
+  0.          0.          0.          0.        ]
+mean: 9.591683207396782 std: 28.77504962219035
+split_boundaries: [0, 2, 6, 10]
+{'1': [5, 6], '2': [1, 2, 0, 8], '3': [9, 3, 7, 4]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([-0.0038,  0.0087,  0.0015,  0.0114, -0.0122, -0.0023, -0.0028,  0.0045,
+        -0.0001,  0.0273], device='cuda:0')
+tensor([-0.0259,  0.0509, -0.0427,  0.0071,  0.0504,  0.0484,  0.0333, -0.0149,
+         0.0351, -0.0618], device='cuda:0')
+tensor([ 0.0345,  0.0249, -0.0482,  0.0125,  0.0345, -0.0340, -0.0270,  0.0102,
+         0.0615,  0.0317], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0573 (0.0573)	0.0517 (0.0517)	0.696 (0.696)	50.78 (50.78)
+[88/89]	0.0127 (0.0243)	0.0092 (0.0200)	0.024 (0.083)	98.67 (96.93)
+ * Train Acc 96.931
+ * Val Acc 98.270, Total time 0.40
+validation split name: 1
+ * Val Acc 98.270, Total time 0.40
+logging for Task  1 while training 1
+logging 1.1
+tensor([-8.3115e-03,  4.1824e-03, -2.9435e-03,  6.9283e-03, -1.6663e-02,
+        -6.7635e-03, -7.2985e-03,  4.4400e-05, -4.6099e-03,  2.2833e-02],
+       device='cuda:0')
+tensor([-0.0243,  0.0610, -0.0492, -0.0007,  0.0577,  0.0559,  0.0242, -0.0056,
+         0.0290, -0.0653], device='cuda:0')
+tensor([ 0.0345,  0.0249, -0.0482,  0.0125,  0.0345, -0.0340, -0.0270,  0.0102,
+         0.0615,  0.0317], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0546 (0.0546)	0.0494 (0.0494)	0.015 (0.015)	100.00 (100.00)
+[88/89]	0.0133 (0.0238)	0.0093 (0.0196)	0.048 (0.031)	97.33 (98.94)
+ * Train Acc 98.942
+ * Val Acc 98.270, Total time 0.39
+validation split name: 1
+ * Val Acc 98.270, Total time 0.39
+logging for Task  1 while training 1
+logging 1.2
+tensor([-0.0080,  0.0045, -0.0026,  0.0072, -0.0163, -0.0064, -0.0070,  0.0004,
+        -0.0043,  0.0232], device='cuda:0')
+tensor([-0.0288,  0.0644, -0.0493, -0.0002,  0.0588,  0.0586,  0.0233, -0.0055,
+         0.0260, -0.0693], device='cuda:0')
+tensor([ 0.0345,  0.0249, -0.0482,  0.0125,  0.0345, -0.0340, -0.0270,  0.0102,
+         0.0615,  0.0317], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0612 (0.0612)	0.0553 (0.0553)	0.035 (0.035)	97.66 (97.66)
+[88/89]	0.0123 (0.0237)	0.0086 (0.0196)	0.027 (0.022)	98.67 (99.22)
+ * Train Acc 99.224
+ * Val Acc 98.811, Total time 0.41
+validation split name: 1
+ * Val Acc 98.811, Total time 0.40
+logging for Task  1 while training 1
+logging 1.3
+tensor([-0.0117,  0.0008, -0.0063,  0.0036, -0.0200, -0.0101, -0.0106, -0.0033,
+        -0.0080,  0.0195], device='cuda:0')
+tensor([-0.0297,  0.0687, -0.0500, -0.0060,  0.0620,  0.0616,  0.0223, -0.0057,
+         0.0260, -0.0733], device='cuda:0')
+tensor([ 0.0345,  0.0249, -0.0482,  0.0125,  0.0345, -0.0340, -0.0270,  0.0102,
+         0.0615,  0.0317], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0580 (0.0580)	0.0513 (0.0513)	0.001 (0.001)	100.00 (100.00)
+[88/89]	0.0132 (0.0237)	0.0096 (0.0195)	0.037 (0.012)	98.67 (99.59)
+ * Train Acc 99.586
+ * Val Acc 98.865, Total time 0.40
+validation split name: 1
+ * Val Acc 98.865, Total time 0.39
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([-0.0091,  0.0034, -0.0038,  0.0061, -0.0175, -0.0076, -0.0081, -0.0008,
+        -0.0054,  0.0220], device='cuda:0')
+tensor([-0.0323,  0.0704, -0.0505, -0.0071,  0.0610,  0.0630,  0.0227,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0345,  0.0249, -0.0482,  0.0125,  0.0345, -0.0340, -0.0270,  0.0102,
+         0.0615,  0.0317], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0577 (0.0577)	0.0520 (0.0520)	1.492 (1.492)	24.22 (24.22)
+[100/192]	0.0246 (0.0245)	0.0198 (0.0198)	0.039 (0.166)	99.22 (94.45)
+[191/192]	0.0053 (0.0240)	0.0014 (0.0194)	0.284 (0.114)	96.15 (96.23)
+ * Train Acc 96.233
+ * Val Acc 98.617, Total time 0.82
+validation split name: 1
+ * Val Acc 95.838, Total time 0.40
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.617, Total time 0.83
+logging for Task  2 while training 2
+logging 2.1
+tensor([-0.0045,  0.0080,  0.0009,  0.0108, -0.0128, -0.0029, -0.0034,  0.0039,
+        -0.0008,  0.0267], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0330,  0.0302, -0.0557,  0.0056,  0.0323, -0.0458, -0.0173,  0.0051,
+         0.0615,  0.0297], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0611 (0.0611)	0.0550 (0.0550)	0.040 (0.040)	98.44 (98.44)
+[100/192]	0.0233 (0.0237)	0.0193 (0.0195)	0.022 (0.038)	99.22 (98.76)
+[191/192]	0.0044 (0.0234)	0.0010 (0.0191)	0.002 (0.038)	100.00 (98.78)
+ * Train Acc 98.782
+ * Val Acc 98.641, Total time 0.78
+validation split name: 1
+ * Val Acc 97.730, Total time 0.37
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.641, Total time 0.78
+logging for Task  2 while training 2
+logging 2.2
+tensor([-0.0058,  0.0067, -0.0004,  0.0095, -0.0141, -0.0042, -0.0048,  0.0026,
+        -0.0021,  0.0254], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0330,  0.0318, -0.0573,  0.0058,  0.0309, -0.0505, -0.0265, -0.0018,
+         0.0496,  0.0330], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0531 (0.0531)	0.0478 (0.0478)	0.005 (0.005)	100.00 (100.00)
+[100/192]	0.0234 (0.0245)	0.0194 (0.0197)	0.012 (0.024)	100.00 (99.29)
+[191/192]	0.0058 (0.0249)	0.0020 (0.0200)	0.002 (0.022)	100.00 (99.32)
+ * Train Acc 99.322
+ * Val Acc 98.932, Total time 0.91
+validation split name: 1
+ * Val Acc 96.108, Total time 0.49
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.932, Total time 0.91
+logging for Task  2 while training 2
+logging 2.3
+tensor([-0.0090,  0.0035, -0.0037,  0.0062, -0.0174, -0.0075, -0.0080, -0.0007,
+        -0.0053,  0.0221], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0350,  0.0329, -0.0618,  0.0072,  0.0278, -0.0594, -0.0150, -0.0018,
+         0.0440,  0.0327], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0596 (0.0596)	0.0531 (0.0531)	0.013 (0.013)	99.22 (99.22)
+[100/192]	0.0229 (0.0253)	0.0186 (0.0203)	0.003 (0.014)	100.00 (99.56)
+[191/192]	0.0055 (0.0254)	0.0010 (0.0205)	0.004 (0.015)	100.00 (99.54)
+ * Train Acc 99.542
+ * Val Acc 99.126, Total time 0.98
+validation split name: 1
+ * Val Acc 97.243, Total time 0.53
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 99.126, Total time 0.91
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([-0.0068,  0.0057, -0.0014,  0.0084, -0.0151, -0.0052, -0.0058,  0.0016,
+        -0.0031,  0.0244], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0377,  0.0325, -0.0618,  0.0086,  0.0267, -0.0643, -0.0209, -0.0018,
+         0.0440,  0.0333], device='cuda:0')
+tensor([-0.0249,  0.0494, -0.0448,  0.0067, -0.0491,  0.0096,  0.0033,  0.0077,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0735 (0.0735)	0.0654 (0.0654)	1.630 (1.630)	19.53 (19.53)
+[100/189]	0.0236 (0.0267)	0.0186 (0.0209)	0.164 (0.208)	95.31 (92.81)
+[188/189]	0.0205 (0.0264)	0.0166 (0.0207)	0.058 (0.156)	98.37 (94.72)
+ * Train Acc 94.720
+ * Val Acc 97.568, Total time 0.80
+validation split name: 1
+ * Val Acc 93.189, Total time 0.42
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 95.972, Total time 0.83
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 97.568, Total time 0.82
+logging for Task  3 while training 3
+logging 3.1
+tensor([-0.0106,  0.0019, -0.0052,  0.0047, -0.0189, -0.0090, -0.0096, -0.0022,
+        -0.0069,  0.0206], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0372,  0.0310, -0.0623,  0.0089,  0.0261, -0.0655, -0.0225, -0.0018,
+         0.0440,  0.0332], device='cuda:0')
+tensor([-0.0555,  0.0488, -0.0537,  0.0076, -0.0442,  0.0161,  0.0090,  0.0077,
+        -0.0572, -0.0364], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0581 (0.0581)	0.0515 (0.0515)	0.058 (0.058)	96.88 (96.88)
+[100/189]	0.0239 (0.0249)	0.0196 (0.0199)	0.040 (0.054)	98.44 (98.31)
+[188/189]	0.0221 (0.0243)	0.0174 (0.0194)	0.062 (0.053)	97.56 (98.23)
+ * Train Acc 98.235
+ * Val Acc 98.014, Total time 0.82
+validation split name: 1
+ * Val Acc 93.135, Total time 0.41
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 96.724, Total time 0.88
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.014, Total time 0.85
+logging for Task  3 while training 3
+logging 3.2
+tensor([-0.0070,  0.0055, -0.0016,  0.0083, -0.0153, -0.0054, -0.0060,  0.0014,
+        -0.0033,  0.0242], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0372,  0.0310, -0.0623,  0.0089,  0.0261, -0.0655, -0.0225, -0.0018,
+         0.0440,  0.0332], device='cuda:0')
+tensor([-0.0759,  0.0511, -0.0648,  0.0045, -0.0442,  0.0185,  0.0079, -0.0060,
+        -0.0572, -0.0441], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0555 (0.0555)	0.0489 (0.0489)	0.014 (0.014)	100.00 (100.00)
+[100/189]	0.0228 (0.0249)	0.0185 (0.0200)	0.017 (0.031)	100.00 (99.08)
+[188/189]	0.0197 (0.0247)	0.0146 (0.0199)	0.049 (0.033)	98.37 (98.98)
+ * Train Acc 98.983
+ * Val Acc 98.486, Total time 0.82
+validation split name: 1
+ * Val Acc 94.432, Total time 0.42
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 96.215, Total time 0.82
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.486, Total time 0.81
+logging for Task  3 while training 3
+logging 3.3
+tensor([-0.0052,  0.0073,  0.0001,  0.0100, -0.0136, -0.0037, -0.0042,  0.0031,
+        -0.0015,  0.0259], device='cuda:0')
+tensor([-0.0342,  0.0704, -0.0507, -0.0027,  0.0598,  0.0624,  0.0221,  0.0026,
+         0.0260, -0.0763], device='cuda:0')
+tensor([ 0.0372,  0.0310, -0.0623,  0.0089,  0.0261, -0.0655, -0.0225, -0.0018,
+         0.0440,  0.0332], device='cuda:0')
+tensor([-0.0827,  0.0530, -0.0649,  0.0132, -0.0455,  0.0202,  0.0071, -0.0060,
+        -0.0572, -0.0351], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0597 (0.0597)	0.0532 (0.0532)	0.023 (0.023)	100.00 (100.00)
+[100/189]	0.0253 (0.0245)	0.0204 (0.0193)	0.012 (0.024)	99.22 (99.32)
+[188/189]	0.0237 (0.0242)	0.0192 (0.0192)	0.010 (0.026)	99.19 (99.14)
+ * Train Acc 99.136
+ * Val Acc 98.362, Total time 0.83
+validation split name: 1
+ * Val Acc 92.216, Total time 0.42
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 93.230, Total time 0.82
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.362, Total time 0.88
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0124824908>), ('2', <utils.metric.AverageMeter object at 0x7f01248242e8>), ('3', <utils.metric.AverageMeter object at 0x7f01248335c0>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f01248240b8>), ('3', <utils.metric.AverageMeter object at 0x7f0124824b70>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f0124824f98>)]))])
+Task 1 average acc: 98.86486486486487
+Task 2 average acc: 98.1848344340458
+Task 3 average acc: 94.60263040163964
+===Summary of experiment repeats: 2 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304   0.          0.          0.          0.
+  0.          0.          0.          0.        ]
+mean: 19.051946247560746 std: 38.105025647302135
+split_boundaries: [0, 2, 6, 10]
+{'1': [8, 7], '2': [1, 5, 6, 9], '3': [0, 4, 2, 3]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([-0.0277,  0.0041,  0.0021, -0.0069,  0.0256,  0.0021,  0.0130,  0.0132,
+        -0.0184, -0.0120], device='cuda:0')
+tensor([ 0.0174, -0.0146,  0.0209, -0.0169, -0.0165, -0.0241, -0.0050,  0.0589,
+        -0.0585,  0.0494], device='cuda:0')
+tensor([ 0.0298,  0.0373, -0.0391, -0.0559,  0.0534,  0.0094,  0.0331,  0.0250,
+        -0.0546,  0.0574], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.0645 (0.0645)	0.0581 (0.0581)	0.725 (0.725)	46.09 (46.09)
+[94/95]	0.0157 (0.0263)	0.0120 (0.0218)	0.012 (0.054)	98.81 (98.29)
+ * Train Acc 98.292
+ * Val Acc 98.801, Total time 0.45
+validation split name: 1
+ * Val Acc 98.801, Total time 0.42
+logging for Task  1 while training 1
+logging 1.1
+tensor([-0.0313,  0.0005, -0.0015, -0.0105,  0.0219, -0.0015,  0.0094,  0.0096,
+        -0.0220, -0.0156], device='cuda:0')
+tensor([ 0.0109, -0.0108,  0.0096, -0.0135, -0.0227, -0.0209, -0.0148,  0.0612,
+        -0.0560,  0.0470], device='cuda:0')
+tensor([ 0.0298,  0.0373, -0.0391, -0.0559,  0.0534,  0.0094,  0.0331,  0.0250,
+        -0.0546,  0.0574], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.0557 (0.0557)	0.0505 (0.0505)	0.001 (0.001)	100.00 (100.00)
+[94/95]	0.0151 (0.0252)	0.0114 (0.0207)	0.006 (0.018)	100.00 (99.41)
+ * Train Acc 99.414
+ * Val Acc 99.351, Total time 0.43
+validation split name: 1
+ * Val Acc 99.351, Total time 0.43
+logging for Task  1 while training 1
+logging 1.2
+tensor([-0.0306,  0.0011, -0.0009, -0.0099,  0.0226, -0.0009,  0.0100,  0.0102,
+        -0.0214, -0.0150], device='cuda:0')
+tensor([ 0.0101, -0.0215,  0.0096, -0.0135, -0.0224, -0.0209, -0.0147,  0.0609,
+        -0.0557,  0.0471], device='cuda:0')
+tensor([ 0.0298,  0.0373, -0.0391, -0.0559,  0.0534,  0.0094,  0.0331,  0.0250,
+        -0.0546,  0.0574], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.0584 (0.0584)	0.0523 (0.0523)	0.002 (0.002)	100.00 (100.00)
+[94/95]	0.0154 (0.0254)	0.0117 (0.0209)	0.010 (0.012)	100.00 (99.60)
+ * Train Acc 99.596
+ * Val Acc 99.401, Total time 0.44
+validation split name: 1
+ * Val Acc 99.401, Total time 0.43
+logging for Task  1 while training 1
+logging 1.3
+tensor([-0.0294,  0.0024,  0.0004, -0.0086,  0.0238,  0.0004,  0.0113,  0.0115,
+        -0.0201, -0.0137], device='cuda:0')
+tensor([ 0.0115, -0.0197,  0.0096, -0.0141, -0.0236, -0.0206, -0.0165,  0.0599,
+        -0.0562,  0.0448], device='cuda:0')
+tensor([ 0.0298,  0.0373, -0.0391, -0.0559,  0.0534,  0.0094,  0.0331,  0.0250,
+        -0.0546,  0.0574], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.0571 (0.0571)	0.0515 (0.0515)	0.003 (0.003)	100.00 (100.00)
+[94/95]	0.0165 (0.0258)	0.0124 (0.0210)	0.000 (0.010)	100.00 (99.59)
+ * Train Acc 99.587
+ * Val Acc 99.151, Total time 0.49
+validation split name: 1
+ * Val Acc 99.151, Total time 0.54
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([-2.9751e-02,  2.0232e-03, -7.1368e-06, -8.9558e-03,  2.3469e-02,
+         1.5804e-06,  1.0875e-02,  1.1141e-02, -2.0519e-02, -1.4098e-02],
+       device='cuda:0')
+tensor([ 0.0123, -0.0204,  0.0096, -0.0182, -0.0236, -0.0207, -0.0176,  0.0616,
+        -0.0570,  0.0432], device='cuda:0')
+tensor([ 0.0298,  0.0373, -0.0391, -0.0559,  0.0534,  0.0094,  0.0331,  0.0250,
+        -0.0546,  0.0574], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0641 (0.0641)	0.0576 (0.0576)	1.530 (1.530)	33.59 (33.59)
+[100/188]	0.0277 (0.0257)	0.0232 (0.0208)	0.016 (0.150)	100.00 (95.28)
+[187/188]	0.0164 (0.0255)	0.0127 (0.0206)	0.024 (0.105)	98.94 (96.66)
+ * Train Acc 96.663
+ * Val Acc 97.972, Total time 0.87
+validation split name: 1
+ * Val Acc 66.633, Total time 0.47
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 97.972, Total time 0.86
+logging for Task  2 while training 2
+logging 2.1
+tensor([-0.0414, -0.0096, -0.0116, -0.0206,  0.0119, -0.0116, -0.0007, -0.0005,
+        -0.0321, -0.0257], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0200,  0.0273, -0.0675, -0.0630,  0.0495,  0.0047,  0.0456,  0.0195,
+        -0.0583,  0.0603], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0583 (0.0583)	0.0521 (0.0521)	0.031 (0.031)	99.22 (99.22)
+[100/188]	0.0252 (0.0254)	0.0210 (0.0207)	0.029 (0.035)	98.44 (98.93)
+[187/188]	0.0173 (0.0251)	0.0135 (0.0204)	0.043 (0.035)	97.87 (98.90)
+ * Train Acc 98.897
+ * Val Acc 98.473, Total time 0.80
+validation split name: 1
+ * Val Acc 69.580, Total time 0.44
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.473, Total time 0.84
+logging for Task  2 while training 2
+logging 2.2
+tensor([-0.0383, -0.0065, -0.0085, -0.0175,  0.0149, -0.0085,  0.0023,  0.0026,
+        -0.0291, -0.0226], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0196,  0.0298, -0.0863, -0.0671,  0.0548, -0.0009,  0.0506,  0.0225,
+        -0.0560,  0.0589], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0587 (0.0587)	0.0511 (0.0511)	0.045 (0.045)	99.22 (99.22)
+[100/188]	0.0252 (0.0248)	0.0201 (0.0202)	0.013 (0.021)	99.22 (99.27)
+[187/188]	0.0184 (0.0245)	0.0138 (0.0198)	0.029 (0.021)	97.87 (99.31)
+ * Train Acc 99.309
+ * Val Acc 98.648, Total time 0.82
+validation split name: 1
+ * Val Acc 60.390, Total time 0.42
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.648, Total time 0.83
+logging for Task  2 while training 2
+logging 2.3
+tensor([-0.0350, -0.0032, -0.0053, -0.0142,  0.0182, -0.0053,  0.0056,  0.0059,
+        -0.0258, -0.0194], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0211,  0.0280, -0.0874, -0.0677,  0.0576, -0.0119,  0.0513,  0.0217,
+        -0.0616,  0.0603], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0577 (0.0577)	0.0519 (0.0519)	0.034 (0.034)	99.22 (99.22)
+[100/188]	0.0244 (0.0250)	0.0200 (0.0202)	0.002 (0.018)	100.00 (99.40)
+[187/188]	0.0176 (0.0254)	0.0138 (0.0206)	0.002 (0.017)	100.00 (99.45)
+ * Train Acc 99.451
+ * Val Acc 98.998, Total time 0.82
+validation split name: 1
+ * Val Acc 66.134, Total time 0.45
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.998, Total time 0.80
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([-0.0363, -0.0045, -0.0065, -0.0155,  0.0169, -0.0065,  0.0043,  0.0046,
+        -0.0271, -0.0206], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0187,  0.0270, -0.0992, -0.0727,  0.0657, -0.0145,  0.0557,  0.0235,
+        -0.0632,  0.0625], device='cuda:0')
+tensor([ 0.0176, -0.0136,  0.0600,  0.0334, -0.0163,  0.0122, -0.0403, -0.0239,
+         0.0288, -0.0526], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0561 (0.0561)	0.0503 (0.0503)	1.457 (1.457)	25.00 (25.00)
+[100/187]	0.0276 (0.0251)	0.0202 (0.0199)	0.082 (0.144)	97.66 (95.03)
+[186/187]	0.0094 (0.0249)	0.0048 (0.0198)	0.055 (0.097)	97.83 (96.75)
+ * Train Acc 96.751
+ * Val Acc 98.751, Total time 0.82
+validation split name: 1
+ * Val Acc 72.228, Total time 0.43
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 97.847, Total time 0.82
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.751, Total time 0.81
+logging for Task  3 while training 3
+logging 3.1
+tensor([-0.0384, -0.0066, -0.0086, -0.0176,  0.0148, -0.0086,  0.0023,  0.0025,
+        -0.0291, -0.0227], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0184,  0.0270, -0.0987, -0.0725,  0.0658, -0.0145,  0.0565,  0.0238,
+        -0.0636,  0.0624], device='cuda:0')
+tensor([ 0.0215, -0.0425,  0.0530,  0.0372, -0.0240,  0.0180, -0.0522, -0.0334,
+         0.0251, -0.0635], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0642 (0.0642)	0.0572 (0.0572)	0.053 (0.053)	98.44 (98.44)
+[100/187]	0.0268 (0.0256)	0.0213 (0.0205)	0.021 (0.031)	98.44 (98.93)
+[186/187]	0.0083 (0.0252)	0.0043 (0.0201)	0.002 (0.028)	100.00 (99.02)
+ * Train Acc 99.019
+ * Val Acc 99.201, Total time 0.80
+validation split name: 1
+ * Val Acc 67.982, Total time 0.46
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 96.670, Total time 0.81
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 99.201, Total time 0.81
+logging for Task  3 while training 3
+logging 3.2
+tensor([-0.0325, -0.0007, -0.0027, -0.0117,  0.0208, -0.0027,  0.0082,  0.0084,
+        -0.0232, -0.0168], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0184,  0.0270, -0.0987, -0.0725,  0.0658, -0.0145,  0.0565,  0.0238,
+        -0.0636,  0.0624], device='cuda:0')
+tensor([ 0.0240, -0.0545,  0.0550,  0.0375, -0.0269,  0.0162, -0.0534, -0.0414,
+         0.0203, -0.0688], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0573 (0.0573)	0.0512 (0.0512)	0.014 (0.014)	99.22 (99.22)
+[100/187]	0.0238 (0.0251)	0.0190 (0.0199)	0.026 (0.014)	99.22 (99.55)
+[186/187]	0.0077 (0.0249)	0.0037 (0.0198)	0.035 (0.015)	97.83 (99.50)
+ * Train Acc 99.501
+ * Val Acc 99.176, Total time 0.84
+validation split name: 1
+ * Val Acc 70.030, Total time 0.46
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 97.722, Total time 0.90
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 99.176, Total time 0.87
+logging for Task  3 while training 3
+logging 3.3
+tensor([-0.0336, -0.0018, -0.0038, -0.0128,  0.0196, -0.0038,  0.0070,  0.0073,
+        -0.0244, -0.0179], device='cuda:0')
+tensor([ 0.0106, -0.0226,  0.0096, -0.0173, -0.0236, -0.0215, -0.0189,  0.0604,
+        -0.0583,  0.0432], device='cuda:0')
+tensor([ 0.0184,  0.0270, -0.0987, -0.0725,  0.0658, -0.0145,  0.0565,  0.0238,
+        -0.0636,  0.0624], device='cuda:0')
+tensor([ 0.0228, -0.0646,  0.0562,  0.0377, -0.0315,  0.0163, -0.0544, -0.0503,
+         0.0216, -0.0759], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0561 (0.0561)	0.0503 (0.0503)	0.003 (0.003)	100.00 (100.00)
+[100/187]	0.0255 (0.0258)	0.0206 (0.0206)	0.010 (0.011)	99.22 (99.64)
+[186/187]	0.0078 (0.0256)	0.0035 (0.0202)	0.001 (0.010)	100.00 (99.69)
+ * Train Acc 99.686
+ * Val Acc 99.276, Total time 0.84
+validation split name: 1
+ * Val Acc 69.980, Total time 0.45
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 97.021, Total time 0.91
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 99.276, Total time 0.96
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0124824198>), ('2', <utils.metric.AverageMeter object at 0x7f0124833e10>), ('3', <utils.metric.AverageMeter object at 0x7f012523b438>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f0124833198>), ('3', <utils.metric.AverageMeter object at 0x7f0124833208>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f0124833320>)]))])
+Task 1 average acc: 99.15084915084915
+Task 2 average acc: 82.56618194024304
+Task 3 average acc: 88.75875835064618
+===Summary of experiment repeats: 3 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835  0.          0.          0.
+  0.          0.          0.          0.        ]
+mean: 27.92782208262536 std: 42.69447396932724
+split_boundaries: [0, 2, 6, 10]
+{'1': [6, 0], '2': [3, 7, 8, 5], '3': [1, 9, 2, 4]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([ 0.0242, -0.0031,  0.0187, -0.0219, -0.0062, -0.0279, -0.0025, -0.0203,
+         0.0281,  0.0217], device='cuda:0')
+tensor([-0.0618,  0.0451, -0.0072,  0.0125,  0.0218,  0.0255, -0.0013, -0.0225,
+        -0.0171,  0.0128], device='cuda:0')
+tensor([-0.0124,  0.0057, -0.0223, -0.0172,  0.0570, -0.0486, -0.0074, -0.0591,
+        -0.0016,  0.0296], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/93]	0.0616 (0.0616)	0.0550 (0.0550)	0.698 (0.698)	48.44 (48.44)
+[92/93]	0.0117 (0.0274)	0.0080 (0.0225)	0.020 (0.060)	98.46 (97.95)
+ * Train Acc 97.948
+ * Val Acc 99.123, Total time 0.45
+validation split name: 1
+ * Val Acc 99.123, Total time 0.46
+logging for Task  1 while training 1
+logging 1.1
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0482, -0.0123,  0.0103,  0.0329,  0.0161, -0.0063, -0.0173,
+        -0.0210,  0.0076], device='cuda:0')
+tensor([-0.0124,  0.0057, -0.0223, -0.0172,  0.0570, -0.0486, -0.0074, -0.0591,
+        -0.0016,  0.0296], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/93]	0.0579 (0.0579)	0.0526 (0.0526)	0.024 (0.024)	99.22 (99.22)
+[92/93]	0.0109 (0.0252)	0.0074 (0.0207)	0.049 (0.020)	98.46 (99.29)
+ * Train Acc 99.291
+ * Val Acc 99.329, Total time 0.44
+validation split name: 1
+ * Val Acc 99.329, Total time 0.45
+logging for Task  1 while training 1
+logging 1.2
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-5.3210e-02,  4.9937e-02, -1.1536e-02,  8.8440e-03,  3.1297e-02,
+         1.6106e-02, -3.7128e-05, -1.8069e-02, -2.1018e-02,  7.2607e-03],
+       device='cuda:0')
+tensor([-0.0124,  0.0057, -0.0223, -0.0172,  0.0570, -0.0486, -0.0074, -0.0591,
+        -0.0016,  0.0296], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/93]	0.0612 (0.0612)	0.0554 (0.0554)	0.008 (0.008)	100.00 (100.00)
+[92/93]	0.0104 (0.0252)	0.0072 (0.0207)	0.000 (0.013)	100.00 (99.53)
+ * Train Acc 99.527
+ * Val Acc 99.278, Total time 0.44
+validation split name: 1
+ * Val Acc 99.278, Total time 0.42
+logging for Task  1 while training 1
+logging 1.3
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0543, -0.0120,  0.0090,  0.0350,  0.0161, -0.0004, -0.0176,
+        -0.0225,  0.0094], device='cuda:0')
+tensor([-0.0124,  0.0057, -0.0223, -0.0172,  0.0570, -0.0486, -0.0074, -0.0591,
+        -0.0016,  0.0296], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/93]	0.0577 (0.0577)	0.0529 (0.0529)	0.012 (0.012)	99.22 (99.22)
+[92/93]	0.0120 (0.0241)	0.0084 (0.0201)	0.003 (0.014)	100.00 (99.46)
+ * Train Acc 99.460
+ * Val Acc 99.329, Total time 0.42
+validation split name: 1
+ * Val Acc 99.329, Total time 0.41
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0114,  0.0085,  0.0274,  0.0163, -0.0005, -0.0176,
+        -0.0220,  0.0095], device='cuda:0')
+tensor([-0.0124,  0.0057, -0.0223, -0.0172,  0.0570, -0.0486, -0.0074, -0.0591,
+        -0.0016,  0.0296], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0544 (0.0544)	0.0488 (0.0488)	1.365 (1.365)	30.47 (30.47)
+[100/185]	0.0245 (0.0241)	0.0197 (0.0198)	0.105 (0.264)	95.31 (90.39)
+[184/185]	0.0213 (0.0242)	0.0174 (0.0198)	0.092 (0.190)	96.55 (93.29)
+ * Train Acc 93.286
+ * Val Acc 96.721, Total time 0.78
+validation split name: 1
+ * Val Acc 93.860, Total time 0.41
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 96.721, Total time 0.76
+logging for Task  2 while training 2
+logging 2.1
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([-0.0033, -0.0128, -0.0256, -0.0088,  0.0505, -0.0570, -0.0115, -0.0679,
+         0.0031,  0.0244], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0559 (0.0559)	0.0503 (0.0503)	0.138 (0.138)	96.09 (96.09)
+[100/185]	0.0257 (0.0247)	0.0213 (0.0202)	0.033 (0.070)	99.22 (97.76)
+[184/185]	0.0205 (0.0254)	0.0164 (0.0207)	0.108 (0.066)	95.69 (97.79)
+ * Train Acc 97.794
+ * Val Acc 97.157, Total time 0.81
+validation split name: 1
+ * Val Acc 95.872, Total time 0.41
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 97.157, Total time 0.80
+logging for Task  2 while training 2
+logging 2.2
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([ 0.0008, -0.0218, -0.0265, -0.0088,  0.0503, -0.0477,  0.0016, -0.0710,
+         0.0051,  0.0241], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0642 (0.0642)	0.0567 (0.0567)	0.054 (0.054)	98.44 (98.44)
+[100/185]	0.0242 (0.0255)	0.0184 (0.0207)	0.031 (0.041)	99.22 (98.67)
+[184/185]	0.0222 (0.0250)	0.0176 (0.0203)	0.063 (0.041)	98.28 (98.66)
+ * Train Acc 98.665
+ * Val Acc 98.181, Total time 0.84
+validation split name: 1
+ * Val Acc 94.479, Total time 0.43
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.181, Total time 0.79
+logging for Task  2 while training 2
+logging 2.3
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([-0.0019, -0.0241, -0.0267, -0.0088,  0.0480, -0.0469,  0.0052, -0.0739,
+         0.0055,  0.0241], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0552 (0.0552)	0.0497 (0.0497)	0.045 (0.045)	99.22 (99.22)
+[100/185]	0.0235 (0.0247)	0.0194 (0.0202)	0.025 (0.024)	99.22 (99.27)
+[184/185]	0.0212 (0.0250)	0.0172 (0.0203)	0.042 (0.027)	99.14 (99.15)
+ * Train Acc 99.151
+ * Val Acc 97.951, Total time 0.76
+validation split name: 1
+ * Val Acc 95.769, Total time 0.41
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 97.951, Total time 0.77
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([ 0.0034, -0.0254, -0.0354, -0.0088,  0.0479, -0.0469, -0.0014, -0.0767,
+         0.0068,  0.0241], device='cuda:0')
+tensor([ 0.0237, -0.0225, -0.0621,  0.0265,  0.0085,  0.0444,  0.0415,  0.0251,
+        -0.0609, -0.0339], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0553 (0.0553)	0.0491 (0.0491)	1.610 (1.610)	17.19 (17.19)
+[100/192]	0.0266 (0.0257)	0.0202 (0.0204)	0.035 (0.183)	99.22 (93.49)
+[191/192]	0.0081 (0.0257)	0.0039 (0.0204)	0.114 (0.129)	97.67 (95.51)
+ * Train Acc 95.513
+ * Val Acc 98.365, Total time 0.82
+validation split name: 1
+ * Val Acc 98.504, Total time 0.41
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 67.649, Total time 0.81
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.365, Total time 0.86
+logging for Task  3 while training 3
+logging 3.1
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([ 0.0033, -0.0261, -0.0354, -0.0088,  0.0479, -0.0469, -0.0039, -0.0742,
+         0.0075,  0.0241], device='cuda:0')
+tensor([ 0.0224, -0.0059, -0.0686,  0.0265, -0.0028,  0.0444,  0.0320,  0.0175,
+        -0.0523, -0.0464], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0545 (0.0545)	0.0489 (0.0489)	0.039 (0.039)	98.44 (98.44)
+[100/192]	0.0287 (0.0247)	0.0226 (0.0198)	0.032 (0.040)	98.44 (98.65)
+[191/192]	0.0065 (0.0245)	0.0027 (0.0197)	0.006 (0.039)	100.00 (98.74)
+ * Train Acc 98.742
+ * Val Acc 98.557, Total time 0.87
+validation split name: 1
+ * Val Acc 98.142, Total time 0.42
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 70.594, Total time 0.79
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.557, Total time 0.82
+logging for Task  3 while training 3
+logging 3.2
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([ 0.0033, -0.0261, -0.0354, -0.0088,  0.0479, -0.0469, -0.0039, -0.0742,
+         0.0075,  0.0241], device='cuda:0')
+tensor([ 0.0206, -0.0086, -0.0686,  0.0265, -0.0176,  0.0444,  0.0316,  0.0176,
+        -0.0518, -0.0347], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0567 (0.0567)	0.0507 (0.0507)	0.007 (0.007)	100.00 (100.00)
+[100/192]	0.0240 (0.0246)	0.0196 (0.0197)	0.006 (0.025)	100.00 (99.23)
+[191/192]	0.0072 (0.0245)	0.0033 (0.0196)	0.005 (0.026)	100.00 (99.16)
+ * Train Acc 99.159
+ * Val Acc 98.773, Total time 0.81
+validation split name: 1
+ * Val Acc 98.194, Total time 0.43
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 72.131, Total time 0.77
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.773, Total time 0.82
+logging for Task  3 while training 3
+logging 3.3
+tensor([ 0.0310,  0.0037,  0.0254, -0.0152,  0.0006, -0.0212,  0.0042, -0.0136,
+         0.0348,  0.0284], device='cuda:0')
+tensor([-0.0532,  0.0545, -0.0113,  0.0080,  0.0274,  0.0163, -0.0005, -0.0171,
+        -0.0235,  0.0096], device='cuda:0')
+tensor([ 0.0033, -0.0261, -0.0354, -0.0088,  0.0479, -0.0469, -0.0039, -0.0742,
+         0.0075,  0.0241], device='cuda:0')
+tensor([ 0.0208, -0.0142, -0.0686,  0.0265, -0.0153,  0.0444,  0.0313,  0.0213,
+        -0.0496, -0.0234], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0577 (0.0577)	0.0519 (0.0519)	0.005 (0.005)	100.00 (100.00)
+[100/192]	0.0245 (0.0250)	0.0198 (0.0200)	0.030 (0.016)	98.44 (99.48)
+[191/192]	0.0084 (0.0259)	0.0041 (0.0208)	0.004 (0.019)	100.00 (99.37)
+ * Train Acc 99.367
+ * Val Acc 99.158, Total time 0.86
+validation split name: 1
+ * Val Acc 97.988, Total time 0.45
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 73.489, Total time 0.81
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 99.158, Total time 0.87
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0124833400>), ('2', <utils.metric.AverageMeter object at 0x7f01251837f0>), ('3', <utils.metric.AverageMeter object at 0x7f0124833a90>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f0125183dd8>), ('3', <utils.metric.AverageMeter object at 0x7f0124824c88>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f0124824518>)]))])
+Task 1 average acc: 99.32920536635707
+Task 2 average acc: 96.85982676073019
+Task 3 average acc: 90.21153158850571
+===Summary of experiment repeats: 4 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159  0.          0.
+  0.          0.          0.          0.        ]
+mean: 36.948975241475935 std: 45.29201503085873
+split_boundaries: [0, 2, 6, 10]
+{'1': [0, 4], '2': [9, 6, 7, 3], '3': [2, 8, 1, 5]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([ 0.0296, -0.0113, -0.0178,  0.0266, -0.0017,  0.0059,  0.0185,  0.0165,
+        -0.0179, -0.0121], device='cuda:0')
+tensor([-0.0617,  0.0079,  0.0327, -0.0403,  0.0379,  0.0115,  0.0515,  0.0179,
+        -0.0589, -0.0337], device='cuda:0')
+tensor([-0.0468, -0.0024, -0.0314,  0.0375,  0.0504,  0.0100,  0.0260,  0.0412,
+        -0.0406,  0.0242], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/92]	0.0615 (0.0615)	0.0559 (0.0559)	0.700 (0.700)	39.84 (39.84)
+[91/92]	0.0230 (0.0255)	0.0194 (0.0211)	0.003 (0.043)	100.00 (98.64)
+ * Train Acc 98.640
+ * Val Acc 99.796, Total time 0.41
+validation split name: 1
+ * Val Acc 99.796, Total time 0.42
+logging for Task  1 while training 1
+logging 1.1
+tensor([ 0.0194, -0.0215, -0.0280,  0.0164, -0.0119, -0.0043,  0.0083,  0.0062,
+        -0.0281, -0.0223], device='cuda:0')
+tensor([-0.0590,  0.0189,  0.0320, -0.0455,  0.0371,  0.0046,  0.0557,  0.0248,
+        -0.0637, -0.0373], device='cuda:0')
+tensor([-0.0468, -0.0024, -0.0314,  0.0375,  0.0504,  0.0100,  0.0260,  0.0412,
+        -0.0406,  0.0242], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/92]	0.0574 (0.0574)	0.0506 (0.0506)	0.032 (0.032)	99.22 (99.22)
+[91/92]	0.0204 (0.0260)	0.0169 (0.0214)	0.011 (0.011)	100.00 (99.63)
+ * Train Acc 99.626
+ * Val Acc 99.847, Total time 0.49
+validation split name: 1
+ * Val Acc 99.847, Total time 0.47
+logging for Task  1 while training 1
+logging 1.2
+tensor([ 0.0198, -0.0211, -0.0276,  0.0168, -0.0115, -0.0039,  0.0087,  0.0067,
+        -0.0277, -0.0219], device='cuda:0')
+tensor([-0.0581,  0.0183,  0.0307, -0.0439,  0.0371,  0.0050,  0.0542,  0.0248,
+        -0.0622, -0.0351], device='cuda:0')
+tensor([-0.0468, -0.0024, -0.0314,  0.0375,  0.0504,  0.0100,  0.0260,  0.0412,
+        -0.0406,  0.0242], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/92]	0.0546 (0.0546)	0.0490 (0.0490)	0.001 (0.001)	100.00 (100.00)
+[91/92]	0.0209 (0.0241)	0.0173 (0.0202)	0.000 (0.006)	100.00 (99.80)
+ * Train Acc 99.796
+ * Val Acc 99.796, Total time 0.43
+validation split name: 1
+ * Val Acc 99.796, Total time 0.45
+logging for Task  1 while training 1
+logging 1.3
+tensor([ 0.0204, -0.0206, -0.0271,  0.0174, -0.0109, -0.0033,  0.0092,  0.0072,
+        -0.0272, -0.0214], device='cuda:0')
+tensor([-0.0597,  0.0187,  0.0312, -0.0467,  0.0368,  0.0037,  0.0546,  0.0248,
+        -0.0618, -0.0355], device='cuda:0')
+tensor([-0.0468, -0.0024, -0.0314,  0.0375,  0.0504,  0.0100,  0.0260,  0.0412,
+        -0.0406,  0.0242], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/92]	0.0549 (0.0549)	0.0491 (0.0491)	0.000 (0.000)	100.00 (100.00)
+[91/92]	0.0211 (0.0248)	0.0175 (0.0204)	0.000 (0.006)	100.00 (99.79)
+ * Train Acc 99.788
+ * Val Acc 99.745, Total time 0.42
+validation split name: 1
+ * Val Acc 99.745, Total time 0.43
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([ 0.0218, -0.0192, -0.0257,  0.0187, -0.0095, -0.0020,  0.0106,  0.0086,
+        -0.0258, -0.0200], device='cuda:0')
+tensor([-6.1911e-02,  1.6709e-02,  3.0474e-02, -4.5868e-02,  3.5997e-02,
+         3.5042e-05,  5.7826e-02,  2.4794e-02, -6.2030e-02, -3.6144e-02],
+       device='cuda:0')
+tensor([-0.0468, -0.0024, -0.0314,  0.0375,  0.0504,  0.0100,  0.0260,  0.0412,
+        -0.0406,  0.0242], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/190]	0.0588 (0.0588)	0.0531 (0.0531)	1.702 (1.702)	26.56 (26.56)
+[100/190]	0.0235 (0.0252)	0.0187 (0.0205)	0.096 (0.193)	98.44 (93.67)
+[189/190]	0.0132 (0.0249)	0.0091 (0.0202)	0.096 (0.135)	98.59 (95.60)
+ * Train Acc 95.598
+ * Val Acc 98.302, Total time 0.82
+validation split name: 1
+ * Val Acc 99.643, Total time 0.47
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.302, Total time 0.84
+logging for Task  2 while training 2
+logging 2.1
+tensor([ 0.0285, -0.0124, -0.0189,  0.0255, -0.0028,  0.0048,  0.0174,  0.0153,
+        -0.0190, -0.0132], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0482, -0.0159, -0.0440,  0.0472,  0.0534,  0.0142,  0.0294,  0.0263,
+        -0.0294,  0.0336], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/190]	0.0679 (0.0679)	0.0592 (0.0592)	0.117 (0.117)	96.09 (96.09)
+[100/190]	0.0270 (0.0250)	0.0212 (0.0205)	0.020 (0.040)	99.22 (98.66)
+[189/190]	0.0127 (0.0253)	0.0089 (0.0206)	0.084 (0.043)	95.77 (98.54)
+ * Train Acc 98.537
+ * Val Acc 98.502, Total time 0.81
+validation split name: 1
+ * Val Acc 98.369, Total time 0.42
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.502, Total time 0.80
+logging for Task  2 while training 2
+logging 2.2
+tensor([ 0.0286, -0.0124, -0.0189,  0.0256, -0.0027,  0.0049,  0.0174,  0.0154,
+        -0.0190, -0.0132], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0567, -0.0159, -0.0462,  0.0480,  0.0513,  0.0119,  0.0287,  0.0263,
+        -0.0286,  0.0375], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/190]	0.0558 (0.0558)	0.0506 (0.0506)	0.021 (0.021)	98.44 (98.44)
+[100/190]	0.0236 (0.0241)	0.0196 (0.0199)	0.089 (0.025)	98.44 (99.20)
+[189/190]	0.0129 (0.0240)	0.0092 (0.0198)	0.003 (0.027)	100.00 (99.16)
+ * Train Acc 99.155
+ * Val Acc 98.702, Total time 0.78
+validation split name: 1
+ * Val Acc 98.675, Total time 0.41
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.702, Total time 0.80
+logging for Task  2 while training 2
+logging 2.3
+tensor([ 0.0306, -0.0104, -0.0169,  0.0275, -0.0008,  0.0068,  0.0194,  0.0174,
+        -0.0170, -0.0112], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0628, -0.0159, -0.0454,  0.0541,  0.0502,  0.0118,  0.0290,  0.0340,
+        -0.0260,  0.0408], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/190]	0.0546 (0.0546)	0.0494 (0.0494)	0.007 (0.007)	100.00 (100.00)
+[100/190]	0.0223 (0.0246)	0.0183 (0.0200)	0.003 (0.016)	100.00 (99.52)
+[189/190]	0.0126 (0.0240)	0.0089 (0.0196)	0.013 (0.017)	100.00 (99.46)
+ * Train Acc 99.456
+ * Val Acc 98.801, Total time 0.79
+validation split name: 1
+ * Val Acc 98.573, Total time 0.42
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.801, Total time 0.77
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([ 0.0319, -0.0090, -0.0155,  0.0289,  0.0006,  0.0082,  0.0208,  0.0188,
+        -0.0156, -0.0098], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0697, -0.0159, -0.0495,  0.0548,  0.0503,  0.0111,  0.0305,  0.0341,
+        -0.0256,  0.0438], device='cuda:0')
+tensor([ 0.0458,  0.0492,  0.0405, -0.0190,  0.0294,  0.0285, -0.0073, -0.0356,
+         0.0342,  0.0161], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0572 (0.0572)	0.0503 (0.0503)	1.899 (1.899)	18.75 (18.75)
+[100/188]	0.0237 (0.0236)	0.0194 (0.0192)	0.127 (0.202)	96.88 (92.99)
+[187/188]	0.0054 (0.0235)	0.0019 (0.0190)	0.050 (0.138)	97.22 (95.30)
+ * Train Acc 95.303
+ * Val Acc 98.438, Total time 0.78
+validation split name: 1
+ * Val Acc 98.777, Total time 0.41
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 84.844, Total time 0.78
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.438, Total time 0.78
+logging for Task  3 while training 3
+logging 3.1
+tensor([ 0.0373, -0.0036, -0.0101,  0.0343,  0.0060,  0.0136,  0.0261,  0.0241,
+        -0.0102, -0.0044], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0696, -0.0159, -0.0494,  0.0563,  0.0506,  0.0114,  0.0321,  0.0341,
+        -0.0236,  0.0452], device='cuda:0')
+tensor([ 0.0481,  0.0438,  0.0555, -0.0259,  0.0237,  0.0331, -0.0149, -0.0330,
+         0.0348,  0.0097], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0586 (0.0586)	0.0517 (0.0517)	0.020 (0.020)	100.00 (100.00)
+[100/188]	0.0246 (0.0247)	0.0199 (0.0198)	0.024 (0.038)	99.22 (98.85)
+[187/188]	0.0067 (0.0248)	0.0026 (0.0199)	0.007 (0.038)	100.00 (98.84)
+ * Train Acc 98.840
+ * Val Acc 98.884, Total time 0.82
+validation split name: 1
+ * Val Acc 98.216, Total time 0.42
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 72.584, Total time 0.80
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.884, Total time 0.92
+logging for Task  3 while training 3
+logging 3.2
+tensor([ 0.0380, -0.0030, -0.0095,  0.0350,  0.0067,  0.0143,  0.0268,  0.0248,
+        -0.0096, -0.0038], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0696, -0.0159, -0.0494,  0.0563,  0.0506,  0.0114,  0.0321,  0.0341,
+        -0.0236,  0.0452], device='cuda:0')
+tensor([ 0.0509,  0.0436,  0.0521, -0.0283,  0.0185,  0.0374, -0.0154, -0.0330,
+         0.0373,  0.0050], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.1578 (0.1578)	0.1523 (0.1523)	0.021 (0.021)	98.44 (98.44)
+[100/188]	0.0236 (0.0254)	0.0192 (0.0207)	0.015 (0.023)	99.22 (99.29)
+[187/188]	0.0073 (0.0250)	0.0032 (0.0202)	0.009 (0.024)	100.00 (99.24)
+ * Train Acc 99.241
+ * Val Acc 98.686, Total time 0.80
+validation split name: 1
+ * Val Acc 98.726, Total time 0.40
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 72.060, Total time 0.81
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.686, Total time 0.83
+logging for Task  3 while training 3
+logging 3.3
+tensor([ 0.0379, -0.0030, -0.0096,  0.0349,  0.0066,  0.0142,  0.0267,  0.0247,
+        -0.0096, -0.0038], device='cuda:0')
+tensor([-0.0626,  0.0167,  0.0298, -0.0460,  0.0356, -0.0004,  0.0573,  0.0248,
+        -0.0622, -0.0362], device='cuda:0')
+tensor([-0.0696, -0.0159, -0.0494,  0.0563,  0.0506,  0.0114,  0.0321,  0.0341,
+        -0.0236,  0.0452], device='cuda:0')
+tensor([ 0.0521,  0.0023,  0.0525, -0.0364,  0.0222,  0.0402, -0.0149, -0.0330,
+         0.0380,  0.0012], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0549 (0.0549)	0.0494 (0.0494)	0.026 (0.026)	98.44 (98.44)
+[100/188]	0.0261 (0.0244)	0.0206 (0.0197)	0.004 (0.015)	100.00 (99.58)
+[187/188]	0.0065 (0.0256)	0.0025 (0.0206)	0.001 (0.015)	100.00 (99.54)
+ * Train Acc 99.541
+ * Val Acc 98.735, Total time 0.80
+validation split name: 1
+ * Val Acc 96.687, Total time 0.42
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 74.582, Total time 0.81
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.735, Total time 0.82
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0125055cf8>), ('2', <utils.metric.AverageMeter object at 0x7f0125198be0>), ('3', <utils.metric.AverageMeter object at 0x7f0124833ba8>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f01248334a8>), ('3', <utils.metric.AverageMeter object at 0x7f0125055668>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f01250a0080>)]))])
+Task 1 average acc: 99.74515800203874
+Task 2 average acc: 98.68719146937887
+Task 3 average acc: 90.00141983030345
+===Summary of experiment repeats: 5 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983  0.
+  0.          0.          0.          0.        ]
+mean: 45.94911722450628 std: 45.992364370473155
+split_boundaries: [0, 2, 6, 10]
+{'1': [1, 4], '2': [9, 6, 3, 5], '3': [0, 2, 8, 7]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([ 0.0309,  0.0067,  0.0040, -0.0267,  0.0100,  0.0134,  0.0050,  0.0301,
+         0.0094, -0.0277], device='cuda:0')
+tensor([ 0.0135, -0.0021, -0.0510,  0.0590,  0.0421,  0.0146, -0.0430,  0.0389,
+        -0.0585,  0.0346], device='cuda:0')
+tensor([-0.0422,  0.0222, -0.0278, -0.0430,  0.0169, -0.0122,  0.0400, -0.0530,
+        -0.0028, -0.0173], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0613 (0.0613)	0.0541 (0.0541)	0.680 (0.680)	73.44 (73.44)
+[98/99]	0.0082 (0.0253)	0.0041 (0.0210)	0.204 (0.047)	97.50 (98.90)
+ * Train Acc 98.895
+ * Val Acc 99.858, Total time 0.48
+validation split name: 1
+ * Val Acc 99.858, Total time 0.48
+logging for Task  1 while training 1
+logging 1.1
+tensor([ 0.0358,  0.0116,  0.0090, -0.0218,  0.0149,  0.0184,  0.0099,  0.0350,
+         0.0143, -0.0228], device='cuda:0')
+tensor([ 0.0084,  0.0006, -0.0437,  0.0521,  0.0513,  0.0093, -0.0322,  0.0329,
+        -0.0600,  0.0315], device='cuda:0')
+tensor([-0.0422,  0.0222, -0.0278, -0.0430,  0.0169, -0.0122,  0.0400, -0.0530,
+        -0.0028, -0.0173], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0611 (0.0611)	0.0545 (0.0545)	0.001 (0.001)	100.00 (100.00)
+[98/99]	0.0077 (0.0254)	0.0043 (0.0211)	0.000 (0.011)	100.00 (99.66)
+ * Train Acc 99.658
+ * Val Acc 99.811, Total time 0.47
+validation split name: 1
+ * Val Acc 99.811, Total time 0.47
+logging for Task  1 while training 1
+logging 1.2
+tensor([ 0.0332,  0.0090,  0.0063, -0.0244,  0.0123,  0.0157,  0.0073,  0.0324,
+         0.0117, -0.0254], device='cuda:0')
+tensor([ 0.0074,  0.0006, -0.0427,  0.0522,  0.0498,  0.0097, -0.0312,  0.0329,
+        -0.0598,  0.0315], device='cuda:0')
+tensor([-0.0422,  0.0222, -0.0278, -0.0430,  0.0169, -0.0122,  0.0400, -0.0530,
+        -0.0028, -0.0173], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0537 (0.0537)	0.0483 (0.0483)	0.019 (0.019)	99.22 (99.22)
+[98/99]	0.0072 (0.0255)	0.0038 (0.0212)	0.000 (0.008)	100.00 (99.76)
+ * Train Acc 99.762
+ * Val Acc 99.906, Total time 0.44
+validation split name: 1
+ * Val Acc 99.906, Total time 0.44
+logging for Task  1 while training 1
+logging 1.3
+tensor([ 0.0353,  0.0111,  0.0084, -0.0223,  0.0144,  0.0178,  0.0094,  0.0345,
+         0.0138, -0.0233], device='cuda:0')
+tensor([ 0.0081,  0.0001, -0.0424,  0.0522,  0.0504,  0.0101, -0.0321,  0.0329,
+        -0.0613,  0.0315], device='cuda:0')
+tensor([-0.0422,  0.0222, -0.0278, -0.0430,  0.0169, -0.0122,  0.0400, -0.0530,
+        -0.0028, -0.0173], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.0539 (0.0539)	0.0483 (0.0483)	0.001 (0.001)	100.00 (100.00)
+[98/99]	0.0072 (0.0244)	0.0038 (0.0203)	0.000 (0.008)	100.00 (99.72)
+ * Train Acc 99.722
+ * Val Acc 99.906, Total time 0.44
+validation split name: 1
+ * Val Acc 99.906, Total time 0.45
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([ 0.0412,  0.0169,  0.0143, -0.0164,  0.0203,  0.0237,  0.0153,  0.0404,
+         0.0197, -0.0174], device='cuda:0')
+tensor([ 0.0077,  0.0005, -0.0386,  0.0522,  0.0499,  0.0108, -0.0324,  0.0329,
+        -0.0608,  0.0315], device='cuda:0')
+tensor([-0.0422,  0.0222, -0.0278, -0.0430,  0.0169, -0.0122,  0.0400, -0.0530,
+        -0.0028, -0.0173], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/183]	0.0609 (0.0609)	0.0544 (0.0544)	1.348 (1.348)	38.28 (38.28)
+[100/183]	0.0239 (0.0247)	0.0198 (0.0200)	0.095 (0.198)	96.09 (93.23)
+[182/183]	0.0195 (0.0245)	0.0159 (0.0198)	0.133 (0.146)	92.68 (95.07)
+ * Train Acc 95.068
+ * Val Acc 97.803, Total time 0.78
+validation split name: 1
+ * Val Acc 99.386, Total time 0.48
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 97.803, Total time 0.81
+logging for Task  2 while training 2
+logging 2.1
+tensor([ 0.0413,  0.0171,  0.0145, -0.0163,  0.0204,  0.0239,  0.0154,  0.0405,
+         0.0198, -0.0172], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0520,  0.0282, -0.0242, -0.0482,  0.0092, -0.0131,  0.0430, -0.0533,
+         0.0070, -0.0205], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/183]	0.0581 (0.0581)	0.0519 (0.0519)	0.023 (0.023)	99.22 (99.22)
+[100/183]	0.0240 (0.0245)	0.0200 (0.0201)	0.044 (0.053)	98.44 (98.29)
+[182/183]	0.0230 (0.0243)	0.0188 (0.0199)	0.108 (0.050)	97.56 (98.41)
+ * Train Acc 98.407
+ * Val Acc 97.932, Total time 0.78
+validation split name: 1
+ * Val Acc 98.725, Total time 0.45
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 97.932, Total time 0.77
+logging for Task  2 while training 2
+logging 2.2
+tensor([ 0.0413,  0.0171,  0.0145, -0.0163,  0.0204,  0.0239,  0.0154,  0.0405,
+         0.0198, -0.0173], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0663,  0.0301, -0.0276, -0.0482,  0.0090, -0.0108,  0.0487, -0.0533,
+         0.0077, -0.0200], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/183]	0.0557 (0.0557)	0.0497 (0.0497)	0.019 (0.019)	99.22 (99.22)
+[100/183]	0.0262 (0.0286)	0.0213 (0.0232)	0.017 (0.034)	99.22 (98.92)
+[182/183]	0.0286 (0.0279)	0.0244 (0.0226)	0.013 (0.034)	100.00 (98.91)
+ * Train Acc 98.907
+ * Val Acc 97.855, Total time 0.80
+validation split name: 1
+ * Val Acc 98.961, Total time 0.47
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 97.855, Total time 0.78
+logging for Task  2 while training 2
+logging 2.3
+tensor([ 0.0412,  0.0170,  0.0144, -0.0164,  0.0203,  0.0238,  0.0153,  0.0404,
+         0.0197, -0.0174], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0813,  0.0272, -0.0293, -0.0482,  0.0097, -0.0110,  0.0503, -0.0533,
+         0.0043, -0.0185], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/183]	0.0536 (0.0536)	0.0484 (0.0484)	0.020 (0.020)	99.22 (99.22)
+[100/183]	0.0239 (0.0245)	0.0197 (0.0200)	0.005 (0.023)	100.00 (99.21)
+[182/183]	0.0235 (0.0245)	0.0195 (0.0200)	0.024 (0.022)	99.19 (99.22)
+ * Train Acc 99.223
+ * Val Acc 98.268, Total time 0.81
+validation split name: 1
+ * Val Acc 98.111, Total time 0.43
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.268, Total time 0.81
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([ 0.0412,  0.0170,  0.0144, -0.0164,  0.0203,  0.0238,  0.0153,  0.0404,
+         0.0197, -0.0174], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0870,  0.0283, -0.0285, -0.0482,  0.0104, -0.0104,  0.0531, -0.0576,
+         0.0027, -0.0188], device='cuda:0')
+tensor([ 0.0309,  0.0349, -0.0564,  0.0136, -0.0496,  0.0368,  0.0064, -0.0517,
+         0.0606, -0.0449], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0567 (0.0567)	0.0498 (0.0498)	1.872 (1.872)	7.81 (7.81)
+[100/188]	0.0255 (0.0248)	0.0205 (0.0200)	0.070 (0.149)	97.66 (94.72)
+[187/188]	0.0134 (0.0247)	0.0079 (0.0200)	0.013 (0.108)	100.00 (96.28)
+ * Train Acc 96.279
+ * Val Acc 97.658, Total time 0.81
+validation split name: 1
+ * Val Acc 71.516, Total time 0.45
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 94.055, Total time 0.78
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 97.658, Total time 0.84
+logging for Task  3 while training 3
+logging 3.1
+tensor([ 0.0433,  0.0190,  0.0164, -0.0144,  0.0223,  0.0258,  0.0173,  0.0424,
+         0.0218, -0.0153], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0868,  0.0294, -0.0284, -0.0482,  0.0105, -0.0108,  0.0531, -0.0579,
+         0.0024, -0.0188], device='cuda:0')
+tensor([ 0.0236,  0.0383, -0.0451,  0.0207, -0.0411,  0.0465,  0.0163, -0.0517,
+         0.0642, -0.0508], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0558 (0.0558)	0.0502 (0.0502)	0.020 (0.020)	99.22 (99.22)
+[100/188]	0.0250 (0.0245)	0.0205 (0.0198)	0.038 (0.037)	97.66 (98.75)
+[187/188]	0.0117 (0.0245)	0.0076 (0.0197)	0.006 (0.036)	100.00 (98.89)
+ * Train Acc 98.887
+ * Val Acc 98.530, Total time 0.80
+validation split name: 1
+ * Val Acc 81.956, Total time 0.46
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 95.348, Total time 0.77
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.530, Total time 0.84
+logging for Task  3 while training 3
+logging 3.2
+tensor([ 0.0417,  0.0175,  0.0148, -0.0159,  0.0208,  0.0242,  0.0158,  0.0409,
+         0.0202, -0.0169], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0868,  0.0294, -0.0284, -0.0482,  0.0105, -0.0108,  0.0531, -0.0579,
+         0.0024, -0.0188], device='cuda:0')
+tensor([ 0.0229,  0.0363, -0.0462,  0.0207, -0.0412,  0.0466,  0.0189, -0.0676,
+         0.0617, -0.0508], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0579 (0.0579)	0.0518 (0.0518)	0.016 (0.016)	100.00 (100.00)
+[100/188]	0.0242 (0.0252)	0.0192 (0.0202)	0.032 (0.023)	99.22 (99.23)
+[187/188]	0.0117 (0.0259)	0.0071 (0.0207)	0.014 (0.022)	100.00 (99.31)
+ * Train Acc 99.308
+ * Val Acc 98.605, Total time 0.95
+validation split name: 1
+ * Val Acc 61.124, Total time 0.50
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 94.831, Total time 0.84
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.605, Total time 0.86
+logging for Task  3 while training 3
+logging 3.3
+tensor([ 0.0507,  0.0264,  0.0238, -0.0069,  0.0298,  0.0332,  0.0248,  0.0499,
+         0.0292, -0.0079], device='cuda:0')
+tensor([ 0.0074,  0.0004, -0.0383,  0.0522,  0.0498,  0.0106, -0.0324,  0.0329,
+        -0.0610,  0.0315], device='cuda:0')
+tensor([-0.0868,  0.0294, -0.0284, -0.0482,  0.0105, -0.0108,  0.0531, -0.0579,
+         0.0024, -0.0188], device='cuda:0')
+tensor([ 0.0241,  0.0371, -0.0457,  0.0207, -0.0413,  0.0490,  0.0212, -0.0769,
+         0.0643, -0.0508], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0625 (0.0625)	0.0554 (0.0554)	0.017 (0.017)	99.22 (99.22)
+[100/188]	0.0242 (0.0260)	0.0196 (0.0208)	0.068 (0.011)	97.66 (99.67)
+[187/188]	0.0117 (0.0256)	0.0072 (0.0204)	0.052 (0.015)	96.72 (99.52)
+ * Train Acc 99.521
+ * Val Acc 98.455, Total time 0.83
+validation split name: 1
+ * Val Acc 71.564, Total time 0.48
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 93.745, Total time 0.83
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.455, Total time 0.85
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0124833208>), ('2', <utils.metric.AverageMeter object at 0x7f0124824b70>), ('3', <utils.metric.AverageMeter object at 0x7f0124833320>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f0125223898>), ('3', <utils.metric.AverageMeter object at 0x7f0125223d68>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f01252236a0>)]))])
+Task 1 average acc: 99.90552668871044
+Task 2 average acc: 98.18941007655903
+Task 3 average acc: 87.92136438902496
+===Summary of experiment repeats: 6 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983 87.92136439
+  0.          0.          0.          0.        ]
+mean: 54.74125366340877 std: 44.755231348512694
+split_boundaries: [0, 2, 6, 10]
+{'1': [0, 7], '2': [5, 1, 8, 3], '3': [9, 2, 4, 6]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([-0.0208, -0.0104, -0.0022,  0.0083,  0.0168, -0.0178,  0.0176,  0.0228,
+         0.0066, -0.0084], device='cuda:0')
+tensor([ 0.0061,  0.0322,  0.0513, -0.0203, -0.0034, -0.0335,  0.0129, -0.0536,
+        -0.0019,  0.0154], device='cuda:0')
+tensor([ 0.0545,  0.0573, -0.0396,  0.0260, -0.0076,  0.0272,  0.0559,  0.0458,
+         0.0065, -0.0053], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.0658 (0.0658)	0.0604 (0.0604)	0.685 (0.685)	60.16 (60.16)
+[95/96]	0.0052 (0.0254)	0.0017 (0.0209)	0.002 (0.043)	100.00 (98.81)
+ * Train Acc 98.810
+ * Val Acc 99.552, Total time 0.47
+validation split name: 1
+ * Val Acc 99.552, Total time 0.46
+logging for Task  1 while training 1
+logging 1.1
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0047,  0.0382,  0.0426, -0.0145,  0.0022, -0.0305,  0.0184, -0.0564,
+        -0.0062,  0.0020], device='cuda:0')
+tensor([ 0.0545,  0.0573, -0.0396,  0.0260, -0.0076,  0.0272,  0.0559,  0.0458,
+         0.0065, -0.0053], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.0620 (0.0620)	0.0564 (0.0564)	0.004 (0.004)	100.00 (100.00)
+[95/96]	0.0063 (0.0252)	0.0023 (0.0209)	0.001 (0.006)	100.00 (99.79)
+ * Train Acc 99.787
+ * Val Acc 99.801, Total time 0.46
+validation split name: 1
+ * Val Acc 99.801, Total time 0.45
+logging for Task  1 while training 1
+logging 1.2
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0304,  0.0369, -0.0154,  0.0011, -0.0302,  0.0169, -0.0566,
+        -0.0058,  0.0010], device='cuda:0')
+tensor([ 0.0545,  0.0573, -0.0396,  0.0260, -0.0076,  0.0272,  0.0559,  0.0458,
+         0.0065, -0.0053], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.0631 (0.0631)	0.0570 (0.0570)	0.053 (0.053)	99.22 (99.22)
+[95/96]	0.0057 (0.0266)	0.0018 (0.0217)	0.000 (0.003)	100.00 (99.93)
+ * Train Acc 99.934
+ * Val Acc 99.751, Total time 0.45
+validation split name: 1
+ * Val Acc 99.751, Total time 0.46
+logging for Task  1 while training 1
+logging 1.3
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0207,  0.0306, -0.0146,  0.0029, -0.0307,  0.0188, -0.0574,
+        -0.0039,  0.0022], device='cuda:0')
+tensor([ 0.0545,  0.0573, -0.0396,  0.0260, -0.0076,  0.0272,  0.0559,  0.0458,
+         0.0065, -0.0053], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.0651 (0.0651)	0.0578 (0.0578)	0.001 (0.001)	100.00 (100.00)
+[95/96]	0.0055 (0.0260)	0.0018 (0.0212)	0.010 (0.002)	100.00 (99.93)
+ * Train Acc 99.934
+ * Val Acc 99.801, Total time 0.49
+validation split name: 1
+ * Val Acc 99.801, Total time 0.47
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0182,  0.0306, -0.0144,  0.0027, -0.0312,  0.0179, -0.0593,
+        -0.0041,  0.0015], device='cuda:0')
+tensor([ 0.0545,  0.0573, -0.0396,  0.0260, -0.0076,  0.0272,  0.0559,  0.0458,
+         0.0065, -0.0053], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0641 (0.0641)	0.0573 (0.0573)	1.352 (1.352)	26.56 (26.56)
+[100/189]	0.0245 (0.0269)	0.0197 (0.0218)	0.100 (0.239)	96.09 (90.95)
+[188/189]	0.0164 (0.0269)	0.0120 (0.0218)	0.044 (0.175)	98.77 (93.56)
+ * Train Acc 93.564
+ * Val Acc 98.130, Total time 0.88
+validation split name: 1
+ * Val Acc 99.253, Total time 0.48
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.130, Total time 0.90
+logging for Task  2 while training 2
+logging 2.1
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0501,  0.0523, -0.0338,  0.0237, -0.0085,  0.0249,  0.0559,  0.0358,
+         0.0083, -0.0060], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0634 (0.0634)	0.0575 (0.0575)	0.070 (0.070)	98.44 (98.44)
+[100/189]	0.0300 (0.0269)	0.0234 (0.0217)	0.038 (0.058)	98.44 (98.13)
+[188/189]	0.0148 (0.0266)	0.0107 (0.0214)	0.082 (0.059)	97.53 (98.05)
+ * Train Acc 98.049
+ * Val Acc 98.280, Total time 0.86
+validation split name: 1
+ * Val Acc 99.552, Total time 0.50
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.280, Total time 0.88
+logging for Task  2 while training 2
+logging 2.2
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0501,  0.0530, -0.0338,  0.0238, -0.0084,  0.0242,  0.0578,  0.0341,
+         0.0109, -0.0081], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0649 (0.0649)	0.0581 (0.0581)	0.072 (0.072)	96.88 (96.88)
+[100/189]	0.0254 (0.0262)	0.0208 (0.0213)	0.061 (0.038)	98.44 (98.72)
+[188/189]	0.0156 (0.0262)	0.0114 (0.0212)	0.047 (0.038)	98.77 (98.74)
+ * Train Acc 98.737
+ * Val Acc 98.853, Total time 0.89
+validation split name: 1
+ * Val Acc 99.153, Total time 0.53
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.853, Total time 0.97
+logging for Task  2 while training 2
+logging 2.3
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0501,  0.0550, -0.0338,  0.0231, -0.0104,  0.0276,  0.0604,  0.0341,
+         0.0106, -0.0116], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/189]	0.0750 (0.0750)	0.0673 (0.0673)	0.018 (0.018)	99.22 (99.22)
+[100/189]	0.0245 (0.0290)	0.0199 (0.0232)	0.003 (0.025)	100.00 (99.14)
+[188/189]	0.0167 (0.0282)	0.0104 (0.0225)	0.012 (0.025)	100.00 (99.16)
+ * Train Acc 99.159
+ * Val Acc 98.454, Total time 0.88
+validation split name: 1
+ * Val Acc 99.104, Total time 0.49
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.454, Total time 0.95
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0499,  0.0565, -0.0338,  0.0223, -0.0097,  0.0268,  0.0609,  0.0336,
+         0.0118, -0.0135], device='cuda:0')
+tensor([-0.0465, -0.0466,  0.0238,  0.0062,  0.0256, -0.0258,  0.0398,  0.0541,
+        -0.0509,  0.0507], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0868 (0.0868)	0.0770 (0.0770)	1.377 (1.377)	25.00 (25.00)
+[100/185]	0.0302 (0.0272)	0.0242 (0.0216)	0.171 (0.179)	96.88 (93.41)
+[184/185]	0.0225 (0.0282)	0.0169 (0.0223)	0.052 (0.129)	96.52 (95.28)
+ * Train Acc 95.285
+ * Val Acc 97.890, Total time 0.95
+validation split name: 1
+ * Val Acc 84.661, Total time 0.52
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 79.681, Total time 0.96
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 97.890, Total time 0.89
+logging for Task  3 while training 3
+logging 3.1
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0499,  0.0562, -0.0338,  0.0224, -0.0094,  0.0272,  0.0611,  0.0331,
+         0.0113, -0.0130], device='cuda:0')
+tensor([-0.0402, -0.0379,  0.0079,  0.0183,  0.0189, -0.0389,  0.0303,  0.0450,
+        -0.0597,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0659 (0.0659)	0.0594 (0.0594)	0.033 (0.033)	98.44 (98.44)
+[100/185]	0.0259 (0.0276)	0.0206 (0.0215)	0.037 (0.036)	99.22 (98.83)
+[184/185]	0.0239 (0.0281)	0.0173 (0.0221)	0.004 (0.036)	100.00 (98.83)
+ * Train Acc 98.834
+ * Val Acc 98.392, Total time 1.04
+validation split name: 1
+ * Val Acc 86.952, Total time 0.55
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 75.642, Total time 0.93
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.392, Total time 0.93
+logging for Task  3 while training 3
+logging 3.2
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0499,  0.0562, -0.0338,  0.0224, -0.0094,  0.0272,  0.0611,  0.0331,
+         0.0113, -0.0130], device='cuda:0')
+tensor([-0.0402, -0.0378,  0.0079,  0.0163,  0.0202, -0.0412,  0.0306,  0.0452,
+        -0.0633,  0.0525], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0663 (0.0663)	0.0580 (0.0580)	0.009 (0.009)	100.00 (100.00)
+[100/185]	0.0259 (0.0268)	0.0204 (0.0214)	0.005 (0.022)	100.00 (99.35)
+[184/185]	0.0233 (0.0266)	0.0178 (0.0212)	0.008 (0.021)	99.13 (99.32)
+ * Train Acc 99.316
+ * Val Acc 98.543, Total time 0.92
+validation split name: 1
+ * Val Acc 88.944, Total time 0.51
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 70.531, Total time 0.94
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.543, Total time 1.05
+logging for Task  3 while training 3
+logging 3.3
+tensor([-0.0152, -0.0048,  0.0034,  0.0139,  0.0224, -0.0122,  0.0232,  0.0284,
+         0.0122, -0.0028], device='cuda:0')
+tensor([ 0.0048,  0.0154,  0.0306, -0.0145,  0.0026, -0.0316,  0.0173, -0.0616,
+        -0.0040,  0.0017], device='cuda:0')
+tensor([ 0.0499,  0.0562, -0.0338,  0.0224, -0.0094,  0.0272,  0.0611,  0.0331,
+         0.0113, -0.0130], device='cuda:0')
+tensor([-0.0402, -0.0386,  0.0079,  0.0129,  0.0212, -0.0439,  0.0323,  0.0451,
+        -0.0637,  0.0532], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0679 (0.0679)	0.0602 (0.0602)	0.035 (0.035)	99.22 (99.22)
+[100/185]	0.0255 (0.0271)	0.0205 (0.0216)	0.091 (0.015)	96.09 (99.47)
+[184/185]	0.0237 (0.0270)	0.0186 (0.0215)	0.038 (0.016)	99.13 (99.36)
+ * Train Acc 99.362
+ * Val Acc 98.769, Total time 0.87
+validation split name: 1
+ * Val Acc 87.948, Total time 0.47
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 67.938, Total time 0.97
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.769, Total time 0.89
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0125198cc0>), ('2', <utils.metric.AverageMeter object at 0x7f0125198908>), ('3', <utils.metric.AverageMeter object at 0x7f01250fd0f0>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f0124833a90>), ('3', <utils.metric.AverageMeter object at 0x7f012522db00>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f0124833668>)]))])
+Task 1 average acc: 99.800796812749
+Task 2 average acc: 98.77891823382114
+Task 3 average acc: 84.88517689425032
+===Summary of experiment repeats: 7 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983 87.92136439
+ 84.88517689  0.          0.          0.        ]
+mean: 63.2297713528338 std: 41.499167774857035
+split_boundaries: [0, 2, 6, 10]
+{'1': [5, 0], '2': [3, 4, 1, 7], '3': [9, 6, 8, 2]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([ 0.0220,  0.0222,  0.0032, -0.0133, -0.0184, -0.0034, -0.0088,  0.0138,
+        -0.0267,  0.0294], device='cuda:0')
+tensor([ 0.0247,  0.0619,  0.0586,  0.0533, -0.0226, -0.0547,  0.0547,  0.0328,
+         0.0299, -0.0276], device='cuda:0')
+tensor([-0.0046, -0.0535,  0.0071, -0.0480,  0.0097, -0.0119,  0.0313,  0.0042,
+        -0.0105,  0.0563], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0781 (0.0781)	0.0717 (0.0717)	0.742 (0.742)	41.41 (41.41)
+[88/89]	0.0159 (0.0305)	0.0118 (0.0249)	0.006 (0.076)	100.00 (96.91)
+ * Train Acc 96.915
+ * Val Acc 99.306, Total time 0.44
+validation split name: 1
+ * Val Acc 99.306, Total time 0.44
+logging for Task  1 while training 1
+logging 1.1
+tensor([ 0.0214,  0.0216,  0.0026, -0.0139, -0.0189, -0.0040, -0.0093,  0.0132,
+        -0.0272,  0.0288], device='cuda:0')
+tensor([ 0.0271,  0.0578,  0.0527,  0.0593, -0.0125, -0.0636,  0.0487,  0.0358,
+         0.0329, -0.0312], device='cuda:0')
+tensor([-0.0046, -0.0535,  0.0071, -0.0480,  0.0097, -0.0119,  0.0313,  0.0042,
+        -0.0105,  0.0563], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0634 (0.0634)	0.0575 (0.0575)	0.035 (0.035)	97.66 (97.66)
+[88/89]	0.0166 (0.0278)	0.0123 (0.0226)	0.004 (0.016)	100.00 (99.45)
+ * Train Acc 99.453
+ * Val Acc 99.412, Total time 0.52
+validation split name: 1
+ * Val Acc 99.412, Total time 0.51
+logging for Task  1 while training 1
+logging 1.2
+tensor([ 0.0228,  0.0230,  0.0040, -0.0125, -0.0175, -0.0026, -0.0080,  0.0146,
+        -0.0259,  0.0302], device='cuda:0')
+tensor([ 0.0286,  0.0598,  0.0527,  0.0611, -0.0099, -0.0657,  0.0487,  0.0350,
+         0.0326, -0.0333], device='cuda:0')
+tensor([-0.0046, -0.0535,  0.0071, -0.0480,  0.0097, -0.0119,  0.0313,  0.0042,
+        -0.0105,  0.0563], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0838 (0.0838)	0.0759 (0.0759)	0.011 (0.011)	100.00 (100.00)
+[88/89]	0.0151 (0.0268)	0.0112 (0.0220)	0.000 (0.008)	100.00 (99.74)
+ * Train Acc 99.744
+ * Val Acc 99.199, Total time 0.50
+validation split name: 1
+ * Val Acc 99.199, Total time 0.46
+logging for Task  1 while training 1
+logging 1.3
+tensor([ 0.0248,  0.0250,  0.0060, -0.0105, -0.0155, -0.0006, -0.0060,  0.0166,
+        -0.0239,  0.0322], device='cuda:0')
+tensor([ 0.0308,  0.0615,  0.0527,  0.0629, -0.0065, -0.0674,  0.0487,  0.0335,
+         0.0330, -0.0343], device='cuda:0')
+tensor([-0.0046, -0.0535,  0.0071, -0.0480,  0.0097, -0.0119,  0.0313,  0.0042,
+        -0.0105,  0.0563], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0655 (0.0655)	0.0589 (0.0589)	0.001 (0.001)	100.00 (100.00)
+[88/89]	0.0167 (0.0271)	0.0125 (0.0224)	0.000 (0.008)	100.00 (99.74)
+ * Train Acc 99.736
+ * Val Acc 99.466, Total time 0.46
+validation split name: 1
+ * Val Acc 99.466, Total time 0.47
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([ 0.0246,  0.0248,  0.0058, -0.0107, -0.0157, -0.0008, -0.0062,  0.0164,
+        -0.0241,  0.0320], device='cuda:0')
+tensor([ 0.0287,  0.0626,  0.0528,  0.0626, -0.0076, -0.0687,  0.0487,  0.0317,
+         0.0321, -0.0349], device='cuda:0')
+tensor([-0.0046, -0.0535,  0.0071, -0.0480,  0.0097, -0.0119,  0.0313,  0.0042,
+        -0.0105,  0.0563], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/196]	0.0632 (0.0632)	0.0570 (0.0570)	1.426 (1.426)	29.69 (29.69)
+[100/196]	0.0272 (0.0274)	0.0222 (0.0221)	0.058 (0.154)	96.88 (95.24)
+[195/196]	0.0050 (0.0267)	0.0012 (0.0215)	0.257 (0.107)	95.00 (96.72)
+ * Train Acc 96.721
+ * Val Acc 98.773, Total time 0.93
+validation split name: 1
+ * Val Acc 85.791, Total time 0.44
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.773, Total time 0.90
+logging for Task  2 while training 2
+logging 2.1
+tensor([ 0.0224,  0.0227,  0.0037, -0.0128, -0.0179, -0.0029, -0.0083,  0.0143,
+        -0.0262,  0.0299], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0102, -0.0433, -0.0070, -0.0559,  0.0182, -0.0042,  0.0207,  0.0019,
+        -0.0227,  0.0631], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/196]	0.0651 (0.0651)	0.0580 (0.0580)	0.007 (0.007)	100.00 (100.00)
+[100/196]	0.0261 (0.0274)	0.0211 (0.0224)	0.064 (0.035)	99.22 (98.96)
+[195/196]	0.0066 (0.0270)	0.0017 (0.0219)	0.089 (0.036)	90.00 (98.93)
+ * Train Acc 98.927
+ * Val Acc 98.845, Total time 1.00
+validation split name: 1
+ * Val Acc 92.895, Total time 0.51
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.845, Total time 1.04
+logging for Task  2 while training 2
+logging 2.2
+tensor([ 0.0228,  0.0231,  0.0041, -0.0125, -0.0175, -0.0026, -0.0079,  0.0146,
+        -0.0258,  0.0302], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0163, -0.0433, -0.0132, -0.0607,  0.0218,  0.0023,  0.0204,  0.0051,
+        -0.0272,  0.0655], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/196]	0.0792 (0.0792)	0.0723 (0.0723)	0.080 (0.080)	98.44 (98.44)
+[100/196]	0.0303 (0.0288)	0.0250 (0.0229)	0.004 (0.026)	100.00 (99.11)
+[195/196]	0.0055 (0.0285)	0.0014 (0.0228)	0.010 (0.025)	100.00 (99.21)
+ * Train Acc 99.207
+ * Val Acc 99.374, Total time 0.88
+validation split name: 1
+ * Val Acc 92.575, Total time 0.45
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 99.374, Total time 0.91
+logging for Task  2 while training 2
+logging 2.3
+tensor([ 0.0271,  0.0274,  0.0084, -0.0081, -0.0132,  0.0018, -0.0036,  0.0190,
+        -0.0215,  0.0346], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0201, -0.0433, -0.0170, -0.0641,  0.0236,  0.0071, -0.0092,  0.0048,
+        -0.0317,  0.0661], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/196]	0.0663 (0.0663)	0.0601 (0.0601)	0.008 (0.008)	100.00 (100.00)
+[100/196]	0.0265 (0.0267)	0.0214 (0.0217)	0.002 (0.014)	100.00 (99.63)
+[195/196]	0.0049 (0.0260)	0.0010 (0.0212)	0.000 (0.014)	100.00 (99.59)
+ * Train Acc 99.592
+ * Val Acc 99.230, Total time 0.89
+validation split name: 1
+ * Val Acc 93.964, Total time 0.44
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 99.230, Total time 0.89
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([ 0.0235,  0.0238,  0.0048, -0.0117, -0.0168, -0.0018, -0.0072,  0.0154,
+        -0.0251,  0.0310], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0212, -0.0433, -0.0180, -0.0698,  0.0269,  0.0075, -0.0517,  0.0041,
+        -0.0326,  0.0723], device='cuda:0')
+tensor([-0.0457, -0.0440, -0.0005, -0.0070, -0.0146,  0.0069,  0.0473,  0.0007,
+        -0.0077, -0.0478], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0751 (0.0751)	0.0669 (0.0669)	1.465 (1.465)	22.66 (22.66)
+[100/185]	0.0266 (0.0267)	0.0216 (0.0217)	0.070 (0.158)	97.66 (94.49)
+[184/185]	0.0241 (0.0266)	0.0194 (0.0213)	0.138 (0.111)	96.77 (96.22)
+ * Train Acc 96.220
+ * Val Acc 98.062, Total time 0.85
+validation split name: 1
+ * Val Acc 95.566, Total time 0.43
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 96.582, Total time 0.96
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.062, Total time 0.93
+logging for Task  3 while training 3
+logging 3.1
+tensor([ 0.0255,  0.0258,  0.0068, -0.0097, -0.0148,  0.0001, -0.0052,  0.0174,
+        -0.0231,  0.0329], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0211, -0.0433, -0.0182, -0.0698,  0.0272,  0.0077, -0.0517,  0.0041,
+        -0.0326,  0.0725], device='cuda:0')
+tensor([-0.0511, -0.0585, -0.0074,  0.0006, -0.0222,  0.0077,  0.0046,  0.0047,
+         0.0025, -0.0541], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0865 (0.0865)	0.0798 (0.0798)	0.027 (0.027)	100.00 (100.00)
+[100/185]	0.0263 (0.0272)	0.0211 (0.0218)	0.029 (0.033)	99.22 (99.01)
+[184/185]	0.0241 (0.0268)	0.0194 (0.0216)	0.017 (0.034)	99.19 (98.98)
+ * Train Acc 98.978
+ * Val Acc 98.565, Total time 0.87
+validation split name: 1
+ * Val Acc 86.058, Total time 0.45
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 96.775, Total time 0.91
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 98.565, Total time 0.92
+logging for Task  3 while training 3
+logging 3.2
+tensor([ 0.0260,  0.0263,  0.0073, -0.0092, -0.0143,  0.0007, -0.0047,  0.0179,
+        -0.0226,  0.0335], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0211, -0.0433, -0.0182, -0.0698,  0.0272,  0.0077, -0.0517,  0.0041,
+        -0.0326,  0.0725], device='cuda:0')
+tensor([-0.0512, -0.0801,  0.0076, -0.0001, -0.0275,  0.0071,  0.0076,  0.0101,
+        -0.0007, -0.0567], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0702 (0.0702)	0.0615 (0.0615)	0.006 (0.006)	100.00 (100.00)
+[100/185]	0.0309 (0.0287)	0.0238 (0.0227)	0.033 (0.021)	98.44 (99.25)
+[184/185]	0.0248 (0.0299)	0.0188 (0.0234)	0.002 (0.022)	100.00 (99.27)
+ * Train Acc 99.265
+ * Val Acc 98.691, Total time 0.92
+validation split name: 1
+ * Val Acc 94.284, Total time 0.57
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 94.801, Total time 1.05
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.691, Total time 1.03
+logging for Task  3 while training 3
+logging 3.3
+tensor([ 0.0207,  0.0209,  0.0019, -0.0146, -0.0196, -0.0047, -0.0101,  0.0125,
+        -0.0280,  0.0281], device='cuda:0')
+tensor([ 0.0291,  0.0630,  0.0528,  0.0630, -0.0076, -0.0685,  0.0487,  0.0317,
+         0.0321, -0.0348], device='cuda:0')
+tensor([-0.0211, -0.0433, -0.0182, -0.0698,  0.0272,  0.0077, -0.0517,  0.0041,
+        -0.0326,  0.0725], device='cuda:0')
+tensor([-0.0525, -0.0975,  0.0025, -0.0010, -0.0343,  0.0071,  0.0076, -0.0069,
+         0.0055, -0.0605], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/185]	0.0881 (0.0881)	0.0801 (0.0801)	0.001 (0.001)	100.00 (100.00)
+[100/185]	0.0287 (0.0290)	0.0219 (0.0232)	0.030 (0.014)	99.22 (99.61)
+[184/185]	0.0310 (0.0294)	0.0224 (0.0234)	0.003 (0.015)	100.00 (99.54)
+ * Train Acc 99.535
+ * Val Acc 98.515, Total time 1.54
+validation split name: 1
+ * Val Acc 94.551, Total time 0.85
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 97.088, Total time 0.99
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.515, Total time 0.91
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f01250fdcc0>), ('2', <utils.metric.AverageMeter object at 0x7f01250a0c50>), ('3', <utils.metric.AverageMeter object at 0x7f01250a05f8>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f01250fd160>), ('3', <utils.metric.AverageMeter object at 0x7f01250a0a90>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f01250a0860>)]))])
+Task 1 average acc: 99.46581196581197
+Task 2 average acc: 96.59675938782436
+Task 3 average acc: 96.71803470286416
+===Summary of experiment repeats: 8 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983 87.92136439
+ 84.88517689 96.7180347   0.          0.        ]
+mean: 72.90157482312023 std: 36.61943641462581
+split_boundaries: [0, 2, 6, 10]
+{'1': [3, 5], '2': [0, 1, 2, 6], '3': [4, 7, 8, 9]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([-0.0236,  0.0261,  0.0113, -0.0187, -0.0242, -0.0311,  0.0246,  0.0190,
+        -0.0153, -0.0020], device='cuda:0')
+tensor([ 0.0210,  0.0001,  0.0451, -0.0358, -0.0289, -0.0384,  0.0436,  0.0266,
+         0.0492,  0.0316], device='cuda:0')
+tensor([-0.0623, -0.0296,  0.0555,  0.0211, -0.0532,  0.0204, -0.0248, -0.0593,
+         0.0601, -0.0313], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/91]	0.0737 (0.0737)	0.0658 (0.0658)	0.736 (0.736)	42.97 (42.97)
+[90/91]	0.0079 (0.0306)	0.0035 (0.0247)	0.003 (0.134)	100.00 (94.66)
+ * Train Acc 94.659
+ * Val Acc 96.109, Total time 0.50
+validation split name: 1
+ * Val Acc 96.109, Total time 0.50
+logging for Task  1 while training 1
+logging 1.1
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0219,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0258, -0.0057,  0.0512, -0.0337, -0.0279, -0.0412,  0.0530,  0.0313,
+         0.0481,  0.0419], device='cuda:0')
+tensor([-0.0623, -0.0296,  0.0555,  0.0211, -0.0532,  0.0204, -0.0248, -0.0593,
+         0.0601, -0.0313], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/91]	0.0786 (0.0786)	0.0692 (0.0692)	0.062 (0.062)	99.22 (99.22)
+[90/91]	0.0081 (0.0292)	0.0032 (0.0236)	0.084 (0.046)	93.75 (98.39)
+ * Train Acc 98.390
+ * Val Acc 99.369, Total time 0.54
+validation split name: 1
+ * Val Acc 99.369, Total time 0.58
+logging for Task  1 while training 1
+logging 1.2
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0288, -0.0149,  0.0498, -0.0518, -0.0331, -0.0440,  0.0704,  0.0333,
+         0.0507,  0.0450], device='cuda:0')
+tensor([-0.0623, -0.0296,  0.0555,  0.0211, -0.0532,  0.0204, -0.0248, -0.0593,
+         0.0601, -0.0313], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/91]	0.0776 (0.0776)	0.0698 (0.0698)	0.031 (0.031)	99.22 (99.22)
+[90/91]	0.0073 (0.0406)	0.0023 (0.0342)	0.001 (0.026)	100.00 (98.96)
+ * Train Acc 98.961
+ * Val Acc 98.896, Total time 0.58
+validation split name: 1
+ * Val Acc 98.896, Total time 0.52
+logging for Task  1 while training 1
+logging 1.3
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0320, -0.0204,  0.0486, -0.0617, -0.0337, -0.0459,  0.0747,  0.0373,
+         0.0534,  0.0487], device='cuda:0')
+tensor([-0.0623, -0.0296,  0.0555,  0.0211, -0.0532,  0.0204, -0.0248, -0.0593,
+         0.0601, -0.0313], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/91]	0.1022 (0.1022)	0.0953 (0.0953)	0.016 (0.016)	99.22 (99.22)
+[90/91]	0.0060 (0.0273)	0.0024 (0.0226)	0.001 (0.019)	100.00 (99.32)
+ * Train Acc 99.325
+ * Val Acc 99.001, Total time 0.43
+validation split name: 1
+ * Val Acc 99.001, Total time 0.43
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0364, -0.0242,  0.0492, -0.0662, -0.0359, -0.0484,  0.0770,  0.0394,
+         0.0548,  0.0502], device='cuda:0')
+tensor([-0.0623, -0.0296,  0.0555,  0.0211, -0.0532,  0.0204, -0.0248, -0.0593,
+         0.0601, -0.0313], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0584 (0.0584)	0.0520 (0.0520)	1.310 (1.310)	49.22 (49.22)
+[100/192]	0.0297 (0.0279)	0.0239 (0.0229)	0.019 (0.132)	100.00 (95.58)
+[191/192]	0.0198 (0.0280)	0.0155 (0.0228)	0.049 (0.087)	98.92 (97.12)
+ * Train Acc 97.123
+ * Val Acc 98.733, Total time 0.99
+validation split name: 1
+ * Val Acc 94.690, Total time 0.55
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.733, Total time 0.98
+logging for Task  2 while training 2
+logging 2.1
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0659, -0.0189,  0.0577,  0.0323, -0.0645,  0.0262, -0.0359, -0.0648,
+         0.0464, -0.0393], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0876 (0.0876)	0.0780 (0.0780)	0.004 (0.004)	100.00 (100.00)
+[100/192]	0.0245 (0.0292)	0.0202 (0.0236)	0.094 (0.029)	96.09 (99.04)
+[191/192]	0.0193 (0.0289)	0.0148 (0.0233)	0.017 (0.026)	100.00 (99.14)
+ * Train Acc 99.136
+ * Val Acc 98.904, Total time 0.95
+validation split name: 1
+ * Val Acc 95.058, Total time 0.52
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.904, Total time 1.04
+logging for Task  2 while training 2
+logging 2.2
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0673, -0.0138,  0.0585,  0.0418, -0.0645,  0.0275, -0.0381, -0.0659,
+         0.0472, -0.0390], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0674 (0.0674)	0.0595 (0.0595)	0.049 (0.049)	97.66 (97.66)
+[100/192]	0.0264 (0.0288)	0.0214 (0.0234)	0.010 (0.016)	100.00 (99.47)
+[191/192]	0.0174 (0.0289)	0.0132 (0.0233)	0.016 (0.015)	98.92 (99.49)
+ * Train Acc 99.491
+ * Val Acc 99.099, Total time 0.93
+validation split name: 1
+ * Val Acc 95.216, Total time 0.45
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 99.099, Total time 0.97
+logging for Task  2 while training 2
+logging 2.3
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0729, -0.0142,  0.0614,  0.0468, -0.0645,  0.0282, -0.0324, -0.0715,
+         0.0462, -0.0419], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/192]	0.0755 (0.0755)	0.0679 (0.0679)	0.008 (0.008)	99.22 (99.22)
+[100/192]	0.0276 (0.0291)	0.0221 (0.0234)	0.016 (0.010)	99.22 (99.61)
+[191/192]	0.0193 (0.0287)	0.0150 (0.0231)	0.033 (0.013)	97.85 (99.58)
+ * Train Acc 99.580
+ * Val Acc 99.123, Total time 0.95
+validation split name: 1
+ * Val Acc 94.322, Total time 0.46
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 99.123, Total time 0.91
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0738, -0.0109,  0.0623,  0.0506, -0.0645,  0.0273, -0.0336, -0.0720,
+         0.0443, -0.0404], device='cuda:0')
+tensor([-0.0398,  0.0211,  0.0011, -0.0351, -0.0199, -0.0022,  0.0244, -0.0613,
+        -0.0408, -0.0487], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0785 (0.0785)	0.0674 (0.0674)	1.475 (1.475)	20.31 (20.31)
+[100/187]	0.0286 (0.0275)	0.0231 (0.0222)	0.142 (0.231)	96.09 (91.85)
+[186/187]	0.0186 (0.0278)	0.0137 (0.0222)	0.138 (0.167)	93.94 (94.23)
+ * Train Acc 94.228
+ * Val Acc 97.370, Total time 0.88
+validation split name: 1
+ * Val Acc 82.650, Total time 0.47
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 97.369, Total time 0.90
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 97.370, Total time 0.94
+logging for Task  3 while training 3
+logging 3.1
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0730, -0.0107,  0.0613,  0.0502, -0.0645,  0.0272, -0.0350, -0.0714,
+         0.0444, -0.0399], device='cuda:0')
+tensor([-0.0410,  0.0172, -0.0048, -0.0440, -0.0250, -0.0133,  0.0232, -0.0717,
+        -0.0358, -0.0521], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0673 (0.0673)	0.0592 (0.0592)	0.038 (0.038)	97.66 (97.66)
+[100/187]	0.0392 (0.0296)	0.0337 (0.0233)	0.084 (0.057)	97.66 (98.02)
+[186/187]	0.0194 (0.0286)	0.0146 (0.0226)	0.020 (0.057)	100.00 (98.08)
+ * Train Acc 98.076
+ * Val Acc 97.896, Total time 0.92
+validation split name: 1
+ * Val Acc 80.705, Total time 0.45
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 95.664, Total time 0.96
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 97.896, Total time 0.87
+logging for Task  3 while training 3
+logging 3.2
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0730, -0.0107,  0.0613,  0.0502, -0.0645,  0.0272, -0.0350, -0.0714,
+         0.0444, -0.0399], device='cuda:0')
+tensor([-0.0348,  0.0168, -0.0037, -0.0449, -0.0250, -0.0173,  0.0211, -0.0771,
+        -0.0372, -0.0535], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0671 (0.0671)	0.0602 (0.0602)	0.034 (0.034)	99.22 (99.22)
+[100/187]	0.0295 (0.0282)	0.0219 (0.0223)	0.015 (0.034)	100.00 (98.97)
+[186/187]	0.0193 (0.0322)	0.0144 (0.0260)	0.030 (0.036)	97.98 (98.83)
+ * Train Acc 98.833
+ * Val Acc 98.397, Total time 0.99
+validation split name: 1
+ * Val Acc 81.598, Total time 0.49
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 92.838, Total time 1.08
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.397, Total time 0.93
+logging for Task  3 while training 3
+logging 3.3
+tensor([-0.0144,  0.0354,  0.0206, -0.0095, -0.0150, -0.0218,  0.0338,  0.0283,
+        -0.0061,  0.0073], device='cuda:0')
+tensor([ 0.0370, -0.0239,  0.0505, -0.0665, -0.0342, -0.0484,  0.0779,  0.0398,
+         0.0549,  0.0507], device='cuda:0')
+tensor([-0.0730, -0.0107,  0.0613,  0.0502, -0.0645,  0.0272, -0.0350, -0.0714,
+         0.0444, -0.0399], device='cuda:0')
+tensor([-0.0325,  0.0176, -0.0041, -0.0495, -0.0285, -0.0184,  0.0245, -0.0804,
+        -0.0360, -0.0578], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/187]	0.0656 (0.0656)	0.0587 (0.0587)	0.005 (0.005)	100.00 (100.00)
+[100/187]	0.0265 (0.0278)	0.0218 (0.0218)	0.040 (0.025)	97.66 (99.23)
+[186/187]	0.0187 (0.0275)	0.0139 (0.0217)	0.020 (0.024)	100.00 (99.26)
+ * Train Acc 99.260
+ * Val Acc 98.322, Total time 0.92
+validation split name: 1
+ * Val Acc 79.706, Total time 0.46
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 97.393, Total time 0.92
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.322, Total time 0.93
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f01251987f0>), ('2', <utils.metric.AverageMeter object at 0x7f01250a02e8>), ('3', <utils.metric.AverageMeter object at 0x7f0125114d68>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f01252235f8>), ('3', <utils.metric.AverageMeter object at 0x7f01250a0518>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f01250a0400>)]))])
+Task 1 average acc: 99.00105152471083
+Task 2 average acc: 96.72239363398486
+Task 3 average acc: 91.80701978252853
+===Summary of experiment repeats: 9 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983 87.92136439
+ 84.88517689 96.7180347  91.80701978  0.        ]
+mean: 82.08227680137307 std: 27.585783625874193
+split_boundaries: [0, 2, 6, 10]
+{'1': [0, 5], '2': [8, 7, 6, 2], '3': [9, 1, 4, 3]}
+MLP(
+  (linear): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): ReLU(inplace)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU(inplace)
+  )
+  (last): ModuleDict(
+    (1): Linear(in_features=256, out_features=2, bias=True)
+    (2): Linear(in_features=256, out_features=4, bias=True)
+    (3): Linear(in_features=256, out_features=4, bias=True)
+  )
+)
+#parameter of model: 330762
+Task order: ['1', '2', '3']
+====================== 1 =======================
+tensor([-0.0056,  0.0282,  0.0043, -0.0226, -0.0183,  0.0009, -0.0009,  0.0012,
+        -0.0096, -0.0033], device='cuda:0')
+tensor([ 0.0609,  0.0545,  0.0066,  0.0366, -0.0313,  0.0124,  0.0452, -0.0329,
+         0.0325, -0.0378], device='cuda:0')
+tensor([ 0.0005,  0.0361, -0.0216,  0.0274,  0.0052,  0.0444,  0.0511, -0.0546,
+        -0.0573, -0.0035], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	1.1801 (1.1801)	0.4733 (0.4733)	0.700 (0.700)	46.88 (46.88)
+[88/89]	0.0162 (0.0390)	0.0121 (0.0256)	0.040 (0.073)	97.50 (97.56)
+ * Train Acc 97.558
+ * Val Acc 99.306, Total time 0.47
+validation split name: 1
+ * Val Acc 99.306, Total time 1.16
+logging for Task  1 while training 1
+logging 1.1
+tensor([-0.0101,  0.0237, -0.0002, -0.0271, -0.0228, -0.0036, -0.0054, -0.0033,
+        -0.0141, -0.0078], device='cuda:0')
+tensor([ 0.0549,  0.0474,  0.0019,  0.0338, -0.0297,  0.0098,  0.0504, -0.0385,
+         0.0211, -0.0381], device='cuda:0')
+tensor([ 0.0005,  0.0361, -0.0216,  0.0274,  0.0052,  0.0444,  0.0511, -0.0546,
+        -0.0573, -0.0035], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0575 (0.0575)	0.0519 (0.0519)	0.022 (0.022)	98.44 (98.44)
+[88/89]	0.0160 (0.0267)	0.0123 (0.0224)	0.002 (0.016)	100.00 (99.52)
+ * Train Acc 99.515
+ * Val Acc 99.306, Total time 0.89
+validation split name: 1
+ * Val Acc 99.306, Total time 0.45
+logging for Task  1 while training 1
+logging 1.2
+tensor([-0.0095,  0.0242,  0.0003, -0.0266, -0.0223, -0.0031, -0.0049, -0.0027,
+        -0.0135, -0.0072], device='cuda:0')
+tensor([ 0.0500,  0.0474,  0.0051,  0.0338, -0.0299,  0.0093,  0.0549, -0.0401,
+         0.0211, -0.0400], device='cuda:0')
+tensor([ 0.0005,  0.0361, -0.0216,  0.0274,  0.0052,  0.0444,  0.0511, -0.0546,
+        -0.0573, -0.0035], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0653 (0.0653)	0.0590 (0.0590)	0.004 (0.004)	100.00 (100.00)
+[88/89]	0.0153 (0.0277)	0.0114 (0.0221)	0.001 (0.011)	100.00 (99.55)
+ * Train Acc 99.550
+ * Val Acc 99.573, Total time 0.47
+validation split name: 1
+ * Val Acc 99.573, Total time 0.46
+logging for Task  1 while training 1
+logging 1.3
+tensor([-0.0092,  0.0246,  0.0007, -0.0262, -0.0219, -0.0027, -0.0045, -0.0024,
+        -0.0132, -0.0069], device='cuda:0')
+tensor([ 0.0501,  0.0474,  0.0084,  0.0338, -0.0327,  0.0100,  0.0573, -0.0405,
+         0.0211, -0.0407], device='cuda:0')
+tensor([ 0.0005,  0.0361, -0.0216,  0.0274,  0.0052,  0.0444,  0.0511, -0.0546,
+        -0.0573, -0.0035], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/89]	0.0661 (0.0661)	0.0600 (0.0600)	0.001 (0.001)	100.00 (100.00)
+[88/89]	0.0164 (0.0277)	0.0120 (0.0226)	0.001 (0.005)	100.00 (99.82)
+ * Train Acc 99.824
+ * Val Acc 99.412, Total time 0.51
+validation split name: 1
+ * Val Acc 99.412, Total time 0.49
+logging for Task  1 while training 1
+logging 1.4
+====================== 2 =======================
+tensor([-9.9193e-03,  2.3867e-02, -3.2155e-05, -2.6941e-02, -2.2642e-02,
+        -3.4527e-03, -5.2590e-03, -3.1170e-03, -1.3898e-02, -7.5932e-03],
+       device='cuda:0')
+tensor([ 0.0549,  0.0474,  0.0104,  0.0338, -0.0314,  0.0089,  0.0602, -0.0415,
+         0.0211, -0.0414], device='cuda:0')
+tensor([ 0.0005,  0.0361, -0.0216,  0.0274,  0.0052,  0.0444,  0.0511, -0.0546,
+        -0.0573, -0.0035], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0884 (0.0884)	0.0777 (0.0777)	1.444 (1.444)	25.00 (25.00)
+[100/188]	0.0263 (0.0275)	0.0216 (0.0222)	0.027 (0.178)	99.22 (93.52)
+[187/188]	0.0112 (0.0271)	0.0070 (0.0218)	0.158 (0.123)	98.21 (95.63)
+ * Train Acc 95.628
+ * Val Acc 98.021, Total time 0.87
+validation split name: 1
+ * Val Acc 92.468, Total time 0.44
+logging for Task  1 while training 2
+logging 2.1
+validation split name: 2
+ * Val Acc 98.021, Total time 0.88
+logging for Task  2 while training 2
+logging 2.1
+tensor([-4.7146e-03,  2.9072e-02,  5.1726e-03, -2.1736e-02, -1.7438e-02,
+         1.7520e-03, -5.4293e-05,  2.0877e-03, -8.6931e-03, -2.3885e-03],
+       device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0079,  0.0263, -0.0291,  0.0223,  0.0065,  0.0499,  0.0537, -0.0488,
+        -0.0511,  0.0014], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0664 (0.0664)	0.0601 (0.0601)	0.048 (0.048)	98.44 (98.44)
+[100/188]	0.0255 (0.0287)	0.0208 (0.0229)	0.024 (0.036)	99.22 (98.95)
+[187/188]	0.0114 (0.0274)	0.0065 (0.0220)	0.024 (0.036)	100.00 (98.92)
+ * Train Acc 98.925
+ * Val Acc 98.397, Total time 0.94
+validation split name: 1
+ * Val Acc 87.660, Total time 0.44
+logging for Task  1 while training 2
+logging 2.2
+validation split name: 2
+ * Val Acc 98.397, Total time 0.86
+logging for Task  2 while training 2
+logging 2.2
+tensor([-0.0042,  0.0296,  0.0057, -0.0212, -0.0169,  0.0023,  0.0005,  0.0026,
+        -0.0082, -0.0019], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0077,  0.0171, -0.0348,  0.0222,  0.0100,  0.0520,  0.0545, -0.0479,
+        -0.0511,  0.0018], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0660 (0.0660)	0.0597 (0.0597)	0.057 (0.057)	96.88 (96.88)
+[100/188]	0.0261 (0.0276)	0.0214 (0.0225)	0.003 (0.025)	100.00 (99.16)
+[187/188]	0.0119 (0.0273)	0.0076 (0.0221)	0.003 (0.024)	100.00 (99.20)
+ * Train Acc 99.196
+ * Val Acc 98.672, Total time 0.87
+validation split name: 1
+ * Val Acc 94.177, Total time 0.45
+logging for Task  1 while training 2
+logging 2.3
+validation split name: 2
+ * Val Acc 98.672, Total time 0.89
+logging for Task  2 while training 2
+logging 2.3
+tensor([-0.0088,  0.0250,  0.0011, -0.0259, -0.0216, -0.0024, -0.0042, -0.0020,
+        -0.0128, -0.0065], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0071,  0.0129, -0.0402,  0.0222,  0.0128,  0.0538,  0.0564, -0.0473,
+        -0.0511,  0.0027], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/188]	0.0640 (0.0640)	0.0576 (0.0576)	0.006 (0.006)	100.00 (100.00)
+[100/188]	0.0283 (0.0264)	0.0228 (0.0215)	0.022 (0.016)	99.22 (99.49)
+[187/188]	0.0112 (0.0265)	0.0070 (0.0214)	0.071 (0.018)	96.43 (99.44)
+ * Train Acc 99.437
+ * Val Acc 98.622, Total time 0.89
+validation split name: 1
+ * Val Acc 93.590, Total time 0.45
+logging for Task  1 while training 2
+logging 2.4
+validation split name: 2
+ * Val Acc 98.622, Total time 0.97
+logging for Task  2 while training 2
+logging 2.4
+====================== 3 =======================
+tensor([-0.0085,  0.0253,  0.0014, -0.0255, -0.0212, -0.0021, -0.0039, -0.0017,
+        -0.0125, -0.0062], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0041,  0.0041, -0.0411,  0.0221,  0.0145,  0.0561,  0.0611, -0.0477,
+        -0.0511,  0.0033], device='cuda:0')
+tensor([-0.0246, -0.0581,  0.0171,  0.0373,  0.0612,  0.0147, -0.0208,  0.0457,
+         0.0325,  0.0493], device='cuda:0')
+====================== Noise params =======================
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/193]	0.0739 (0.0739)	0.0645 (0.0645)	1.750 (1.750)	17.19 (17.19)
+[100/193]	0.0264 (0.0285)	0.0216 (0.0226)	0.100 (0.181)	95.31 (93.60)
+[192/193]	0.0176 (0.0282)	0.0130 (0.0223)	0.022 (0.130)	100.00 (95.58)
+ * Train Acc 95.577
+ * Val Acc 98.162, Total time 0.92
+validation split name: 1
+ * Val Acc 96.848, Total time 0.42
+logging for Task  1 while training 3
+logging 3.1
+validation split name: 2
+ * Val Acc 78.131, Total time 0.88
+logging for Task  2 while training 3
+logging 3.1
+validation split name: 3
+ * Val Acc 98.162, Total time 0.90
+logging for Task  3 while training 3
+logging 3.1
+tensor([-0.0223,  0.0115, -0.0124, -0.0393, -0.0350, -0.0158, -0.0176, -0.0155,
+        -0.0263, -0.0200], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0046,  0.0039, -0.0412,  0.0221,  0.0147,  0.0563,  0.0620, -0.0476,
+        -0.0511,  0.0037], device='cuda:0')
+tensor([-0.0447, -0.0460,  0.0037,  0.0322,  0.0599,  0.0122, -0.0248,  0.0335,
+         0.0325,  0.0403], device='cuda:0')
+====================== Noise params =======================
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/193]	0.0662 (0.0662)	0.0590 (0.0590)	0.077 (0.077)	97.66 (97.66)
+[100/193]	0.0261 (0.0273)	0.0213 (0.0219)	0.024 (0.045)	99.22 (98.45)
+[192/193]	0.0176 (0.0269)	0.0128 (0.0216)	0.010 (0.043)	100.00 (98.56)
+ * Train Acc 98.565
+ * Val Acc 97.993, Total time 0.91
+validation split name: 1
+ * Val Acc 97.436, Total time 0.48
+logging for Task  1 while training 3
+logging 3.2
+validation split name: 2
+ * Val Acc 76.503, Total time 0.94
+logging for Task  2 while training 3
+logging 3.2
+validation split name: 3
+ * Val Acc 97.993, Total time 1.00
+logging for Task  3 while training 3
+logging 3.2
+tensor([-0.0186,  0.0152, -0.0087, -0.0356, -0.0313, -0.0122, -0.0140, -0.0118,
+        -0.0226, -0.0163], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0046,  0.0039, -0.0412,  0.0221,  0.0147,  0.0563,  0.0620, -0.0476,
+        -0.0511,  0.0037], device='cuda:0')
+tensor([-0.0629, -0.0534, -0.0063,  0.0322,  0.0639,  0.0129, -0.0309,  0.0334,
+         0.0325,  0.0426], device='cuda:0')
+====================== Noise params =======================
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/193]	0.0677 (0.0677)	0.0608 (0.0608)	0.028 (0.028)	99.22 (99.22)
+[100/193]	0.0264 (0.0271)	0.0215 (0.0214)	0.034 (0.026)	99.22 (99.11)
+[192/193]	0.0179 (0.0312)	0.0128 (0.0253)	0.080 (0.028)	98.86 (99.05)
+ * Train Acc 99.051
+ * Val Acc 98.791, Total time 1.21
+validation split name: 1
+ * Val Acc 96.955, Total time 0.47
+logging for Task  1 while training 3
+logging 3.3
+validation split name: 2
+ * Val Acc 78.382, Total time 0.88
+logging for Task  2 while training 3
+logging 3.3
+validation split name: 3
+ * Val Acc 98.791, Total time 0.97
+logging for Task  3 while training 3
+logging 3.3
+tensor([-0.0163,  0.0175, -0.0064, -0.0333, -0.0290, -0.0098, -0.0116, -0.0095,
+        -0.0202, -0.0139], device='cuda:0')
+tensor([ 0.0546,  0.0474,  0.0105,  0.0338, -0.0302,  0.0085,  0.0603, -0.0420,
+         0.0211, -0.0419], device='cuda:0')
+tensor([-0.0046,  0.0039, -0.0412,  0.0221,  0.0147,  0.0563,  0.0620, -0.0476,
+        -0.0511,  0.0037], device='cuda:0')
+tensor([-0.0768, -0.0769, -0.0112,  0.0322,  0.0650,  0.0104, -0.0407,  0.0332,
+         0.0325,  0.0437], device='cuda:0')
+====================== Noise params =======================
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/193]	0.0720 (0.0720)	0.0622 (0.0622)	0.004 (0.004)	100.00 (100.00)
+[100/193]	0.0325 (0.0290)	0.0273 (0.0231)	0.116 (0.021)	96.09 (99.27)
+[192/193]	0.0178 (0.0289)	0.0130 (0.0228)	0.001 (0.019)	100.00 (99.34)
+ * Train Acc 99.339
+ * Val Acc 98.743, Total time 1.04
+validation split name: 1
+ * Val Acc 96.421, Total time 0.46
+logging for Task  1 while training 3
+logging 3.4
+validation split name: 2
+ * Val Acc 74.449, Total time 0.96
+logging for Task  2 while training 3
+logging 3.4
+validation split name: 3
+ * Val Acc 98.743, Total time 1.04
+logging for Task  3 while training 3
+logging 3.4
+OrderedDict([('1', OrderedDict([('1', <utils.metric.AverageMeter object at 0x7f0125198eb8>), ('2', <utils.metric.AverageMeter object at 0x7f0125198390>), ('3', <utils.metric.AverageMeter object at 0x7f0125114c88>)])), ('2', OrderedDict([('2', <utils.metric.AverageMeter object at 0x7f01250fd1d0>), ('3', <utils.metric.AverageMeter object at 0x7f01250a0978>)])), ('3', OrderedDict([('3', <utils.metric.AverageMeter object at 0x7f01250fd3c8>)]))])
+Task 1 average acc: 99.41239316239316
+Task 2 average acc: 96.10599403936078
+Task 3 average acc: 89.87086152720615
+===Summary of experiment repeats: 10 / 10 ===
+The regularization coefficient: 0.0005
+The last avg acc of all repeats: [95.91683207 94.6026304  88.75875835 90.21153159 90.00141983 87.92136439
+ 84.88517689 96.7180347  91.80701978 89.87086153]
+mean: 91.06936295409369 std: 3.5389164232221275
+reg_coef: 0.0005 mean: 91.06936295409369 std: 3.5389164232221275
