@@ -43,16 +43,25 @@ class Noise_Net(MLP):
             out1_ = self.noise_list[task](input)
 
         else:
-            # import pdb; pdb.set_trace()
-            # this is the combined case
-            # after training task_t the noise needs to be fixed  
-            for t in range(int(task)):
-                if t == 0:
-                    out1_ = self.noise_list[task](input)
-                else:
-                    print("====================== Augmenting task "+  str(t) + "to task" +  task + "==============")
-                    out_1 = self.noise_list[task](out1_)
+            if self.training:
+                # this is the combined case
+                # after training task_t the noise needs to be fixed  
+                for t in range(1, int(task) + 1):
+                    if t == 1:
+                        out1_ = self.noise_list[str(t)](input)
+                    else:
+                        # print("====================== Augmenting task "+  str(t) + "to task" +  task + "==============")
+                        out_1 = self.noise_list[str(t)](out1_)
 
+            else:
+                # task not used
+            
+                for t in range(1, len(self.noise_list.keys()) + 1):
+                    if t == 1:
+                        out1_ = self.noise_list[str(t)](input)
+                    else:
+                        # print("====================== Evaluating task "+  str(t) + "to task" +  task + "==============")
+                        out_1 = self.noise_list[str(t)](out1_)
 
         out2_= super(Noise_Net, self).forward(out1_)
 

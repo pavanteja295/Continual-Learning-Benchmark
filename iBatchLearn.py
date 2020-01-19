@@ -129,7 +129,7 @@ def get_args(argv):
     parser.add_argument('--dataset', type=str, default='MNIST', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
     parser.add_argument('--first_split_size', type=int, default=2)
-    parser.add_argument('--other_split_size', type=int, default=4)
+    parser.add_argument('--other_split_size', type=int, default=2)
     parser.add_argument('--no_class_remap', dest='no_class_remap', default=False, action='store_true',
                         help="Avoid the dataset with a subset of classes doing the remapping. Ex: [2,5,6 ...] -> [0,1,2 ...]")
     parser.add_argument('--train_aug', dest='train_aug', default=False, action='store_true',
@@ -205,6 +205,16 @@ if __name__ == '__main__':
             args.run_num = r + 1
             acc_table, task_names = run(args)
             print(acc_table)
+
+            # import pdb; pdb.set_trace()
+            # after the end of task 5 report the accuracies
+            final_tsk_acc = 0
+            final_tsk = [i for i in acc_table.keys()][-1]
+            for tsk in acc_table.keys():
+                final_tsk_acc += acc_table[tsk][final_tsk].avg
+            print('===Final accuracy on task:',final_tsk, final_tsk_acc / len(acc_table.keys()),'===')
+
+
 
             # Calculate average performance across tasks
             # Customize this part for a different performance metric
