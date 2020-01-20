@@ -16,6 +16,7 @@ class MLP_Inc_Tasks(MLP):
         self.noise_list = nn.ModuleDict()
         self.noise_type = noise_type
         for task in tasks.keys():
+        
             self.noise_list[task] = nn.Linear(img_sz * img_sz * in_channel, img_sz * img_sz * in_channel, bias=False)
 
         

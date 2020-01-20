@@ -9,6 +9,8 @@ import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
 from torch.utils.tensorboard import SummaryWriter
+import matplotlib.pyplot as plt
+import torchvision
 
 # hello world
 def run(args):
@@ -110,7 +112,16 @@ def run(args):
             # if i == 1:
                 #after the first task freeze some weights:
 
-
+        # def funcname(self, parameter_list):
+        #         npimg = img.numpy().transpose((1,2,0))
+        #         min_val = np.min(npimg, keepdims =True)
+        #         print('min',min_val)
+        #         max_val = np.max(npimg, keepdims =True)
+        #         print('max',max_val)
+        #         inp = (npimg-min_val)/(max_val-min_val)
+        #         # inp = npimg
+        #         plt.imshow(inp)
+        #     pass
     return acc_table, task_names
 
 def get_args(argv):
