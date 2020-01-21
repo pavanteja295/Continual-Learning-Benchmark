@@ -9,7 +9,7 @@ import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
 from torch.utils.tensorboard import SummaryWriter
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import torchvision
 
 # hello world
