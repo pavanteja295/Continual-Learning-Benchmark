@@ -188,7 +188,7 @@ class SI(L2):
         for n, p in self.params.items():
             self.initial_params[n] = p.clone().detach()
 
-    def update_model(self, inputs, targets, tasks):
+    def update_model(self, inputs, targets, tasks, task_n=''):
 
         unreg_gradients = {}
         
