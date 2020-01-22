@@ -58,7 +58,7 @@ class L2(NormalNN):
     def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
         loss = super(L2, self).criterion(inputs, targets, tasks, **kwargs)
         
-        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         if regularization and len(self.regularization_terms)>0:
             # Calculate the reg_loss only when the regularization_terms exists
             reg_loss = 0
@@ -69,9 +69,9 @@ class L2(NormalNN):
                 for n, p in self.params.items():
                     task_reg_loss += (importance[n] * (p - task_param[n]) ** 2).sum()
                 reg_loss += task_reg_loss
-                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + str(i), task_reg_loss, self.n_iter)
+                # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + str(i), task_reg_loss, self.n_iter)
             loss += self.config['reg_coef'] * reg_loss
-        self.writer.close()
+        # self.writer.close()
 
         return loss
 
