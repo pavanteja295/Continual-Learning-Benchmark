@@ -160,7 +160,7 @@ def get_args(argv):
     parser.add_argument('--print_freq', type=float, default=100, help="Print the log at every x iteration")
     parser.add_argument('--model_weights', type=str, default=None,
                         help="The path to the file for the model weights (*.pth).")
-    parser.add_argument('--reg_coef', nargs="+", type=float, default=[5e-4], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
+    parser.add_argument('--reg_coef', nargs="+", type=float, default=[0], help="The coefficient for regularization. Larger means less plasilicity. Give a list for hyperparameter search.")
     parser.add_argument('--eval_on_train_set', dest='eval_on_train_set', default=False, action='store_true',
                         help="Force the evaluation on train set")
     parser.add_argument('--offline_training', dest='offline_training', default=False, action='store_true',

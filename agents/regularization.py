@@ -32,7 +32,9 @@ class L2(NormalNN):
     def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
 
         self.log('#reg_term:', len(self.regularization_terms))
-
+        # 1.Learn the parameters for current task
+        super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)
+        
         if epochs[0] == 0:
             # 2.Backup the weight of current task
             task_param = {}
@@ -51,8 +53,7 @@ class L2(NormalNN):
                 # Use a new slot to store the task-specific information
                 self.regularization_terms[self.task_count] = {'importance':importance, 'task_param':task_param}
 
-        # 1.Learn the parameters for current task
-        super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)
+
 
 
     def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
