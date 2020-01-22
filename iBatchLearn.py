@@ -62,11 +62,12 @@ def run(args):
         val_loader = torch.utils.data.DataLoader(val_dataset_all,
                                                  batch_size=args.batch_size, shuffle=False, num_workers=args.workers)
         
-        epochs = args.epoch[-1]
+        epochs = args.epochs[-1]
         agent.learn_batch(train_loader, val_loader, [0, epochs])
 
         acc_table['All'] = {}
-        acc_table['All']['All'] = agent.validation(val_loader)
+        loss_table['All'] = {}
+        acc_table['All']['All'], loss_table['All']['All'] = agent.validation(val_loader)
 
     else:  # Incremental learning
         # Feed data to agent and evaluate agent's performance
@@ -81,8 +82,8 @@ def run(args):
             if args.incremental_class:
                 agent.add_valid_output_dim(task_output_space[train_name])
 
-            epochs = args.epochs[i] if len(args.epochs) - 1  else args.epochs[0]
             # Learn
+            epochs = args.epochs[i] if len(args.epochs) - 1  else args.epochs[0]
             # split the epochs into multiple sub epochs
             # to perform validation after every 10 in between if epochs are 80 --> 20, 30, 40, 50, 40 , 80 
             # helps us in better understanding how the degradation happens
@@ -170,7 +171,7 @@ def get_args(argv):
     parser.add_argument('--exp_name', dest='exp_name', default='default', type=str,
                         help="Exp name to be added to the suffix")
     parser.add_argument('--warm_up', type=int, default=0, help='warm up training phase')
-    parser.add_argument('--nesterov',  default=True, action='store_true', help='nesterov up training phase')
+    parser.add_argument('--nesterov',  default=False, action='store_true', help='nesterov up training phase')
     parser.add_argument('--epochs', nargs="+", type=int, default=[4], 
                      help="Randomize the order of splits")
     parser.add_argument('--old_val_freq', type=int, default=1, 
@@ -224,8 +225,6 @@ if __name__ == '__main__':
             for tsk in acc_table.keys():
                 final_tsk_acc += acc_table[tsk][final_tsk].avg
             print('===Final accuracy on task:',final_tsk, final_tsk_acc / len(acc_table.keys()),'===')
-
-
 
             # Calculate average performance across tasks
             # Customize this part for a different performance metric
