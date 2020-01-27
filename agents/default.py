@@ -268,15 +268,15 @@ class NormalNN(nn.Module):
             #             # import pdb; pdb.set_trace()
             #             if len(param.data.shape) > 1: 
             #                 print(param.data[0,:10])
-            print('====================== Noise params =======================')
-            if self.noise:
-                for key, val in self.model.noise_list.items():
-                    if key != task_n:
-                        for param in self.model.noise_list[key].parameters():
-                                print(param.data[:10])
-                    else:
-                        for param in self.model.noise_list[key].parameters():
-                                print(param.data[:10])
+            # print('====================== Noise params =======================')
+            # if self.noise:
+            #     for key, val in self.model.noise_list.items():
+            #         if key != task_n:
+            #             for param in self.model.noise_list[key].parameters():
+            #                     print(param.data[:10])
+            #         else:
+            #             for param in self.model.noise_list[key].parameters():
+            #                     print(param.data[:10])
 
                     
             # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
