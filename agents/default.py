@@ -93,7 +93,7 @@ class NormalNN(nn.Module):
             print('====================== Noise Type ==   ',noise_type,'=======================')
             model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params, noise_type= noise_type) #
         else:
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
 
         # Define the backbone (MLP, LeNet, VGG, ResNet ... etc) of model
