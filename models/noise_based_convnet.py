@@ -6,11 +6,12 @@ from torch.autograd import Variable
 from torch.nn.init import kaiming_uniform_
 import torch.nn as nn
 import math
+from models.resnet import PreActBlock, PreActResNet_cifar
 
 class Noise_Layer(nn.Module):
     def __init__(self, in_channel=1, img_sz=32, op='*'):
         super(Noise_Layer, self).__init__()
-        self.weight = nn.Parameter(torch.randn(int(img_sz * img_sz * in_channel)))
+        self.weight = nn.Parameter(torch.randn(int(in_channel), int(img_sz), int(img_sz) ))
         # self.reset_parameters()
         self.op = op
 
@@ -24,21 +25,21 @@ class Noise_Layer(nn.Module):
             out_ = in_ + self.weight
         return out_
 
-class Noise_Net(MLP):
-    def __init__(self, out_dim=10, in_channel=1, img_sz=32, hidden_dim=256, tasks={}, noise_type='seperate'):
-        # import pdb; pdb.set_trace()
-        super(Noise_Net, self).__init__( out_dim, in_channel, img_sz, hidden_dim)
+class Noise_Net(PreActResNet_cifar):
+    def __init__(self, out_dim=10, in_channel=3, img_sz=32, hidden_dim=256, tasks={}, noise_type='seperate'):
+        # change this accordingly 
+        super(Noise_Net, self).__init__(PreActBlock, [4, 4, 4], [32, 64, 128], num_classes=out_dim)
         self.noise_list = nn.ModuleDict()
         self.noise_type = noise_type
         # defining seperate noise layers
         for task in tasks.keys():
             self.noise_list[task] = Noise_Layer(in_channel, img_sz)
-
+        
         
     def forward(self, input, task):
         # input is the image
-
-        input = input.view(-1,self.in_dim)
+        
+        # input = input.view(-1,self.in_dim)
         if self.noise_type == 'seperate':
             out1_ = self.noise_list[task](input)
 
