@@ -203,13 +203,24 @@ class NormalNN(nn.Module):
 
     def freeze(self, task_n):
         
+        # for name, param in self.model.named_parameters():
+        #     import pdb; pdb.set_trace()
+
         if task_n == '2':
             if self.config['freeze_core']:
-                for param in self.model.linear.parameters():
-                        param.requires_grad = False
-            else:
-                for param in self.model.linear.parameters():
-                        param.requires_grad = True
+            #     for param in self.model.linear.parameters():
+            #             param.requires_grad = False
+            # else:
+            #     for param in self.model.linear.parameters():
+            #             param.requires_grad = True
+
+                for name, param in self.model.named_parameters():
+                    if  'last.' in name and 'bn_last.' not in name:
+                        param.requires_grad =  True
+                    elif 'noise.' in name:
+                        param.requires_grad =  True
+                    else:
+                        param.requires_grad =  False
 
         for key, val in self.model.last.items():
             if key != task_n:
@@ -285,6 +296,18 @@ class NormalNN(nn.Module):
             
             if epoch > self.warmup:
                 self.scheduler.step(epoch)
+            
+            # params = []
+            # params_n = []
+            # for name, param in self.model.named_parameters():
+            #     if 'last.' in name and 'bn_last.' not in name:
+            #         params.requires_grad =  True
+            #     else:
+            #         params.requires_grad =  False
+            
+            # if noise
+            #     if :
+            #         params_n.append(name)
             
 
             # # # Config the model and optimizer
