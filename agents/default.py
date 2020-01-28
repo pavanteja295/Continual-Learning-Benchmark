@@ -108,12 +108,16 @@ class NormalNN(nn.Module):
         # For a single-headed model the output will be {'All':output}
         model.last = nn.ModuleDict()
         for task,out_dim in cfg['out_dim'].items():
-            model.last[task] = nn.Linear(n_feat,out_dim)
-
+            if self.config['add_extra_last']:
+                model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat), nn.Linear(n_feat,out_dim))
+            else:
+                model.last[task] = nn.Linear(n_feat,out_dim)
+            
         # Redefine the task-dependent function
         def new_logits(self, x):
             outputs = {}
             for task, func in self.last.items():
+                # import pdb; pdb.set_trace()
                 outputs[task] = func(x)
             return outputs
 

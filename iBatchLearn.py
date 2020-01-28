@@ -36,7 +36,7 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_type':args.noise_type }
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_type':args.noise_type, 'add_extra_last':args.add_extra_last }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -181,6 +181,9 @@ def get_args(argv):
                      help="freeze the core network")
     parser.add_argument('--reset_opt',  default=False, action='store_true',
                      help="freeze the core network")
+
+    parser.add_argument('--add_extra_last',  default=False, action='store_true',
+                     help="adds extra linear layer")
     
 
     args = parser.parse_args(argv)
