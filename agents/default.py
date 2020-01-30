@@ -55,7 +55,7 @@ class NormalNN(nn.Module):
         else:
             self.gpu = False
         self.exp_name = agent_config['exp_name']
-        self.warmup = agent_config['warmup']
+        # self.warmup = agent_config['warmup']
         self.init_optimizer()
         self.reset_optimizer = agent_config['reset_opt']
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
@@ -82,7 +82,7 @@ class NormalNN(nn.Module):
 
         self.optimizer = torch.optim.__dict__[self.config['optimizer']](**optimizer_arg)
         self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.config['schedule'],
-                                                              gamma=0.1)
+                                                              gamma=0.1 )
         
     def create_model(self):
         cfg = self.config
@@ -295,11 +295,11 @@ class NormalNN(nn.Module):
 
                     
             # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
-            if epoch == 0 and self.warmup:
-                self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
+            # if epoch == 0 and self.warmup:
+            #     self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
             
-            if epoch > self.warmup:
-                self.scheduler.step(epoch)
+
+            self.scheduler.step(epoch)
             
             # params = []
             # params_n = []
@@ -328,8 +328,8 @@ class NormalNN(nn.Module):
             for i, (input, target, task) in enumerate(train_loader):
                 # iteration count
                 self.n_iter = (epoch) * len(train_loader) + i + 1
-                if epoch < self.warmup:
-                    self.warm.step()
+                # if epoch < self.warmup:
+                #     self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
                 if self.gpu:
                         input = input.cuda()                                                                                                                                                                                                                                                
