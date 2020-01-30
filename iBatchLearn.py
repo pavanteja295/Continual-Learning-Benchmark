@@ -203,8 +203,8 @@ if __name__ == '__main__':
 
 
     # necessary for reproducing results
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+    # torch.backends.cudnn.deterministic = True
+    # torch.backends.cudnn.benchmark = False
 
     # The for loops over hyper-paramerters or repeats
     for reg_coef in reg_coef_list:
@@ -212,9 +212,9 @@ if __name__ == '__main__':
         
         avg_final_acc[reg_coef] = np.zeros(args.repeat)
         for r in range(args.repeat):
-            torch.manual_seed(r)
-            random.seed(r)
-            np.random.seed(r)
+            # torch.manual_seed(r)
+            # random.seed(r)
+            # np.random.seed(r)
             # Run the experiment
             
             args.run_num = r + 1

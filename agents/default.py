@@ -253,10 +253,10 @@ class NormalNN(nn.Module):
         itrs = 0
         if epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
            self.task_num +=1
-           if self.reset_optimizer:
-                self.log('Optimizer is reset!')
-                self.freeze(task_n)
-                self.init_optimizer(params=filter(lambda p: p.requires_grad, self.model.parameters()))
+        #    if self.reset_optimizer:
+        #         self.log('Optimizer is reset!')
+        #         self.freeze(task_n)
+        #         self.init_optimizer(params=filter(lambda p: p.requires_grad, self.model.parameters()))
         
         data_timer = Timer()
         batch_timer = Timer()
