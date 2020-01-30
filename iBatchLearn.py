@@ -184,7 +184,8 @@ def get_args(argv):
 
     parser.add_argument('--add_extra_last',  default=False, action='store_true',
                      help="adds extra linear layer")
-    
+    parser.add_argument('--benchmark',  default=False, action='store_true',
+                     help="adds extra linear layer")    
 
     args = parser.parse_args(argv)
     return args
@@ -201,10 +202,10 @@ if __name__ == '__main__':
     # for reproducibility
 
 
-
+    if args.benchmark:
     # necessary for reproducing results
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
     # The for loops over hyper-paramerters or repeats
     for reg_coef in reg_coef_list:
@@ -212,9 +213,11 @@ if __name__ == '__main__':
         
         avg_final_acc[reg_coef] = np.zeros(args.repeat)
         for r in range(args.repeat):
-            torch.manual_seed(r)
-            random.seed(r)
-            np.random.seed(r)
+            
+            if args.benchmark:
+                torch.manual_seed(r)
+                random.seed(r)
+                np.random.seed(r)
             # Run the experiment
             
             args.run_num = r + 1
