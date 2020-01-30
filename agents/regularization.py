@@ -35,7 +35,7 @@ class L2(NormalNN):
         # 1.Learn the parameters for current task
         super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)
         
-        if epochs[1] == self.config['schedule'][-1] - 1:
+        if epochs[1] == self.config['schedule'][-1]:
             # 2.Backup the weight of current task
             task_param = {}
             for n, p in self.params.items():
