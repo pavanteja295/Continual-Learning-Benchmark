@@ -1,7 +1,7 @@
 import torch
 import random
 from .default import NormalNN
-from torch.utils.tensorboard import SummaryWriter
+#from torch.utils.tensorboard import SummaryWriter
 
 
 class L2(NormalNN):
