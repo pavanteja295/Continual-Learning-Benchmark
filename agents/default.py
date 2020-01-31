@@ -4,7 +4,7 @@ import torch.nn as nn
 from types import MethodType
 import models
 from utils.metric import accuracy, AverageMeter, Timer
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from torch.optim.lr_scheduler import _LRScheduler
 
 
@@ -61,7 +61,7 @@ class NormalNN(nn.Module):
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
 
-        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         self.task_num = 0
 
     def init_optimizer(self, params=None):
@@ -342,8 +342,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Loss/train' + task_n, losses.avg, self.n_iter)
-                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + task_n, acc.avg, self.n_iter)
+                # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Loss/train' + task_n, losses.avg, self.n_iter)
+                # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + task_n, acc.avg, self.n_iter)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -362,9 +362,9 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader, task_n)
-               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
-               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
-            self.writer.close()
+            #    self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
+            #    self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
+            # self.writer.close()
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'

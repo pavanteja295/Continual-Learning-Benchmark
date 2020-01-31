@@ -8,7 +8,7 @@ from collections import OrderedDict
 import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 # import matplotlib.pyplot as plt
 import torchvision
 
@@ -92,7 +92,7 @@ def run(args):
                     # Evaluate
                     acc_table[train_name] = OrderedDict()
                     loss_table[train_name] = OrderedDict()
-                    writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
+                    # writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
                     for j in range(i+1):
                         val_name = task_names[j]
                         print('validation split name:', val_name)
@@ -107,9 +107,9 @@ def run(args):
                         print('logging for Task  {} while training {}'.format(val_name, train_name))
                         print('logging', int(train_name) + (epoch_10 + 1) * 0.1 )
                 
-                        writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
-                        writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
-                        writer.close()
+                        # writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
+                        # writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
+                        # writer.close()
             # if i == 1:
                 #after the first task freeze some weights:
 

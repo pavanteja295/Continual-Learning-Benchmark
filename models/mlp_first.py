@@ -1,7 +1,7 @@
 import torch
 import random
 from models.mlp import MLP
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from torch.autograd import Variable
 from torch.nn.init import kaiming_uniform_
 import torch.nn as nn
