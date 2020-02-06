@@ -44,7 +44,8 @@ class Noise_Net(nn.Module):
         else:
             noise_ = torch.mean(self.noise_list[task], 0, True)
 
-        x = x * noise_
+        # some times the shit loader gives only remaining samples
+        x = x * noise_[:x.shape[0]]
         out = self.core_.forward(x)
         out = self.logits(out)
         return out
