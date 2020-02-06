@@ -8,7 +8,8 @@ from collections import OrderedDict
 import dataloaders.base
 from dataloaders.datasetGen import SplitGen, PermutedGen
 import agents
-# from torch.utils.tensorboard import SummaryWriter
+#from torch.utils.tensorboard import SummaryWriter
+from tensorboardX import SummaryWriter
 # import matplotlib.pyplot as plt
 import torchvision
 
@@ -36,7 +37,8 @@ def run(args):
                     'out_dim':{'All':args.force_out_dim} if args.force_out_dim > 0 else task_output_space,
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
-                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_type':args.noise_type, 'add_extra_last':args.add_extra_last }
+                    'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_':args.noise_, 'add_extra_last':args.add_extra_last,
+                    'batch_size':args.batch_size }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -92,7 +94,7 @@ def run(args):
                     # Evaluate
                     acc_table[train_name] = OrderedDict()
                     loss_table[train_name] = OrderedDict()
-                    # writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
+                    writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
                     for j in range(i+1):
                         val_name = task_names[j]
                         print('validation split name:', val_name)
@@ -107,9 +109,9 @@ def run(args):
                         print('logging for Task  {} while training {}'.format(val_name, train_name))
                         print('logging', int(train_name) + (epoch_10 + 1) * 0.1 )
                 
-                        # writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
-                        # writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
-                        # writer.close()
+                        writer.add_scalar('Run' + str(args.run_num) +  '/CumAcc/Task' + val_name, acc_table[val_name][train_name].avg, float(int(train_name)) * 100 + (epoch_10 + 1) * args.old_val_freq)
+                        writer.add_scalar('Run' + str(args.run_num) +  '/CumLoss/Task' + val_name, loss_table[val_name][train_name].avg, int(train_name) * 100 + (epoch_10 + 1)* args.old_val_freq )
+                        writer.close()
             # if i == 1:
                 #after the first task freeze some weights:
 
@@ -128,7 +130,7 @@ def run(args):
 def get_args(argv):
     # This function prepares the variables shared across demo.py
     parser = argparse.ArgumentParser()
-    parser.add_argument('--noise_type', type=str, default='seperate', help="The type (mlp|lenet|vgg|resnet) of backbone network")
+    parser.add_argument('--noise_', default=False, action='store_true', help="Noise of the network")
     parser.add_argument('--gpuid', nargs="+", type=int, default=[0],
                         help="The list of gpuid, ex:--gpuid 3 1. Negative value means cpu-only")
     parser.add_argument('--model_type', type=str, default='noise_based', help="The type (mlp|lenet|vgg|resnet) of backbone network")

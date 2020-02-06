@@ -86,8 +86,12 @@ class PreActResNet(nn.Module):
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
 
-    def features(self, x):
-        out = self.conv1(x)
+    def features(self, x, noise):
+        if type(noise) == type(None): # anything works here be it combined or single
+            out = self.conv1(x*noise)
+        else:
+            out = self.conv1(x)
+
         out = self.stage1(out)
         out = self.stage2(out)
         out = self.stage3(out)
@@ -98,12 +102,13 @@ class PreActResNet(nn.Module):
         x = self.last(x)
         return x
 
-    def forward(self, x):
-        x = self.features(x)
+    def forward(self, x, noise=None):
+        x = self.features(x, noise)
         x = F.relu(self.bn_last(x))
         x = F.adaptive_avg_pool2d(x, 1)
         x = self.logits(x.view(x.size(0), -1))
         return x
+
 
 
 class PreActResNet_cifar(nn.Module):
@@ -143,6 +148,9 @@ class PreActResNet_cifar(nn.Module):
         return nn.Sequential(*layers)
 
     def features(self, x):
+        # if  type(noise) == type(None):
+        #     out = self.conv1(x, noise)
+        # else:
         out = self.conv1(x)
         out = self.stage1(out)
         out = self.stage2(out)
@@ -160,6 +168,31 @@ class PreActResNet_cifar(nn.Module):
         out = self.logits(out.view(out.size(0), -1))
         return out
 
+
+class Noise_Net(PreActResNet_cifar):
+    def __init__(self, block, num_blocks = [3 , 3 , 3 ], filters = [16, 32, 64], num_classes=10, img_sz=32, bs=128, tasks=''):
+        # change this accordingly 
+
+        # widerestnet
+        super(Noise_Net, self).__init__(block, num_blocks, filters, num_classes)
+
+        in_channel = 3
+        self.noise_list = nn.ModuleDict()
+
+        # defining seperate noise layers
+        for task in tasks.keys():
+            self.noise_list[task] =  Variable(0.2 * torch.rand(bs, img_sz, img_sz) + 0.8 , requires_grad = True)
+        
+        
+    
+    def forward(self, x, task):
+        # input is the image
+        if self.training:
+            noise_ = self.noise_list[task]
+        else:
+            noise_ = torch.mean(self.noise_list[task], 0, True)
+            
+        return super(Noise_Net, self).forward(x, noise_)
 
 # ResNet for Cifar10/100 or the dataset with image size 32x32
 
@@ -181,6 +214,9 @@ def ResNet164_cifar(out_dim=10):
 
 def WideResNet_28_2_cifar(out_dim=10):
     return PreActResNet_cifar(PreActBlock, [4, 4, 4], [32, 64, 128], num_classes=out_dim)
+
+def WideResNetNoise_28_2_cifar(tasks,bs=128,outdim=10):
+    return Noise_Net(PreActBlock, [4, 4, 4], [32, 64, 128], num_classes=out_dim, tasks=tasks, bs=bs)
 
 def WideResNet_28_2_drop_cifar(out_dim=10):
     return PreActResNet_cifar(PreActBlock, [4, 4, 4], [32, 64, 128], num_classes=out_dim, droprate=0.3)

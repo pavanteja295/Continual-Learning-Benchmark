@@ -4,7 +4,7 @@ import torch.nn as nn
 from types import MethodType
 import models
 from utils.metric import accuracy, AverageMeter, Timer
-# from torch.utils.tensorboard import SummaryWriter
+from tensorboardX import SummaryWriter
 from torch.optim.lr_scheduler import _LRScheduler
 
 
@@ -44,7 +44,7 @@ class NormalNN(nn.Module):
         self.config = agent_config
         # If out_dim is a dict, there is a list of tasks. The model will have a head for each task.
         self.multihead = True if len(self.config['out_dim'])>1 else False  # A convenience flag to indicate multi-head/task
-        self.noise = 'Noise' in self.config['model_name'] or 'MLP_Inc_Tasks' in self.config['model_name']
+        self.noise = self.config['noise_']
         # import pdb; pdb.set_trace()
         self.model = self.create_model()
         self.criterion_fn = nn.CrossEntropyLoss()
@@ -61,7 +61,7 @@ class NormalNN(nn.Module):
         self.valid_out_dim = 'ALL'  # Default: 'ALL' means all output nodes are active
                                     # Set a interger here for the incremental class scenario
 
-        # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
         self.task_num = 0
 
     def init_optimizer(self, params=None):
@@ -88,14 +88,13 @@ class NormalNN(nn.Module):
         cfg = self.config
         
         if self.noise:
-            params = self.config['out_dim']
-            noise_type = self.config['noise_type']
-            print('====================== Noise Type ==   ',noise_type,'=======================')
-            model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']](tasks=params, noise_type= noise_type) #
+            # just call the noise net
+            model = models.noise_based_convnet.Noise_Net(self.config)
+            
         else:
             # import pdb; pdb.set_trace()
             model = models.__dict__[cfg['model_type']].__dict__[cfg['model_name']]()
-
+        
         # Define the backbone (MLP, LeNet, VGG, ResNet ... etc) of model
         
 
@@ -106,18 +105,18 @@ class NormalNN(nn.Module):
 
         # The output of the model will be a dict: {task_name1:output1, task_name2:output2 ...}
         # For a single-headed model the output will be {'All':output}
+        # impo
         model.last = nn.ModuleDict()
         for task,out_dim in cfg['out_dim'].items():
             if self.config['add_extra_last']:
                 model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat), nn.Linear(n_feat,out_dim))
             else:
                 model.last[task] = nn.Linear(n_feat,out_dim)
-            
+
         # Redefine the task-dependent function
         def new_logits(self, x):
             outputs = {}
             for task, func in self.last.items():
-                # import pdb; pdb.set_trace()
                 outputs[task] = func(x)
             return outputs
 
@@ -162,7 +161,7 @@ class NormalNN(nn.Module):
                 with torch.no_grad():
                     input = input.cuda()
                     target = target.cuda()
-            # print(task_n)
+
             output = self.predict(input, task_n)
             loss = self.criterion(output, target, task)
             losses.update(loss, input.size(0))        
@@ -267,9 +266,10 @@ class NormalNN(nn.Module):
 
         for epoch in range(epochs[0], epochs[1]):
             # grads visualization
-            # for i, param in enumerate(self.model.linear.parameters()):
-            #     if not i :
+            # for i, param in enumerate(self.model.noise_list):
             #         print(param.data[0,:10])
+
+
 
             # # import pdb; pdb.set_trace()
             # for key, val in self.model.last.items():
@@ -294,7 +294,7 @@ class NormalNN(nn.Module):
             #                     print(param.data[:10])
 
                     
-            # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+            self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
             # if epoch == 0 and self.warmup:
             #     self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
             
@@ -326,6 +326,8 @@ class NormalNN(nn.Module):
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
 
             for i, (input, target, task) in enumerate(train_loader):
+                # for key, val in self.model.noise_list.items():
+                #     print(key, val[0, 0 , :2 , :2])
                 # iteration count
                 self.n_iter = (epoch) * len(train_loader) + i + 1
                 # if epoch < self.warmup:
@@ -342,8 +344,8 @@ class NormalNN(nn.Module):
                 # measure accuracy and record loss
                 acc = accumulate_acc(output, target, task, acc)
                 losses.update(loss, input.size(0))
-                # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Loss/train' + task_n, losses.avg, self.n_iter)
-                # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + task_n, acc.avg, self.n_iter)
+                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Loss/train' + task_n, losses.avg, self.n_iter)
+                self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + task_n, acc.avg, self.n_iter)
                 
                 batch_time.update(batch_timer.toc())  # measure elapsed time
                 data_timer.toc()
@@ -362,9 +364,9 @@ class NormalNN(nn.Module):
             # Evaluate the performance of current task
             if val_loader != None:
                acc_val, loss_val =  self.validation(val_loader, task_n)
-            #    self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
-            #    self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
-            # self.writer.close()
+               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Loss/test' + task_n, loss_val.avg, self.n_iter)
+               self.writer.add_scalar('Run' + str(self.config['run_num']) + 'Accuracy/test' + task_n, acc_val.avg, self.n_iter)
+            self.writer.close()
 
     def learn_stream(self, data, label):
         assert False,'No implementation yet'
