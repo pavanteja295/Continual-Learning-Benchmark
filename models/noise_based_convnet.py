@@ -8,6 +8,7 @@ import torch.nn as nn
 import math
 import models
 from models.resnet import WideResNet_28_2_cifar
+import torch.nn.functional as F
 
 
 class Noise_Net(nn.Module):
@@ -62,7 +63,7 @@ class Noise_Net(nn.Module):
         else:
             noise_ = torch.mean(self.noise_list[task], 0, True)
         
-        out = out * noise_[:out.shape[0]]
+        out = F.relu(out * noise_[:out.shape[0]])
 
         out = self.logits(out)
 
