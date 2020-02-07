@@ -109,7 +109,7 @@ class NormalNN(nn.Module):
         model.last = nn.ModuleDict()
         for task,out_dim in cfg['out_dim'].items():
             if self.config['add_extra_last']:
-                model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat), nn.Linear(n_feat,out_dim))
+                model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat), nn.ReLU(inplace=True), nn.Linear(n_feat,out_dim))
             else:
                 model.last[task] = nn.Linear(n_feat,out_dim)
 
