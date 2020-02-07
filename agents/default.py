@@ -205,45 +205,21 @@ class NormalNN(nn.Module):
         return loss.detach(), out
 
     def freeze(self, task_n):
-        
-        # for name, param in self.model.named_parameters():
-        #     import pdb; pdb.set_trace()
-
-        if task_n == '2':
-            if self.config['freeze_core']:
-            #     for param in self.model.linear.parameters():
-            #             param.requires_grad = False
-            # else:
-            #     for param in self.model.linear.parameters():
-            #             param.requires_grad = True
-
-                for name, param in self.model.named_parameters():
-                    if  'last.' in name and 'bn_last.' not in name:
-                        param.requires_grad =  True
-                    elif 'noise.' in name:
-                        param.requires_grad =  True
-                    else:
-                        param.requires_grad =  False
-
-        for key, val in self.model.last.items():
-            if key != task_n:
-                for param in self.model.last[key].parameters():
+        for name, param in self.model.named_parameters():
+            if ('noise' in name) or ('last' in name and 'bn_last.' not in name):
+                if task_n in name:
+                    param.requires_grad =  True
+                else:
                     param.requires_grad = False
             else:
-                for param in self.model.last[key].parameters():
+                if task_n == '1':
                     param.requires_grad = True
-        if self.noise:
-            for key, val in self.model.noise_list.items():
-                if key != task_n:
-                    for param in self.model.noise_list[key].parameters():
-                        param.requires_grad = False
                 else:
-                    for param in self.model.noise_list[key].parameters():
-                        param.requires_grad = True
-
+                    param.requires_grad = False
+        
         t = 0
-        for p in self.model.parameters():
-            if p.requires_grad:
+        for name, params in self.model.named_parameters():
+            if params.requires_grad:
                 t = t + 1
         print('====================== trainable params ==   ',t,'=======================')
                 
@@ -252,10 +228,10 @@ class NormalNN(nn.Module):
         itrs = 0
         if epochs[0] == 0:  # Only for the first epoch of each task or classReset optimizer before incrementally learning
            self.task_num +=1
-        #    if self.reset_optimizer:
-        #         self.log('Optimizer is reset!')
-        #         self.freeze(task_n)
-        #         self.init_optimizer(params=filter(lambda p: p.requires_grad, self.model.parameters()))
+           if self.reset_optimizer:
+                self.log('Optimizer is reset!')
+                self.freeze(task_n)
+                self.init_optimizer(params=filter(lambda p: p.requires_grad, self.model.parameters()))
         
         data_timer = Timer()
         batch_timer = Timer()
