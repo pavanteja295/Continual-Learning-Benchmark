@@ -35,36 +35,36 @@ class Noise_Net(nn.Module):
         self.noise_list = {}
         # defining seperate noise layers
         for task in tasks.keys():
-            #self.noise_list[task] =  torch.nn.Parameter(0.2*torch.rand(batch_size, in_channel, img_sz, img_sz) +0.8 , requires_grad = True)
-            self.noise_list[task] =  torch.nn.Parameter(0.2*torch.rand(batch_size, 128) +0.8 , requires_grad = True)
+            self.noise_list[task] =  torch.nn.Parameter(0.2*torch.rand(batch_size, in_channel, img_sz, img_sz) +0.8 , requires_grad = True)
+            #self.noise_list[task] =  torch.nn.Parameter(0.2*torch.rand(batch_size, 128) +0.8 , requires_grad = True)
             self.register_parameter('noise_list' + task, self.noise_list[task])  
-
-    # def forward(self, x, task):
-    #     # input is the image
-    #     if self.training:
-    #         noise_ = self.noise_list[task]
-    #     else:
-    #         noise_ = torch.mean(self.noise_list[task], 0, True)
-
-    #     # some times the shit loader gives only remaining samples
-    #     x = x * noise_[:x.shape[0]]
-    #     out = self.core_.forward(x)
-    #     out = self.logits(out)
-    #     return out
 
     def forward(self, x, task):
         # input is the image
-
-        # some times the shit loader gives only remaining samples
-
-        out = self.core_.forward(x)
         if self.training:
             noise_ = self.noise_list[task]
         else:
             noise_ = torch.mean(self.noise_list[task], 0, True)
-        
-        out = F.relu(out * noise_[:out.shape[0]])
 
+        # some times the shit loader gives only remaining samples
+        x = F.relu(x * noise_[:x.shape[0]])
+        out = self.core_.forward(x)
         out = self.logits(out)
-
         return out
+
+    # def forward(self, x, task):
+    #     # input is the image
+
+    #     # some times the shit loader gives only remaining samples
+
+    #     out = self.core_.forward(x)
+    #     if self.training:
+    #         noise_ = self.noise_list[task]
+    #     else:
+    #         noise_ = torch.mean(self.noise_list[task], 0, True)
+        
+    #     out = F.relu(out * noise_[:out.shape[0]])
+
+    #     out = self.logits(out)
+
+    #     return out
