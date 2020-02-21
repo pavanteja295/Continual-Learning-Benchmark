@@ -20,7 +20,7 @@ class PCA_regression(NormalNN):
         self.task_count = 0
         self.online_reg = False  # True: There will be only one importance matrix and previous model parameters
                                 # False: Each task has its own importance matrix and model parameters
-        self.baseline_ = torch.load('/home/pavanteja/workspace/CL_PCA/PCA_CL_github/PARAM/CIFAR10_task/baseline_new.pth')
+        self.baseline_ = torch.load('../CL_PCA/PCA_CL_github/PARAM/CIFAR10_task/baseline_new.pth')
         self.baseline_pca = self.baseline_['pca_weights']
         self.baseline_opt_num = self.baseline_['pca_opt_num']
         self.baseline_weights = self.baseline_['state_dict']
@@ -64,6 +64,7 @@ class PCA_regression(NormalNN):
     def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
         #loss = super(PCA_regression, self).criterion(inputs, targets, tasks, **kwargs)
         loss = 0
+        # import pdb; pdb.set_trace()
         if self.reg == 'Weights':
 
             for n, p in self.params.items():
