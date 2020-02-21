@@ -38,7 +38,7 @@ def run(args):
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
                     'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_':args.noise_, 'add_extra_last':args.add_extra_last,
-                    'batch_size':args.batch_size, 'reg':'all_PCA' }
+                    'batch_size':args.batch_size, 'reg': args.reg }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -190,7 +190,7 @@ def get_args(argv):
                      help="adds extra linear layer")
     parser.add_argument('--benchmark',  default=False, action='store_true',
                      help="adds extra linear layer")    
-    parser.add_argument('--reg',  default=False, action='store_true',
+    parser.add_argument('--reg',  type=str, default='Weights',
                      help="type of reg")   
     args = parser.parse_args(argv)
     return args
