@@ -38,7 +38,7 @@ def run(args):
                     'optimizer':args.optimizer,
                     'print_freq':args.print_freq, 'gpuid': args.gpuid,
                     'reg_coef':args.reg_coef, 'exp_name' : args.exp_name, 'warmup':args.warm_up, 'nesterov':args.nesterov, 'run_num' :args.run_num, 'freeze_core':args.freeze_core, 'reset_opt':args.reset_opt, 'noise_':args.noise_, 'add_extra_last':args.add_extra_last,
-                    'batch_size':args.batch_size }
+                    'batch_size':args.batch_size, 'reg':'all_PCA' }
                     
     agent = agents.__dict__[args.agent_type].__dict__[args.agent_name](agent_config)
     print(agent.model)
@@ -73,7 +73,7 @@ def run(args):
 
     else:  # Incremental learning
         # Feed data to agent and evaluate agent's performance
-        for i in range(len(task_names)):
+        for i in range(1):
             train_name = task_names[i]
             print('======================',train_name,'=======================')
             train_loader = torch.utils.data.DataLoader(train_dataset_splits[train_name],
@@ -96,6 +96,8 @@ def run(args):
                     loss_table[train_name] = OrderedDict()
                     writer = SummaryWriter(log_dir="runs/" + agent.exp_name)
                     for j in range(i+1):
+                        if i != j:
+                            continue
                         val_name = task_names[j]
                         print('validation split name:', val_name)
                         val_data = val_dataset_splits[val_name] if not args.eval_on_train_set else train_dataset_splits[val_name]
@@ -140,7 +142,7 @@ def get_args(argv):
     parser.add_argument('--agent_name', type=str, default='NormalNN', help="The class name of agent")
     parser.add_argument('--optimizer', type=str, default='Adam', help="SGD|Adam|RMSprop|amsgrad|Adadelta|Adagrad|Adamax ...")
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
-    parser.add_argument('--dataset', type=str, default='MNIST', help="MNIST(default)|CIFAR10|CIFAR100")
+    parser.add_argument('--dataset', type=str, default='CIFAR10', help="MNIST(default)|CIFAR10|CIFAR100")
     parser.add_argument('--n_permutation', type=int, default=0, help="Enable permuted tests when >0")
     parser.add_argument('--first_split_size', type=int, default=2)
     parser.add_argument('--other_split_size', type=int, default=2)
@@ -188,7 +190,8 @@ def get_args(argv):
                      help="adds extra linear layer")
     parser.add_argument('--benchmark',  default=False, action='store_true',
                      help="adds extra linear layer")    
-
+    parser.add_argument('--reg',  default=False, action='store_true',
+                     help="type of reg")   
     args = parser.parse_args(argv)
     return args
 
@@ -237,7 +240,7 @@ if __name__ == '__main__':
             # Calculate average performance across tasks
             # Customize this part for a different performance metric
             avg_acc_history = [0] * len(task_names)
-            for i in range(len(task_names)):
+            for i in range(len([1])):
                 train_name = task_names[i]
                 cls_acc_sum = 0
                 for j in range(i + 1):

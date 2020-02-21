@@ -6,3 +6,4 @@ from . import noise_based
 from . import mlp_first
 from . import mlp_inc_tasks
 from . import noise_based_convnet
+from . import layer5_network

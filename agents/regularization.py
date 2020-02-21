@@ -3,6 +3,130 @@ import random
 from .default import NormalNN
 #from torch.utils.tensorboard import SummaryWriter
 
+class PCA_regression(NormalNN):
+    """
+    @article{kirkpatrick2017overcoming,
+        title={Overcoming catastrophic forgetting in neural networks},
+        author={Kirkpatrick, James and Pascanu, Razvan and Rabinowitz, Neil and Veness, Joel and Desjardins, Guillaume and Rusu, Andrei A and Milan, Kieran and Quan, John and Ramalho, Tiago and Grabska-Barwinska, Agnieszka and others},
+        journal={Proceedings of the national academy of sciences},
+        year={2017},
+        url={https://arxiv.org/abs/1612.00796}
+    }
+    """
+    def __init__(self, agent_config):
+        super(PCA_regression, self).__init__(agent_config)
+        self.params = {n: p for n, p in self.model.named_parameters() if p.requires_grad}  # For convenience
+        self.regularization_terms = {}
+        self.task_count = 0
+        self.online_reg = False  # True: There will be only one importance matrix and previous model parameters
+                                # False: Each task has its own importance matrix and model parameters
+        self.baseline_ = torch.load('/home/pavanteja/workspace/CL_PCA/PCA_CL_github/PARAM/CIFAR10_task/baseline_new.pth')
+        self.baseline_pca = self.baseline_['pca_weights']
+        self.baseline_opt_num = self.baseline_['pca_opt_num']
+        self.baseline_weights = self.baseline_['state_dict']
+        self.reg = agent_config['reg']
+
+    def calculate_importance(self, dataloader):
+        # Use an identity importance so it is an L2 regularization.
+        importance = {}
+        for n, p in self.params.items():
+            importance[n] = p.clone().detach().fill_(1)  # Identity
+        return importance
+
+    def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
+
+        self.log('#reg_term:', len(self.regularization_terms))
+
+        # 1.Learn the parameters for current task
+        super(PCA_regression, self).learn_batch(train_loader, val_loader, epochs, task_n)
+        
+        # if epochs[1] == self.config['schedule'][-1]:
+        #     # 2.Backup the weight of current task
+        #     task_param = {}
+        #     for n, p in self.params.items():
+        #         task_param[n] = p.clone().detach()
+
+        #     # 3.Calculate the importance of weights for current task
+        #     importance = self.calculate_importance(train_loader)
+
+        #     # Save the weight and importance of weights of current task
+        #     self.task_count += 1
+        #     if self.online_reg and len(self.regularization_terms)>0:
+        #         # Always use only one slot in self.regularization_terms
+        #         self.regularization_terms[1] = {'importance':importance, 'task_param':task_param}
+        #     else:
+        #         # Use a new slot to store the task-specific information
+        #         self.regularization_terms[self.task_count] = {'importance':importance, 'task_param':task_param}
+
+
+
+
+    def criterion(self, inputs, targets, tasks, regularization=True, **kwargs):
+        #loss = super(PCA_regression, self).criterion(inputs, targets, tasks, **kwargs)
+        loss = 0
+        if self.reg == 'Weights':
+
+            for n, p in self.params.items():
+                if  'last' not in n:
+                    loss += ((p - self.baseline_weights[n]) ** 2).sum()
+                else:
+                    spt_name_ = n.split('.')
+                    del spt_name_[1]
+                    wt_name = '.'.join(spt_name_)
+                    loss += ((p - self.baseline_weights[wt_name]) ** 2).sum()
+
+        if self.reg == 'all_PCA':
+            for n, p in self.params.items():
+                
+                if  'last' not in n:
+                    pca_t = torch.Tensor(self.baseline_pca[n]).cuda()
+                    if 'bias' in n:
+                        loss += ((torch.matmul(p, pca_t) - torch.matmul(self.baseline_weights[n], pca_t)) ** 2).sum()
+                    else:
+                        
+                        wt_swp = p.reshape(p.size(0), p.size(1)*p.size(2)*p.size(3))
+                        wt_swp = wt_swp.permute(1, 0)
+                        loss += ((torch.matmul(wt_swp, pca_t) - torch.matmul(wt_swp, pca_t)) ** 2).sum()
+                    
+                else:
+                    spt_name_ = n.split('.')
+                    del spt_name_[1]
+                    wt_name = '.'.join(spt_name_)
+                    loss += (((p  - self.baseline_weights[wt_name]) ) ** 2).sum()
+
+        if self.reg == 'sub_PCA':
+            for n, p in self.params.items():
+                if  'last' not in n:
+                    import pdb; pdb.set_trace()
+                    loss += ((p - self.baseline_weights[n]) ** 2).sum()
+                else:
+                    spt_name_ = n.split('.')
+                    del spt_name_[1]
+                    wt_name = '.'.join(spt_name_)
+                    loss += ((p - self.baseline_weights[wt_name]) ** 2).sum()
+
+        # loss 
+        #     import pdb; pdb.set_trace()
+        #     task_reg_loss += (importance[n] * (p - task_param[n]) ** 2).sum()
+        # reg_loss += task_reg_loss
+        
+        # # self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
+        # if regularization and len(self.regularization_terms)>0:
+        #     # Calculate the reg_loss only when the regularization_terms exists
+        #     reg_loss = 0
+        #     for i,reg_term in self.regularization_terms.items():
+        #         task_reg_loss = 0
+        #         importance = reg_term['importance']
+        #         task_param = reg_term['task_param']
+        #         for n, p in self.params.items():
+        #             task_reg_loss += (importance[n] * (p - task_param[n]) ** 2).sum()
+        #         reg_loss += task_reg_loss
+        #         # self.writer.add_scalar('Run' + str(self.config['run_num']) + '/Accuracy/train' + str(i), task_reg_loss, self.n_iter)
+        #     loss += self.config['reg_coef'] * reg_loss
+        # # self.writer.close()
+
+        return loss
+
 
 class L2(NormalNN):
     """
@@ -21,6 +145,7 @@ class L2(NormalNN):
         self.task_count = 0
         self.online_reg = False  # True: There will be only one importance matrix and previous model parameters
                                 # False: Each task has its own importance matrix and model parameters
+        import pdb; pdb.set_trace()
 
     def calculate_importance(self, dataloader):
         # Use an identity importance so it is an L2 regularization.
@@ -30,7 +155,7 @@ class L2(NormalNN):
         return importance
 
     def learn_batch(self, train_loader, val_loader=None, epochs=[0, 40], task_n=''):
-
+        # import pdb; pdb.set_trace()
         self.log('#reg_term:', len(self.regularization_terms))
         # 1.Learn the parameters for current task
         super(L2, self).learn_batch(train_loader, val_loader, epochs, task_n)

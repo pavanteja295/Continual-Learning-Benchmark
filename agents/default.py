@@ -107,17 +107,19 @@ class NormalNN(nn.Module):
         # For a single-headed model the output will be {'All':output}
         # impo
         model.last = nn.ModuleDict()
-        for task,out_dim in cfg['out_dim'].items():
-            if self.config['add_extra_last']:
-                model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat), nn.ReLU(inplace=True), nn.Linear(n_feat,out_dim))
-            else:
-                model.last[task] = nn.Linear(n_feat,out_dim)
+        model.last['1'] = nn.Linear(n_feat,2)
 
-        # Redefine the task-dependent function
+        # for task,out_dim in cfg['out_dim'].items():
+        #     if self.config['add_extra_last']:  
+        #         model.last[task] = nn.Sequential(nn.Linear(n_feat,n_feat),  nn.Linear(n_feat,out_dim)) # nn.ReLU(inplace=True),
+        #     else:
+        #         model.last[task] = nn.Linear(n_feat,out_dim)
+
+        # # Redefine the task-dependent function
         def new_logits(self, x):
             outputs = {}
             for task, func in self.last.items():
-                outputs[task] = func(x)
+                    outputs[task] = func(x)    
             return outputs
 
         # Replace the task-dependent function
@@ -134,6 +136,7 @@ class NormalNN(nn.Module):
     def forward(self, x, task_n=''):
         if self.noise:
             return self.model.forward(x, task_n)
+        # import pdb; pdb.set_trace()
         return self.model.forward(x)
 
     def predict(self, inputs, task_n=''):
@@ -176,6 +179,7 @@ class NormalNN(nn.Module):
         return acc, losses
 
     def criterion(self, preds, targets, tasks, **kwargs):
+        # import pdb; pdb.set_trace()
         # The inputs and targets could come from single task or a mix of tasks
         # The network always makes the predictions with all its heads
         # The criterion will match the head and task to calculate the loss.
@@ -196,7 +200,6 @@ class NormalNN(nn.Module):
         return loss
 
     def update_model(self, inputs, targets, tasks, task_n=''):
-
         out = self.forward(inputs, task_n)
         loss = self.criterion(out, targets, tasks)
         self.optimizer.zero_grad()
@@ -241,55 +244,10 @@ class NormalNN(nn.Module):
         acc = AverageMeter()
 
         for epoch in range(epochs[0], epochs[1]):
-            # grads visualization
-            # for i, param in enumerate(self.model.noise_list):
-            #         print(param.data[0,:10])
-
-
-
-            # # import pdb; pdb.set_trace()
-            # for key, val in self.model.last.items():
-            #     if key != task_n:
-            #         for param in self.model.last[key].parameters():
-            #         #    import pdb; pdb.set_trace()
-            #             if len(param.data.shape) > 1: 
-            #                 print(param.data[0,:10])
-            #     else:
-            #         for param in self.model.last[key].parameters():
-            #             # import pdb; pdb.set_trace()
-            #             if len(param.data.shape) > 1: 
-            #                 print(param.data[0,:10])
-            # print('====================== Noise params =======================')
-            # if self.noise:
-            #     for key, val in self.model.noise_list.items():
-            #         if key != task_n:
-            #             for param in self.model.noise_list[key].parameters():
-            #                     print(param.data[:10])
-            #         else:
-            #             for param in self.model.noise_list[key].parameters():
-            #                     print(param.data[:10])
-
                     
             self.writer = SummaryWriter(log_dir="runs/" + self.exp_name)
-            # if epoch == 0 and self.warmup:
-            #     self.warm = WarmUpLR(self.optimizer, len(train_loader) * self.warmup)
-            
-
             self.scheduler.step(epoch)
             
-            # params = []
-            # params_n = []
-            # for name, param in self.model.named_parameters():
-            #     if 'last.' in name and 'bn_last.' not in name:
-            #         params.requires_grad =  True
-            #     else:
-            #         params.requires_grad =  False
-            
-            # if noise
-            #     if :
-            #         params_n.append(name)
-            
-
             # # # Config the model and optimizer
             self.log('Epoch:{0}'.format(epoch))
             self.model.train()
@@ -302,12 +260,7 @@ class NormalNN(nn.Module):
             self.log('Itr\t\tTime\t\t  Data\t\t  Loss\t\tAcc') 
 
             for i, (input, target, task) in enumerate(train_loader):
-                # for key, val in self.model.noise_list.items():
-                #     print(key, val[0, 0 , :2 , :2])
-                # iteration count
                 self.n_iter = (epoch) * len(train_loader) + i + 1
-                # if epoch < self.warmup:
-                #     self.warm.step()
                 data_time.update(data_timer.toc())  # measure data loading time
                 if self.gpu:
                         input = input.cuda()                                                                                                                                                                                                                                                
